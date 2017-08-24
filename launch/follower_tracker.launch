@@ -1,0 +1,14 @@
+<launch>
+	<arg name="ns" default="follower" />
+  <arg name="launch_rviz" default="false" />
+
+  <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
+  <include file="$(find turtlebot_guidance)/launch/keyboard_teleop.launch">
+		<arg name="name_prefix" value="$(arg ns)" />
+  </include>
+
+  <node pkg="turtlebot_guidance" type="follower_tracker_node" name="turtlebot_follower_tracker"  output="screen" />
+
+  <node if="$(arg launch_rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guidance)/rviz/guidance.rviz" />
+
+</launch>

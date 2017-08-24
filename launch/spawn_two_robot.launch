@@ -1,0 +1,45 @@
+<launch>
+  <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
+  <arg name="base"      value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- create, roomba -->
+  <arg name="gui" default="true"/>
+  <arg name="stacks"    value="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons -->
+  <arg name="3d_sensor" value="$(optenv TURTLEBOT_3D_SENSOR asus_xtion_pro)"/>  <!-- kinect, asus_xtion_pro -->
+
+  <!-- Load gazebo environment-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="world_name" value="$(arg world_file)"/>
+  </include>
+
+  <!-- Load guidance robot model-->
+  <group ns="guidance" clear_params="true">
+    <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
+    </include>
+
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+      <param name="tf_prefix" value="guidance"/>
+      <param name="publish_frequency" type="double" value="30.0"/>
+    </node>
+
+    <node name="spawn_guidance_robot" pkg="gazebo_ros" type="spawn_model"
+          args="-x 0 -urdf -param robot_description -model guidance"
+          respawn="false" />
+  </group>
+
+  <!-- Load follower robot model-->
+  <group ns="follower" clear_params="true">
+    <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
+    </include>
+
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+      <param name="tf_prefix" value="follower"/>
+      <param name="publish_frequency" type="double" value="30.0"/>
+    </node>
+
+    <node name="spawn_follower_robot" pkg="gazebo_ros" type="spawn_model"
+          args="-x 2 -urdf -param robot_description -model follower"
+          respawn="false" />
+  </group>
+</launch>
