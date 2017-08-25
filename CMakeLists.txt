@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(turtlebot_guidance)
-
-#catkin_add_env_hooks(25.turtlebot-gazebo SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
+add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   pcl_ros
+  rviz_visual_tools
 )
 catkin_package(
   INCLUDE_DIRS
@@ -15,6 +15,7 @@ catkin_package(
   CATKIN_DEPENDS
     pcl_conversions
     pcl_ros
+    rviz_visual_tools
 )
 
 include_directories(

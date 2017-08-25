@@ -16,30 +16,20 @@
   <!-- Load guidance robot model-->
   <group ns="guidance" clear_params="true">
     <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
+      <arg name="namespace" value="guidance" />
+      <arg name="init_x" value="0" />
+      <arg name="init_y" value="0" />
+      <arg name="init_yaw" value="0" />
     </include>
-
-    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
-      <param name="tf_prefix" value="guidance"/>
-      <param name="publish_frequency" type="double" value="30.0"/>
-    </node>
-
-    <node name="spawn_guidance_robot" pkg="gazebo_ros" type="spawn_model"
-          args="-x 0 -urdf -param robot_description -model guidance"
-          respawn="false" />
   </group>
 
   <!-- Load follower robot model-->
   <group ns="follower" clear_params="true">
     <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
+      <arg name="namespace" value="follower" />
+      <arg name="init_x" value="2" />
+      <arg name="init_y" value="0" />
+      <arg name="init_yaw" value="0" />
     </include>
-
-    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
-      <param name="tf_prefix" value="follower"/>
-      <param name="publish_frequency" type="double" value="30.0"/>
-    </node>
-
-    <node name="spawn_follower_robot" pkg="gazebo_ros" type="spawn_model"
-          args="-x 2 -urdf -param robot_description -model follower"
-          respawn="false" />
   </group>
 </launch>

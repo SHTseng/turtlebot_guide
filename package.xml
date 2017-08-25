@@ -10,20 +10,20 @@
   <build_depend>libpcl-all-dev</build_depend>
   <build_depend>pcl_conversions</build_depend>
   <build_depend>pcl_ros</build_depend>
+  <build_depend>rviz_visual_tools</build_depend>
 
   <run_depend>yocs_cmd_vel_mux</run_depend>
   <run_depend>diagnostic_aggregator</run_depend>
   <run_depend>depthimage_to_laserscan</run_depend>
   <run_depend>gazebo_ros</run_depend>
   <run_depend>kobuki_gazebo_plugins</run_depend>
-  <run_depend>robot_pose_ekf</run_depend>
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>turtlebot_bringup</run_depend>
   <run_depend>turtlebot_description</run_depend>
-  <run_depend>turtlebot_navigation</run_depend>
 
   <run_depend>pcl_conversions</run_depend>
   <run_depend>pcl_ros</run_depend>
   <run_depend>libpcl-all</run_depend>
+  <run_depend>rviz_visual_tools</run_depend>
 
 </package>
