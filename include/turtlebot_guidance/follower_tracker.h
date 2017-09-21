@@ -39,7 +39,11 @@ public:
 
 private:
 
-	void extractTarget();
+  void extractTarget();
+
+  ros::NodeHandle nh_;
+
+  ros::Publisher vis_pub_;
 
   PointCloudPtr cloud_p_;
 

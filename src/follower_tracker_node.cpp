@@ -13,10 +13,10 @@ public:
     ft_.reset(new turtlebot_guidance::FollowerTracker(0.01));
 
     // Create a ROS subscriber for the input point cloud
-    sub_ = nh_.subscribe ("/guidance/camera/depth/points", 1,
+    sub_ = nh_.subscribe ("/guidance/camera/depth/points", 100,
                                          &FollowerTrackerNode::trackCallback, this);
 
-    ir_sub_ = nh_.subscribe("/guidance/ir_camera/scan", 1,
+    ir_sub_ = nh_.subscribe("/guidance/ir_camera/scan", 100,
                                            &FollowerTrackerNode::IRCameraCallback, this);
 
     // Create a ROS publisher for the output point cloud
