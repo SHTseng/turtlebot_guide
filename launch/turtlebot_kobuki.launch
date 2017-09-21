@@ -6,12 +6,12 @@
   
   <param name="tf_prefix" value="$(arg namespace)"/>
   
-  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_description)/robots/kobuki_hexagons_asus_xtion_pro.urdf.xacro'" />
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guidance)/robot/turtlebot_$(arg namespace).xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
   <node name="spawn_guidance_robot" pkg="gazebo_ros" type="spawn_model"
       args="-x $(arg init_x) -y $(arg init_y) -Y $(arg init_yaw) -unpause -urdf -param robot_description -model turtlebot_$(arg namespace)"
-      respawn="false" />
+      respawn="false"/>
   
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0"/>

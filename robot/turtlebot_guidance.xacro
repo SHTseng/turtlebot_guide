@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : kinect
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="cameraSize" value="0.05" />
+
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/asus_xtion_pro.urdf.xacro"/>
+  
+  <kobuki/>
+  <stack_hexagons                 parent="base_link"/>
+  <sensor_asus_xtion_pro          parent="base_link"/>
+
+  <link name="ir_camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <box_inertia m="${cameraSize}" x="${cameraSize}" y="${cameraSize}" z="${cameraSize}" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="ir_camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.1 0 0.025" rpy="0 0 0"/>
+    <parent link="plate_top_link"/>
+    <child link="ir_camera_link"/>
+  </joint>
+
+  <gazebo reference="ir_camera_link">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <gazebo reference="ir_camera_link">
+    <sensor type="logical_camera" name="ir_camera">
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>5.0</update_rate>
+      <logical_camera>
+        <near>0.05</near>
+        <far>2.0</far>
+        <horizontal_fov>0.576</horizontal_fov>
+        <aspect_ratio>1.33</aspect_ratio>
+      </logical_camera>
+      <plugin name="gazebo_ir_camera_plugin" filename="libgazebo_ros_ir_camera.so">
+        <robotNamespace>guidance</robotNamespace>
+        <topicName>/guidance/ir_camera/scan</topicName>
+        <frameName>ir_camera_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

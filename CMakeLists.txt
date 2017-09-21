@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   pcl_ros
   rviz_visual_tools
+  gazebo_ir_camera_plugin
 )
 catkin_package(
   INCLUDE_DIRS
@@ -16,13 +17,13 @@ catkin_package(
     pcl_conversions
     pcl_ros
     rviz_visual_tools
+    gazebo_ir_camera_plugin
 )
 
 include_directories(
-  include
+  include/
   ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
-#  ${EIGEN3_INCLUDE_DIR}
 )
 
 link_directories(
@@ -31,7 +32,7 @@ link_directories(
 
 SET(follower_tracker_files
   src/follower_tracker.cpp
-  include/follower_tracker.h
+  include/turtlebot_guidance/follower_tracker.h
 )
 
 add_library(follower_tracker ${follower_tracker_files})
