@@ -1,5 +1,6 @@
 #include <ros/ros.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/Pose.h>
 
 #include "turtlebot_guidance/follower_tracker.h"
 
@@ -12,15 +13,17 @@ public:
     // Initialize the tracking class
     ft_.reset(new turtlebot_guidance::FollowerTracker(0.01));
 
-    // Create a ROS subscriber for the input point cloud
+    // Create a ROS subscriber for the input point cloud and azimuthal angle
     sub_ = nh_.subscribe ("/guidance/camera/depth/points", 100,
                                          &FollowerTrackerNode::trackCallback, this);
 
     ir_sub_ = nh_.subscribe("/guidance/ir_camera/scan", 100,
                                            &FollowerTrackerNode::IRCameraCallback, this);
 
-    // Create a ROS publisher for the output point cloud
-    pub_ = nh_.advertise<sensor_msgs::PointCloud2> ("/guidance/output", 10);
+    // Create a ROS publisher for the output point cloud and geometry pose
+    pc_pub_ = nh_.advertise<sensor_msgs::PointCloud2> ("/guidance/output", 10);
+
+    pose_pub_ = nh_.advertise<geometry_msgs::Pose>("/guidance/follower_pose", 10);
   }
 
   void trackCallback(const sensor_msgs::PointCloud2ConstPtr &depth_msgs)
@@ -40,10 +43,10 @@ public:
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr output_cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
     ft_->filter(output_cloud);
 
-    sensor_msgs::PointCloud2 output;
-    pcl::toROSMsg(*output_cloud, output);
+    sensor_msgs::PointCloud2 output_cloud_msg;
+    pcl::toROSMsg(*output_cloud, output_cloud_msg);
 
-    pub_.publish (output);
+    pc_pub_.publish (output_cloud_msg);
   }
 
   void IRCameraCallback(const gazebo_ir_camera_plugin::IRCamera &msg)
@@ -59,7 +62,9 @@ private:
 
   ros::Subscriber ir_sub_;
 
-  ros::Publisher pub_;
+  ros::Publisher pc_pub_;
+
+  ros::Publisher pose_pub_;
 
   std::unique_ptr<turtlebot_guidance::FollowerTracker> ft_;
 
@@ -70,7 +75,6 @@ private:
 int main (int argc, char* argv[])
 {
   ros::init (argc, argv, "follower_tracker_node");
-
   FollowerTrackerNode node;
 
   ros::spin();

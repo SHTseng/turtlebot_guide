@@ -9,7 +9,7 @@
   <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guidance)/robot/turtlebot_$(arg namespace).xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
-  <node name="spawn_guidance_robot" pkg="gazebo_ros" type="spawn_model"
+  <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
       args="-x $(arg init_x) -y $(arg init_y) -Y $(arg init_yaw) -unpause -urdf -param robot_description -model turtlebot_$(arg namespace)"
       respawn="false"/>
   

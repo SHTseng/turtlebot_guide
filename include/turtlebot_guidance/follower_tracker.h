@@ -15,6 +15,7 @@
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/segmentation/extract_clusters.h>
 
+#include <geometry_msgs/Pose.h>
 #include <gazebo_ir_camera_plugin/IRCamera.h>
 
 namespace turtlebot_guidance
@@ -39,7 +40,10 @@ public:
 
 private:
 
+  const geometry_msgs::Pose getTargetPose();
+
   void extractTarget();
+
 
   ros::NodeHandle nh_;
 

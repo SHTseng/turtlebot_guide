@@ -53,7 +53,7 @@
   <gazebo reference="ir_camera_link">
     <sensor type="logical_camera" name="ir_camera">
       <always_on>true</always_on>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
       <update_rate>5.0</update_rate>
       <logical_camera>
         <near>0.05</near>

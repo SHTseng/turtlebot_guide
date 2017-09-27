@@ -7,6 +7,8 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_ros
   rviz_visual_tools
   gazebo_ir_camera_plugin
+  move_base_msgs
+  actionlib
 )
 catkin_package(
   INCLUDE_DIRS
@@ -18,6 +20,8 @@ catkin_package(
     pcl_ros
     rviz_visual_tools
     gazebo_ir_camera_plugin
+    move_base_msgs
+    actionlib
 )
 
 include_directories(
@@ -43,3 +47,6 @@ add_dependencies(follower_tracker ${catkin_EXPORTED_TARGETS})
 
 add_executable(follower_tracker_node src/follower_tracker_node.cpp)
 target_link_libraries(follower_tracker_node follower_tracker)
+
+add_executable(global_path_plan_node src/global_path_plan_node.cpp)
+target_link_libraries(global_path_plan_node ${catkin_LIBRARIES})
