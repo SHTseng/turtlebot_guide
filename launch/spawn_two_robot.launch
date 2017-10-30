@@ -28,9 +28,9 @@
   <group ns="follower" clear_params="true">
     <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
       <arg name="namespace" value="follower" />
-      <arg name="init_x" value="1.9" />
-      <arg name="init_y" value="0.0" />
-      <arg name="init_yaw" value="0" />
+      <arg name="init_x" value="1.6" />
+      <arg name="init_y" value="0" />
+      <arg name="init_yaw" value="1.57" />
     </include>  
   </group>
 

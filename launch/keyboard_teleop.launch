@@ -1,5 +1,5 @@
 <launch>
-  <arg name="name_prefix" default="guidance" />
+  <arg name="name_prefix" default="follower" />
 
   <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
   <node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">

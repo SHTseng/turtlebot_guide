@@ -4,7 +4,6 @@ namespace turtlebot_guidance
 {
 
 FollowerTracker::FollowerTracker(const float &voxel_size):
-  nh_("~"),
   voxel_size_(voxel_size)
 {
 
@@ -21,10 +20,10 @@ void FollowerTracker::filter(PointCloudPtr output_cloud)
   pcl::copyPointCloud(*cloud_p_, *output_cloud);
 }
 
-void FollowerTracker::setROI(gazebo_ir_camera_plugin::IRCamera ir_msg)
+void FollowerTracker::setROI(const double &azi)
 {
   float offset = 0.4;
-  float mapped_pt = 3.031*std::tan(ir_msg.azimuthal_angles.front());
+  float mapped_pt = 3.031*std::tan(azi);
 
   roi_filter_.setInputCloud(cloud_p_);
   roi_filter_.setFilterFieldName("x");

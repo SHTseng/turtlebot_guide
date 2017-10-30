@@ -13,7 +13,8 @@
   <arg name="debug" default="false"/>
   <arg name="physics" default="ode"/>
   <arg name="verbose" default="false"/>
-  <arg name="world_name" default="$(find turtlebot_guidance)/worlds/cnrg_room1.world"/> 
+<!--  <arg name="world_name" default="$(find turtlebot_guidance)/worlds/cnrg_room1.world"/> -->
+  <arg name="world_name" default="$(env TURTLEBOT_STAGE_MAP_FILE)"/>
   <arg name="respawn_gazebo" default="false"/>
   <arg name="use_clock_frequency" default="false"/>
   <arg name="pub_clock_frequency" default="100"/>

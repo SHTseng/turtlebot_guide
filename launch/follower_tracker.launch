@@ -1,6 +1,6 @@
 <launch>
   <arg name="ns" default="follower" />
-  <arg name="launch_rviz" default="true" />
+  <arg name="launch_rviz" default="false" />
 
   <!-- implemented node to track follower -->
   <node pkg="turtlebot_guidance" type="follower_tracker_node" name="follower_tracker_node" output="screen" />

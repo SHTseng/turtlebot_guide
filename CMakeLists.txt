@@ -50,3 +50,13 @@ target_link_libraries(follower_tracker_node follower_tracker)
 
 add_executable(global_path_plan_node src/global_path_plan_node.cpp)
 target_link_libraries(global_path_plan_node ${catkin_LIBRARIES})
+
+# unit tests
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest_gtest(test_state_detect
+                    test/state_detect.test
+                    test/test_state_detect.cpp)
+  target_link_libraries(test_state_detect ${catkin_LIBRARIES})
+endif()
+

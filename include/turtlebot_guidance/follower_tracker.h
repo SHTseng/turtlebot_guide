@@ -36,16 +36,13 @@ public:
 
   void setInputCloud(const PointCloud &input_cloud);
 
-  void setROI(gazebo_ir_camera_plugin::IRCamera ir_msg);
+  void setROI(const double &azi);
 
 private:
 
   const geometry_msgs::Pose getTargetPose();
 
   void extractTarget();
-
-
-  ros::NodeHandle nh_;
 
   ros::Publisher vis_pub_;
 
