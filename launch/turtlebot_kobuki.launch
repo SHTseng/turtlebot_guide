@@ -20,7 +20,6 @@
   
   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
         args="$(arg init_x) $(arg init_y) 0 $(arg init_yaw) 0 0 /map /$(arg namespace)/odom 100" />
-
   
   <!-- Velocity muxer -->
   <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>

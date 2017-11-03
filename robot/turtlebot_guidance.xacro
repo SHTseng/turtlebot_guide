@@ -45,7 +45,7 @@
     <child link="ir_camera_link_mid"/>
   </joint>
 
-  <link name="ir_camera_link_l">
+  <link name="l_ir_camera_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -70,10 +70,10 @@
     <axis xyz="0 1 0" />
     <origin xyz="0.09 0.07 0.015" rpy="0 0 0.55"/>
     <parent link="plate_top_link"/>
-    <child link="ir_camera_link_l"/>
+    <child link="l_ir_camera_link"/>
   </joint>
 
-  <link name="ir_camera_link_3">
+  <link name="r_ir_camera_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -94,29 +94,30 @@
     </inertial>
   </link>
 
-  <joint name="ir_camera_joint_3" type="fixed">
+  <joint name="r_ir_camera_joint" type="fixed">
     <axis xyz="0 1 0" />
     <origin xyz="0.09 -0.07 0.015" rpy="0 0 -0.55"/>
     <parent link="plate_top_link"/>
-    <child link="ir_camera_link_3"/>
+    <child link="r_ir_camera_link"/>
   </joint>
 
   <gazebo reference="ir_camera_link_mid">
     <material>Gazebo/Green</material>
   </gazebo>
 
-  <gazebo reference="ir_camera_link_l">
+  <gazebo reference="l_ir_camera_link">
     <material>Gazebo/Green</material>
   </gazebo>
 
-  <gazebo reference="ir_camera_link_3">
+  <gazebo reference="r_ir_camera_link">
     <material>Gazebo/Green</material>
   </gazebo>
 
   <gazebo reference="ir_camera_link_mid">
-    <sensor type="logical_camera" name="ir_camera_mid">
+    <sensor type="logical_camera" name="ir_camera_1">
       <always_on>true</always_on>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
+      <topic>logical_camera_1/image</topic>
       <update_rate>10.0</update_rate>
       <logical_camera>
         <near>0.05</near>
@@ -124,18 +125,19 @@
         <horizontal_fov>0.576</horizontal_fov>
         <aspect_ratio>1.33</aspect_ratio>
       </logical_camera>
-      <plugin name="gazebo_ir_camera_mid_plugin" filename="libgazebo_ros_ir_camera.so">
+      <plugin name="ir_camera_controller" filename="libgazebo_ros_ir_camera.so">
         <robotNamespace>guidance</robotNamespace>
-        <topicName>/guidance/ir_camera_mid/scan</topicName>
+        <topicName>/scan</topicName>
         <frameName>ir_camera_link_mid</frameName>
       </plugin>
     </sensor>
   </gazebo>
 
-  <gazebo reference="ir_camera_link_l">
-    <sensor type="logical_camera" name="ir_camera_l">
+  <gazebo reference="l_ir_camera_link">
+    <sensor type="logical_camera" name="ir_camera_2 ">
       <always_on>true</always_on>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
+      <topic>logical_camera_2/image</topic>
       <update_rate>10.0</update_rate>
       <logical_camera>
         <near>0.05</near>
@@ -143,18 +145,19 @@
         <horizontal_fov>0.576</horizontal_fov>
         <aspect_ratio>1.33</aspect_ratio>
       </logical_camera>
-      <plugin name="gazebo_ir_camera_l_plugin" filename="libgazebo_ros_ir_camera.so">
+      <plugin name="left_ir_camera_controller" filename="libgazebo_ros_ir_camera.so">
         <robotNamespace>guidance</robotNamespace>
-        <topicName>/guidance/ir_camera_l/scan</topicName>
-        <frameName>ir_camera_link_l</frameName>
+        <topicName>/scan</topicName>
+        <frameName>l_ir_camera_link</frameName>
       </plugin>
     </sensor>
   </gazebo>
 
-  <gazebo reference="ir_camera_link_3">
+  <gazebo reference="r_ir_camera_link">
     <sensor type="logical_camera" name="ir_camera_3">
       <always_on>true</always_on>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
+      <topic>logical_camera_3/image</topic>
       <update_rate>10.0</update_rate>
       <logical_camera>
         <near>0.05</near>
@@ -164,8 +167,8 @@
       </logical_camera>
       <plugin name="gazebo_ir_camera_r_plugin" filename="libgazebo_ros_ir_camera.so">
         <robotNamespace>guidance</robotNamespace>
-        <topicName>/guidance/ir_camera_3/scan</topicName>
-        <frameName>ir_camera_link_3</frameName>
+        <topicName>/scan</topicName>
+        <frameName>r_ir_camera_link</frameName>
       </plugin>
     </sensor>
   </gazebo>

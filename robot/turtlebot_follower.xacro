@@ -11,7 +11,7 @@
   <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
   <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
   <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
-  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/asus_xtion_pro.urdf.xacro"/>
+<!--  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/asus_xtion_pro.urdf.xacro"/>-->
   
   <kobuki/>
   <stack_hexagons                 parent="base_link"/>
@@ -39,19 +39,20 @@
     </inertial>
   </link>
 	
-  <joint name="ir_led_joint" type="fixed">
+  <joint name="ir_led_joint" type="revolute">
     <axis xyz="0 1 0" />
     <origin xyz="0 0 0.025" rpy="0 0 0"/>
     <parent link="plate_top_link"/>
     <child link="ir_led_link"/>
+    <limit lower="-0.01" upper="0.01" effort="0" velocity="0" />
   </joint>
 
   <gazebo reference="ir_led_link">
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <gazebo reference="ir_led_link">
-<!--    <sensor type="ray" name="ir_led">
+  <gazebo reference="plate_top_link">
+    <sensor type="ray" name="ir_led">
       <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
       <update_rate>30</update_rate>
@@ -70,10 +71,10 @@
           <resolution>0.01</resolution>
         </range>
       </ray>
-    </sensor>-->
+    </sensor>
 
-    <plugin name="ir_emitter" filename="libgazebo_ros_ir_emitter.so">
+<!--    <plugin name="ir_emitter" filename="libgazebo_ros_ir_emitter.so">
      <frameName>ir_led_link</frameName>
-    </plugin>
+    </plugin>-->
   </gazebo>
 </robot>
