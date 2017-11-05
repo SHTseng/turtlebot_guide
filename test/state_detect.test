@@ -1,0 +1,36 @@
+<launch>
+  <arg name="gui" default="false"/>
+
+  <param name="/use_sim_time" value="true" />
+  <node name="gazebo" pkg="gazebo_ros" type="gzserver"
+      respawn="false" output="screen"
+      args="-r $(find turtlebot_gazebo)/worlds/empty.world" />
+
+  <group if="$(arg gui)">
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
+  </group>
+
+  <!-- Load guidance robot model-->
+  <group ns="guidance" clear_params="true">
+    <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
+      <arg name="namespace" value="guidance" />
+      <arg name="init_x" value="0" />
+      <arg name="init_y" value="0" />
+      <arg name="init_yaw" value="0" />
+    </include>
+  </group>
+
+  <!-- Load follower robot model-->
+  <group ns="follower" clear_params="true">
+    <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
+      <arg name="namespace" value="follower" />
+      <arg name="init_x" value="1.6" />
+      <arg name="init_y" value="0.0" />
+      <arg name="init_yaw" value="1.57" />
+    </include>
+  </group>
+
+  <test pkg="turtlebot_guidance" type="test_state_detect" test-name="state_detect"
+        clear_params="true" time-limit="30.0"/>
+
+</launch>

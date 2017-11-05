@@ -133,7 +133,7 @@
     </sensor>
   </gazebo>
 
-  <gazebo reference="l_ir_camera_link">
+<!--  <gazebo reference="l_ir_camera_link">
     <sensor type="logical_camera" name="ir_camera_2 ">
       <always_on>true</always_on>
       <visualize>false</visualize>
@@ -171,6 +171,6 @@
         <frameName>r_ir_camera_link</frameName>
       </plugin>
     </sensor>
-  </gazebo>
+  </gazebo>-->
 
 </robot>

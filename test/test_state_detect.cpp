@@ -12,23 +12,34 @@
 
 #include <tinyxml.h>
 
-struct helper
+class StateDetect : public testing::Test
 {
-  helper(){}
-
-  void cb(const gazebo_ir_camera_plugin::IRCamera &msg)
+protected:
+  virtual void SetUp()
   {
-    msg_ = msg;
+    has_new_image_ = false;
   }
 
-  gazebo_ir_camera_plugin::IRCamera msg_;
+  ros::NodeHandle nh_;
+  ros::Subscriber cam_sub_;
+  bool has_new_image_;
+  int model_cnt_;
+  ros::Time image_stamp_;
+public:
+  void imageCallback(const gazebo_ir_camera_plugin::IRCameraConstPtr& msg)
+  {
+    image_stamp_ = msg->header.stamp;
+    model_cnt_ = msg->azimuthal_angles.size();
+    has_new_image_ = true;
+}
 };
 
-gazebo_ir_camera_plugin::IRCamera ir_camera_msg_;
+bool has_new_image = false;
+int cnt = 0;
 
-void callBack(const gazebo_ir_camera_plugin::IRCamera &msg)
+void callBack(const gazebo_ir_camera_plugin::IRCameraConstPtr &msg)
 {
-  ir_camera_msg_ = msg;
+  cnt = msg->azimuthal_angles.size();
 }
 
 TEST(StateDetectTest, spawnRobot)
@@ -50,7 +61,7 @@ TEST(StateDetectTest, spawnRobot)
   ROS_DEBUG_NAMED("spawn_box", "XML string: %s",stream.str().c_str());
 
   geometry_msgs::Pose current_pose;
-  current_pose.position.x = 1.6;
+  current_pose.position.x = 1.5;
   current_pose.position.y = 0.0;
   current_pose.position.z = 0.0;
   current_pose.orientation.w = 1.0;
@@ -60,6 +71,7 @@ TEST(StateDetectTest, spawnRobot)
   spawn_model_srv.request.initial_pose = current_pose;
 
   ASSERT_TRUE(spawn_model_client.call(spawn_model_srv));
+  ASSERT_TRUE(spawn_model_srv.response.success);
 
   ASSERT_TRUE(ros::service::waitForService("/gazebo/get_world_properties"));
   ros::ServiceClient check_model_client = nh.serviceClient<gazebo_msgs::GetWorldProperties>("/gazebo/get_world_properties");
@@ -85,17 +97,34 @@ TEST(StateDetectTest, spawnRobot)
 TEST(StateDetectTest, subscribeIRTopic)
 {
   ros::NodeHandle nh;
-  helper h;
-  ros::Subscriber ir_sub_ = nh.subscribe("/guidance/ir_camera_1/scan", 1, &helper::cb, &h);
+  ASSERT_TRUE(ros::service::waitForService("/gazebo/get_world_properties"));
+  ros::ServiceClient check_model_client = nh.serviceClient<gazebo_msgs::GetWorldProperties>("/gazebo/get_world_properties");
+  gazebo_msgs::GetWorldProperties world_properties;
+  ASSERT_TRUE(check_model_client.call(world_properties));
+  std::vector<std::string> model_names = world_properties.response.model_names;
+  ASSERT_TRUE(std::find(model_names.begin(), model_names.end(), "follower") != model_names.end());
+//  helper h;
+  ros::Subscriber ir_sub_ = nh.subscribe("/guidance/ir_camera_1/scan", 0, callBack);
+  ros::Publisher pub = nh.advertise<gazebo_ir_camera_plugin::IRCamera>("/ir_camera_1/scan", 0);
   while (ir_sub_.getNumPublishers() == 0)
   {
-    ros::spinOnce();
+    ros::Duration(0.01).sleep();
   }
-  EXPECT_EQ(ir_sub_.getNumPublishers(), 1) << "IR Camera publisher does not exist";
-  ASSERT_TRUE(ros::getGlobalCallbackQueue()->isEmpty());
+  ASSERT_EQ(ir_sub_.getNumPublishers(), 1) << "IR Camera publisher does not exist";
+//  ASSERT_EQ(pub.getNumSubscribers(), 1);
 
-  EXPECT_EQ(h.msg_.azimuthal_angles.size(), 1) << "Robot is not in the IR camera frame";
-  ir_sub_.shutdown();
+  gazebo_ir_camera_plugin::IRCamera msg;
+  msg.azimuthal_angles.push_back(0.0);
+  pub.publish(msg);
+
+  ros::Duration(0.5).sleep();
+  ros::spinOnce();
+  EXPECT_EQ(cnt, 1U) << "Robot is not in the IR camera frame";
+}
+
+TEST(StateDetectTest, endTest)
+{
+  ros::shutdown();
 }
 
 //TEST(StateDetectTest, deleteRobot)
@@ -124,15 +153,7 @@ TEST(StateDetectTest, subscribeIRTopic)
 
 int main (int argc, char* argv[])
 {
-  testing::InitGoogleTest(&argc, argv);
   ros::init(argc, argv, "test_state_detect");
-  ros::NodeHandle nh;
+  testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
-
-  //  ros::AsyncSpinner spinner(1);
-//  spinner.start();
-//  int ret = RUN_ALL_TESTS();
-//  spinner.stop();
-//  ros::shutdown();
-//  return ret;
 }
