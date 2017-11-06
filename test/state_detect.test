@@ -20,17 +20,15 @@
     </include>
   </group>
 
-  <!-- Load follower robot model-->
-  <group ns="follower" clear_params="true">
-    <include file="$(find turtlebot_guidance)/launch/turtlebot_kobuki.launch">
-      <arg name="namespace" value="follower" />
-      <arg name="init_x" value="1.6" />
-      <arg name="init_y" value="0.0" />
-      <arg name="init_yaw" value="1.57" />
-    </include>
+  <group ns="testing" clear_params="true">
+    <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guidance)/robot/turtlebot_follower.xacro'" />
+    <param name="robot_description" command="$(arg urdf_file)" />
+
+    <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x 1.6 -urdf -param robot_description -model turtlebot_follower"
+        respawn="false"/>
   </group>
 
-  <test pkg="turtlebot_guidance" type="test_state_detect" test-name="state_detect"
-        clear_params="true" time-limit="30.0"/>
+  <test pkg="turtlebot_guidance" type="test_state_detect" test-name="state_detect" time-limit="20.0"/>
 
 </launch>

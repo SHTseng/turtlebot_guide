@@ -10,7 +10,7 @@
   <param name="robot_description" command="$(arg urdf_file)" />
   
   <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-      args="-x $(arg init_x) -y $(arg init_y) -Y $(arg init_yaw) -unpause -urdf -param robot_description -model turtlebot_$(arg namespace)"
+      args="-x $(arg init_x) -y $(arg init_y) -Y $(arg init_yaw) -urdf -param robot_description -model turtlebot_$(arg namespace)"
       respawn="false"/>
   
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
