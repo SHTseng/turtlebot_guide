@@ -122,7 +122,9 @@
       <logical_camera>
         <near>0.05</near>
         <far>2.0</far>
-        <horizontal_fov>0.576</horizontal_fov>
+        <!-- For unit testing -->
+        <horizontal_fov>1.57</horizontal_fov>
+<!--        <horizontal_fov>0.576</horizontal_fov>-->
         <aspect_ratio>1.33</aspect_ratio>
       </logical_camera>
       <plugin name="ir_camera_controller" filename="libgazebo_ros_ir_camera.so">

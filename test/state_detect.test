@@ -20,13 +20,18 @@
     </include>
   </group>
 
-  <group ns="testing" clear_params="true">
+  <group ns="follower" clear_params="true">
     <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guidance)/robot/turtlebot_follower.xacro'" />
     <param name="robot_description" command="$(arg urdf_file)" />
 
     <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-        args="-x 1.6 -urdf -param robot_description -model turtlebot_follower"
+        args="-x 1.5 -y -0.05 -z 0.0 -Y 0.0 -urdf -param robot_description -model turtlebot_follower"
         respawn="false"/>
+
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="30.0"/>
+      <param name="tf_prefix" type="string" value="follower" />
+    </node>
   </group>
 
   <test pkg="turtlebot_guidance" type="test_state_detect" test-name="state_detect" time-limit="20.0"/>
