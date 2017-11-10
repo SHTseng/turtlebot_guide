@@ -122,9 +122,7 @@
       <logical_camera>
         <near>0.05</near>
         <far>2.0</far>
-        <!-- For unit testing -->
-        <horizontal_fov>1.57</horizontal_fov>
-<!--        <horizontal_fov>0.576</horizontal_fov>-->
+        <horizontal_fov>0.576</horizontal_fov>
         <aspect_ratio>1.33</aspect_ratio>
       </logical_camera>
       <plugin name="ir_camera_controller" filename="libgazebo_ros_ir_camera.so">
@@ -135,7 +133,7 @@
     </sensor>
   </gazebo>
 
-<!--  <gazebo reference="l_ir_camera_link">
+  <gazebo reference="l_ir_camera_link">
     <sensor type="logical_camera" name="ir_camera_2 ">
       <always_on>true</always_on>
       <visualize>false</visualize>
@@ -173,6 +171,6 @@
         <frameName>r_ir_camera_link</frameName>
       </plugin>
     </sensor>
-  </gazebo>-->
+  </gazebo>
 
 </robot>
