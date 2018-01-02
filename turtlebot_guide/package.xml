@@ -1,0 +1,19 @@
+<package>
+  <name>turtlebot_guide</name>
+  <version>0.0.0</version>
+  <description>metapackage of turtlebot_guide</description>
+  <maintainer email="q253upng@gmail.com">SHTseng</maintainer>
+  <license>TODO</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>gazebo_ir_camera_plugin</run_depend>
+  <run_depend>turtlebot_follower_tracker</run_depend>
+  <run_depend>turtlebot_guide_planner</run_depend>
+  <run_depend>turtlebot_guide_integration</run_depend>
+  <run_depend>turtlebot_demo</run_depend>
+
+  <export>
+    <metapackage/> 
+  </export>
+</package>

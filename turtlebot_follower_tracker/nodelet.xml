@@ -1,0 +1,9 @@
+<library path="lib/libFollowerTrackerNodelet">
+  <class name="turtlebot_guide/FollowerTrackerNodelet" 
+         type="turtlebot_guide::FollowerTrackerNodelet" 
+         base_class_type="nodelet::Nodelet">
+    <description>
+      Node for tracking the follower of turtlebot guide.
+    </description>
+  </class>
+</library>
