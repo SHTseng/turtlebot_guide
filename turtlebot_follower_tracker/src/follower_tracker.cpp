@@ -35,6 +35,7 @@ void FollowerTracker::filter(PointCloudPtr output_cloud)
   outlier_removal.setNegative(0);
   outlier_removal.setKeepOrganized(false);
   outlier_removal.filter(*scene_cloud_);
+
   this->alignTarget();
 
   previous_pose_ = tracked_pose_;
