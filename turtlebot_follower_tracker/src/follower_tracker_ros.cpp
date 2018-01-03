@@ -11,10 +11,22 @@ FollowerTrackerROS::FollowerTrackerROS(ros::NodeHandle &n, ros::NodeHandle &pnh)
   ft_.reset(new FollowerTracker(0.015, mesh_name_));
   ros::Duration(1.0).sleep();
 
+  // make sure the transfromation between camera frame and base frame exist
   tf_listener_.lookupTransform("base_footprint", "camera_depth_optical_frame",
                                ros::Time::now(), camera_base_tf_);
 
+  // prepare rviz visual tools for visualizing the bounding box
   visual_tools_.reset(new rviz_visual_tools::RvizVisualTools("base_link","/rviz_visual_markers"));
+  visual_tools_->loadMarkerPub();
+
+  visual_tools_->deleteAllMarkers();
+  visual_tools_->enableBatchPublishing();
+
+  // initial the tracked pose
+  target_pose_.pose.position.x = 0.0;
+  target_pose_.pose.position.y = 0.0;
+  target_pose_.pose.position.z = 0.0;
+
   pose_pub_ = nh_.advertise<geometry_msgs::Pose>("follower_tracker/tracked_pose", 1);
   cloud_pub_ = nh_.advertise<sensor_msgs::PointCloud2> ("output", 1,
                                                    boost::bind(&FollowerTrackerROS::connectCB, this, _1),
@@ -38,7 +50,8 @@ void FollowerTrackerROS::depthCB(const sensor_msgs::PointCloud2ConstPtr& depth_m
 
 //  double azi = fusedSensorData();
   ft_->setInputCloud(*cloud_p);
-  ft_->setROI(0);
+  ft_->setROI(target_pose_.pose.position.y);
+//  ft_->setROI(0);
 
   // convert the point cloud type to sensor message for publishing
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr output_cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
@@ -49,11 +62,6 @@ void FollowerTrackerROS::depthCB(const sensor_msgs::PointCloud2ConstPtr& depth_m
   cloud_pub_.publish(output_cloud_msg);
 
   geometry_msgs::Pose camera_frame_pose = ft_->getTargetPose();
-//  ROS_INFO_STREAM(camera_frame_pose.position.x << " " << camera_frame_pose.position.y << " " << camera_frame_pose.position.z);
-//  ROS_INFO_STREAM(camera_frame_pose.orientation.w << " " << camera_frame_pose.orientation.x << " " << camera_frame_pose.orientation.y << " " << camera_frame_pose.orientation.z);
-
-//  pose_pub_.publish(camera_frame_pose);
-  target_pose_.pose = camera_frame_pose;
   target_pose_.header.frame_id = "camera_depth_optical_frame";
   target_pose_.header.stamp = ros::Time::now();
 
@@ -62,6 +70,9 @@ void FollowerTrackerROS::depthCB(const sensor_msgs::PointCloud2ConstPtr& depth_m
   transformed_pose.position.y = camera_frame_pose.position.x-0.052;
   transformed_pose.position.z = 0.21;
   publishBoundingBox(transformed_pose);
+
+  target_pose_.pose = transformed_pose;
+  pose_pub_.publish(camera_frame_pose);
 
 //  ROS_INFO_STREAM(target_pose.position.x << " " << target_pose.position.y << " " << target_pose.position.z);
 //  ros::Duration current_time = ros::Time::now() - last_time_;
@@ -98,8 +109,10 @@ void FollowerTrackerROS::disconnectCB(const ros::SingleSubscriberPublisher& pub)
 
 void FollowerTrackerROS::publishBoundingBox(const geometry_msgs::Pose& msg)
 {
-  Eigen::Affine3d pose;
-  tf::poseMsgToEigen(msg, pose);
-  visual_tools_->publishWireframeCuboid(pose, 0.42, 0.354, 0.354, rviz_visual_tools::LIME_GREEN);
+  visual_tools_->deleteAllMarkers();
+
+  Eigen::Affine3d pose = Eigen::Affine3d::Identity();
+  pose.translation() << msg.position.x, msg.position.y, msg.position.z;
+  visual_tools_->publishWireframeCuboid(pose, 0.46, 0.354, 0.354, rviz_visual_tools::YELLOW);
   visual_tools_->trigger();
 }
