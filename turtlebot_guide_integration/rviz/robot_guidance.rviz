@@ -11,7 +11,6 @@ Panels:
         - /Global Planning1/Planner1
         - /PointCloud21
         - /MarkerArray1
-        - /MarkerArray1/Status1
       Splitter Ratio: 0.565306127
     Tree Height: 813
   - Class: rviz/Selection
@@ -721,7 +720,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.0559907
+      Distance: 8.95643139
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -736,10 +735,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.559798896
+      Pitch: 0.769798815
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 0.753177404
+      Yaw: 6.27636337
     Saved: ~
 Window Geometry:
   Displays:
