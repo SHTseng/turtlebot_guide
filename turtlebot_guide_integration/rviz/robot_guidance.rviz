@@ -11,6 +11,7 @@ Panels:
         - /Global Planning1/Planner1
         - /PointCloud21
         - /MarkerArray1
+        - /MarkerArray1/Status1
       Splitter Ratio: 0.565306127
     Tree Height: 813
   - Class: rviz/Selection
@@ -697,7 +698,7 @@ Visualization Manager:
       Name: MarkerArray
       Namespaces:
         Wireframe Cuboid: true
-      Queue Size: 100
+      Queue Size: 1
       Value: true
   Enabled: true
   Global Options:
@@ -720,7 +721,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.75421047
+      Distance: 3.0559907
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -735,10 +736,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.599798799
+      Pitch: 0.559798896
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 0.753176808
+      Yaw: 0.753177404
     Saved: ~
 Window Geometry:
   Displays:
