@@ -27,6 +27,7 @@ int main(int argc, char* argv[])
   control_speed.linear.x = 0.0;
   control_speed.linear.y = 0.0;
   control_speed.angular.z = 0.0;
+
   guide_cmdvel_pub.publish(control_speed);
   follower_cmdvel_pub.publish(control_speed);
 

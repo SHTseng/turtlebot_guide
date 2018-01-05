@@ -1,9 +1,9 @@
 <launch>  
   <arg name="gui" default="false"/>
   <arg name="rviz" default="true"/>
-  <arg name="map_file" default="$(find turtlebot_navigation)/maps/willow_v2.yaml"/>
+  <arg name="map_file" default="$(find turtlebot_navigation)/maps/willow_v3.yaml"/>
   
-  <arg name="initial_pose_x" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="initial_pose_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_a" default="3.14"/>
   
@@ -56,13 +56,6 @@
     <remap from="image" to="/camera/depth/image_raw"/>
     <remap from="scan" to="/scan"/>
   </node>
-    
-  <node pkg="nodelet" type="nodelet" name="follower_tracker" 
-        args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager">
-    <param name="mesh_name" value="turtlebot.pcd"/>
-    <remap from="input" to="/camera/depth/points"/>
-    <remap from="output" to="/turtlebot_follower_tracker/output" />
-  </node>
   
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
@@ -85,7 +78,7 @@
   <group ns="follower" clear_params="true">
     <include file="$(find turtlebot_guide_integration)/launch/turtlebot_kobuki.launch">
       <arg name="namespace" value="follower" />
-      <arg name="init_x" value="18.5" />
+      <arg name="init_x" value="23.5" />
       <arg name="init_y" value="17.0" />
       <arg name="init_yaw" value="3.14" />
     </include>  
