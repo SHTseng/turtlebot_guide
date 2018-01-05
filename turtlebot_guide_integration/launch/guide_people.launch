@@ -3,7 +3,7 @@
   <arg name="rviz" default="true"/>
   <arg name="map_file" default="$(find turtlebot_navigation)/maps/willow_v2.yaml"/>
   
-  <arg name="initial_pose_x" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="initial_pose_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_a" default="3.14"/>
   
@@ -13,7 +13,7 @@
   <param name ="/use_sim_time" value="true"/>
   
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="worlds/willowgarage.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="world_name" value="$(find turtlebot_guide_integration)/worlds/willowgarage.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="$(arg gui)"/>
@@ -31,7 +31,6 @@
   
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0"/>
-    <!--<param name="tf_prefix" type="string" value="guidance" />-->
   </node>
   
   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
@@ -45,53 +44,20 @@
     <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
   </node>
   
-  <!-- Depth image nodelet includes Fake laser, follower tracker -->
-  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager" output="screen"/>
-  <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan"
-        args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet depthimage_nodelet_manager">
-    <param name="scan_height" value="10"/>
-    <param name="output_frame_id" value="/camera_depth_frame"/>
-    <param name="range_min" value="0.45"/>
-    <param name="range_max" value="2.5"/>
-    <remap from="image" to="/camera/depth/image_raw"/>
-    <remap from="scan" to="/scan"/>
-  </node>
-    
-  <node pkg="nodelet" type="nodelet" name="follower_tracker" 
-        args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager">
-    <param name="mesh_name" value="turtlebot.pcd"/>
-    <remap from="input" to="/camera/depth/points"/>
-    <remap from="output" to="/turtlebot_follower_tracker/output" />
-  </node>
+  <!-- People tracking -->
+  <include file="$(find spencer_people_tracking_launch)/launch/tracking_turtlebot_xtion.launch" /> 
   
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
     <param name="frame_id" value="/map"/>
   </node>
   
-  <!-- AMCL -->
-  <include file="$(find turtlebot_navigation)/launch/includes/amcl/amcl.launch.xml">
-    <arg name="scan_topic" value="scan"/>
-    <arg name="use_map_topic" value ="true"/>
-    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
-    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
-    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
-  </include>
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
     
   <!-- Move base -->
   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml" />
   
-  <!-- Load follower robot model-->
-  <group ns="follower" clear_params="true">
-    <include file="$(find turtlebot_guide_integration)/launch/turtlebot_kobuki.launch">
-      <arg name="namespace" value="follower" />
-      <arg name="init_x" value="18.5" />
-      <arg name="init_y" value="17.0" />
-      <arg name="init_yaw" value="3.14" />
-    </include>  
-  </group> 
-  
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/robot_guidance.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/robot_guidance.rviz" if="$(arg rviz)"/>
     
  </launch>

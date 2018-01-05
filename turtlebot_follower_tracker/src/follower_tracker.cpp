@@ -45,11 +45,13 @@ void FollowerTracker::filter(PointCloudPtr output_cloud)
 void FollowerTracker::setROI(const double &azi)
 {
   float offset = 0.4;
-  float mapped_pt = 3.031*std::tan(azi);
+//  float mapped_pt = 3.031*std::tan(azi);
+  float mapped_pt = azi;
 
   roi_filter_.setInputCloud(scene_cloud_);
   roi_filter_.setFilterFieldName("x");
-  roi_filter_.setFilterLimits(-mapped_pt-offset, -mapped_pt+offset);
+//  roi_filter_.setFilterLimits(-mapped_pt-offset, -mapped_pt+offset);
+  roi_filter_.setFilterLimits(mapped_pt-offset, mapped_pt+offset);
   roi_filter_.filter(*scene_cloud_);
 
   roi_filter_.setInputCloud(scene_cloud_);

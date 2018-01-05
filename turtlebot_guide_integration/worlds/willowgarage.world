@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://willowgarage</uri>
+    </include>
+    
+    <physics type='ode'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>100</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+    
+    <actor name="actor">
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <trajectory id="0" type="walking">
+          <waypoint>  
+            <time>0</time>
+            <pose>26 17 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>4</time>
+            <pose>23 17 0 0 0 3.14</pose>
+          </waypoint>
+          <waypoint>
+            <time>4.5</time>
+            <pose>23 17 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>9</time>
+            <pose>26 17 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>9.5</time>
+            <pose>26 17 0 0 0 3.14</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+  </world>
+</sdf>

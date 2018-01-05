@@ -75,9 +75,9 @@ void FollowerTrackerROS::depthCB(const sensor_msgs::PointCloud2ConstPtr& depth_m
   pose_pub_.publish(camera_frame_pose);
 
 //  ROS_INFO_STREAM(target_pose.position.x << " " << target_pose.position.y << " " << target_pose.position.z);
-//  ros::Duration current_time = ros::Time::now() - last_time_;
-//  ROS_INFO_STREAM(current_time.toSec()*1000);
-//  last_time_ = ros::Time::now();
+  ros::Duration current_time = ros::Time::now() - last_time_;
+  ROS_INFO_STREAM(current_time.toSec()*1000);
+  last_time_ = ros::Time::now();
 }
 
 void FollowerTrackerROS::connectCB(const ros::SingleSubscriberPublisher& pub)
