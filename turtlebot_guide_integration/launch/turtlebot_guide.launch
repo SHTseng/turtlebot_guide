@@ -57,12 +57,12 @@
     <remap from="scan" to="/scan"/>
   </node>
     
-  <node pkg="nodelet" type="nodelet" name="follower_tracker" 
+  <!--node pkg="nodelet" type="nodelet" name="follower_tracker" 
         args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager">
     <param name="mesh_name" value="turtlebot.pcd"/>
     <remap from="input" to="/camera/depth/points"/>
     <remap from="output" to="/turtlebot_follower_tracker/output" />
-  </node>
+  </node-->
   
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
@@ -70,13 +70,14 @@
   </node>
   
   <!-- AMCL -->
-  <include file="$(find turtlebot_navigation)/launch/includes/amcl/amcl.launch.xml">
+  <!--include file="$(find turtlebot_navigation)/launch/includes/amcl/amcl.launch.xml">
     <arg name="scan_topic" value="scan"/>
     <arg name="use_map_topic" value ="true"/>
     <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
-  </include>
+  </include -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
     
   <!-- Move base -->
   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml" />

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>turtlebot_mbf_nav</name>
+  <version>0.0.0</version>
+  <description>The sub-package of turtlebot_guide </description>
+  <maintainer email="q253upng@gmail.com">SHTseng</maintainer>
+  <license>TODO</license>
+
+  <depend>tf</depend>
+  <depend>roscpp</depend>
+  <depend>pluginlib</depend>
+  <depend>actionlib</depend>
+  <depend>actionlib_msgs</depend>
+  <depend>base_local_planner</depend>
+  <depend>dynamic_reconfigure</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>mbf_abstract_nav</depend>
+  <depend>mbf_costmap_core</depend>
+  <depend>mbf_costmap_nav</depend>
+  <depend>mbf_msgs</depend>
+  <depend>nav_core</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rviz_visual_tools</depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+</package>

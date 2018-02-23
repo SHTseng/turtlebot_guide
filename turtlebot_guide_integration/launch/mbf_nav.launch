@@ -1,0 +1,62 @@
+<launch>  
+  <arg name="gui" default="false"/>
+  <arg name="rviz" default="false"/>
+  <arg name="map_file" default="$(find turtlebot_navigation)/maps/willow_v2.yaml"/>
+  
+  <arg name="initial_pose_x" default="21.5"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="initial_pose_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="initial_pose_a" default="3.14"/>
+  
+  <param name="init_x" value="$(arg initial_pose_x)"/>
+  <param name="init_y" value="$(arg initial_pose_y)"/>
+  <param name="init_th" value="$(arg initial_pose_a)"/>
+  <param name ="/use_sim_time" value="true"/>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot_guide_integration)/worlds/willowgarage_people_walk.world"/> 
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include> 
+  
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/turtlebot_guidance.xacro'" />
+  <param name="robot_description" command="$(arg urdf_file)" />
+  
+  <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
+      args="-x $(arg initial_pose_x) -y $(arg initial_pose_y) -Y $(arg initial_pose_a) -urdf -param robot_description -model turtlebot_guidance"
+      respawn="false"/>
+  
+  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0"/>
+  </node>
+  
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
+        args="$(arg initial_pose_x) $(arg initial_pose_y) 0 $(arg initial_pose_a) 0 0 /map /odom 100" />
+  
+  <!-- Velocity muxer -->
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="cmd_vel_mux"
+        args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
+    <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml" />
+    <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
+  </node>
+  
+  <!-- People tracking -->
+  <!--include file="$(find spencer_people_tracking_launch)/launch/tracking_turtlebot_xtion.launch" /--> 
+  
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+    <param name="frame_id" value="/map"/>
+  </node>
+  
+  <!-- Localization -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
+  
+  <!-- Move base flex -->
+  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml">
+  </include>
+  
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_mbf_nav)/rviz/mbf.rviz" if="$(arg rviz)"/>
+  
+    
+ </launch>

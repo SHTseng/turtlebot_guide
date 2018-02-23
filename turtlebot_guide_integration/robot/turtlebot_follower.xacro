@@ -17,7 +17,7 @@
   <stack_hexagons                 parent="base_link"/>
   <sensor_asus_xtion_pro          parent="base_link"/>
 
-  <link name="ir_led_link">
+  <!--<link name="ir_led_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -73,8 +73,8 @@
       </ray>
     </sensor>
 
-<!--    <plugin name="ir_emitter" filename="libgazebo_ros_ir_emitter.so">
+    <plugin name="ir_emitter" filename="libgazebo_ros_ir_emitter.so">
      <frameName>ir_led_link</frameName>
-    </plugin>-->
-  </gazebo>
+    </plugin>
+  </gazebo>-->
 </robot>

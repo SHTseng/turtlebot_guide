@@ -9,9 +9,9 @@
 
   <run_depend>gazebo_ir_camera_plugin</run_depend>
   <run_depend>turtlebot_follower_tracker</run_depend>
-  <run_depend>turtlebot_guide_planner</run_depend>
+  <run_depend>turtlebot_mbf_nav</run_depend>
   <run_depend>turtlebot_guide_integration</run_depend>
-  <run_depend>turtlebot_demo</run_depend>
+  <run_depend>turtlebot_guide_visualization</run_depend>
 
   <export>
     <metapackage/> 

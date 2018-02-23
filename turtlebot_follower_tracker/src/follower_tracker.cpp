@@ -3,20 +3,29 @@
 namespace turtlebot_guide
 {
 
-FollowerTracker::FollowerTracker(const float &voxel_size, const std::string& mesh_model_name):
+FollowerTracker::FollowerTracker(const float &voxel_size, const std::string& mesh_model_name, const float &initial_y):
   voxel_size_(voxel_size),
+  initial_y_(initial_y),
   mesh_model_name_(mesh_model_name)
 {
   mesh_loader_.reset(new MeshModelLoader(mesh_model_name_));
   this->loadTargetModel();
 
   Eigen::Affine3f model_transform = Eigen::Affine3f::Identity();
-  model_transform.translation() << 0.0, 0.2, 0.0;
+
+  // Initial guess for follower at back
+//  model_transform.translation() << 0.0, 0.2, 0.0;
+//  model_transform.rotate (Eigen::AngleAxisf (M_PI/2, Eigen::Vector3f::UnitX()));
+//  model_transform.rotate (Eigen::AngleAxisf (-M_PI/2, Eigen::Vector3f::UnitZ()));
+
+  // Initial guess for CCN project
+  model_transform.translation() << 0.3, 0.29, 1.8;
   model_transform.rotate (Eigen::AngleAxisf (M_PI/2, Eigen::Vector3f::UnitX()));
-  model_transform.rotate (Eigen::AngleAxisf (-M_PI/2, Eigen::Vector3f::UnitZ()));
+  model_transform.rotate (Eigen::AngleAxisf (-M_PI, Eigen::Vector3f::UnitZ()));
   pcl::transformPointCloud (*model_cloud_, *model_cloud_, model_transform);
 
-  icp.setInputSource(model_cloud_);
+  previous_pose_.position.x = 0.3;
+  previous_pose_.position.z = 1.8;
 }
 
 FollowerTracker::~FollowerTracker()
@@ -37,6 +46,8 @@ void FollowerTracker::filter(PointCloudPtr output_cloud)
   outlier_removal.filter(*scene_cloud_);
 
   this->alignTarget();
+  //update initial guess
+//  updateICPInitialGuess(tracked_pose_.position.x-previous_pose_.position.x, tracked_pose_.position.z-previous_pose_.position.z);
 
   previous_pose_ = tracked_pose_;
   pcl::copyPointCloud(*scene_cloud_, *output_cloud);
@@ -72,6 +83,7 @@ void FollowerTracker::setInputCloud(const PointCloud &input_cloud)
 
 void FollowerTracker::alignTarget()
 {
+  icp.setInputSource(model_cloud_);
   icp.setInputTarget(scene_cloud_);
   icp.setMaximumIterations(15);
   PointCloud final;
@@ -82,6 +94,15 @@ void FollowerTracker::alignTarget()
     tracked_p_aff.matrix() = tracked_p;
     tf::poseEigenToMsg(tracked_p_aff, tracked_pose_);
   }
+}
+
+void FollowerTracker::updateICPInitialGuess(const float& x, const float &z)
+{
+  Eigen::Affine3f model_transform = Eigen::Affine3f::Identity();
+  ROS_INFO_STREAM(x);
+  model_transform.translation() << -x, 0, 0;
+  model_transform.rotate (Eigen::AngleAxisf (0, Eigen::Vector3f::UnitX()));
+  pcl::transformPointCloud (*model_cloud_, *model_cloud_, model_transform);
 }
 
 void FollowerTracker::extractTarget()
