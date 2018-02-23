@@ -17,7 +17,8 @@ int main(int argc, char *argv[])
 {
   ros::init(argc, argv, "capture_scene");
   ros::NodeHandle nh;
-  ros::Subscriber sub = nh.subscribe("/turtlebot_follower_tracker/output", 1, callback);
+  //ros::Subscriber sub = nh.subscribe("/turtlebot_follower_tracker/output", 1, callback);
+  ros::Subscriber sub = nh.subscribe("/camera/depth/points", 1, callback);
 
   while(sub.getNumPublishers() == 0){
     ros::Duration(0.5).sleep();
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
   pcl::PCLPointCloud2::Ptr pcl_input(new pcl::PCLPointCloud2);
   pcl_conversions::toPCL(data, *pcl_input);
 
-  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_p(new pcl::PointCloud<pcl::PointXYZ>);
+  pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud_p(new pcl::PointCloud<pcl::PointXYZRGBA>);
   pcl::fromPCLPointCloud2(*pcl_input, *cloud_p);
 
   std::string save_file_name = ros::package::getPath("turtlebot_follower_tracker")+"/data/scene.pcd";

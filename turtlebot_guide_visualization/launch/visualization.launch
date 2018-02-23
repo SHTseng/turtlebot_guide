@@ -1,0 +1,4 @@
+<launch>
+  <node name="turtlebot_guide_visualization" type="visualization_node" pkg="turtlebot_guide_visualization" output="screen">
+  </node>
+</launch>

@@ -11,12 +11,12 @@
       <uri>model://willowgarage</uri>
     </include>
     
-    <physics type='ode'>
+    <!--<physics type='ode'>
       <max_step_size>0.01</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>100</real_time_update_rate>
       <gravity>0 0 -9.8</gravity>
-    </physics>
+    </physics> -->
     
     <actor name="actor">
       <skin>

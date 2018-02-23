@@ -32,6 +32,9 @@ private:
 
   void publishBoundingBox(const geometry_msgs::Pose& msg);
 
+  void frameTransformation(const geometry_msgs::Pose& camera_frame,
+                           geometry_msgs::Pose& transformed_frame);
+
   ros::NodeHandle nh_;
   ros::NodeHandle pnh_;
 
@@ -48,6 +51,10 @@ private:
 
   tf::TransformListener tf_listener_;
   tf::StampedTransform camera_base_tf_;
+
+  /// 0. camera look in back
+  /// 1. camera look in front
+  int camera_mode_;
 
   rviz_visual_tools::RvizVisualToolsPtr visual_tools_;
 };

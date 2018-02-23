@@ -1,0 +1,3546 @@
+<trajectory id="0" type="walking">
+    <waypoint>
+        <time>0</time>
+        <pose>23.95 16.95 0 0 0 -3.14</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.083755131295930402</time>
+        <pose>23.9207 16.9484 0 0 0 -6.22816</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.15518214234296104</time>
+        <pose>23.8957 16.9476 0 0 0 -6.24728</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.2266079229423103</time>
+        <pose>23.8708 16.9464 0 0 0 -6.23555</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.29803971241712041</time>
+        <pose>23.8458 16.9449 0 0 0 -6.22236</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.3694632401565901</time>
+        <pose>23.8209 16.9431 0 0 0 -6.20595</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.4408962982904539</time>
+        <pose>23.796 16.9407 0 0 0 -6.18845</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.51232651042451516</time>
+        <pose>23.7712 16.9379 0 0 0 -6.16758</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.58375355872525403</time>
+        <pose>23.7464 16.9345 0 0 0 -6.14543</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.65517832599883186</time>
+        <pose>23.7217 16.9305 0 0 0 -6.12012</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.7266065158502093</time>
+        <pose>23.6972 16.9258 0 0 0 -6.09385</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.79803471847407803</time>
+        <pose>23.6727 16.9204 0 0 0 -6.06468</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.86946237134656512</time>
+        <pose>23.6485 16.9143 0 0 0 -6.03496</pose>
+    </waypoint>
+    <waypoint>
+        <time>0.94089975680062043</time>
+        <pose>23.6245 16.9074 0 0 0 -6.00251</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.0123236139847021</time>
+        <pose>23.6007 16.8998 0 0 0 -5.97119</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.0837562916296464</time>
+        <pose>23.5769 16.8921 0 0 0 -5.96803</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.1551822286971349</time>
+        <pose>23.5531 16.8843 0 0 0 -5.96556</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.226613843090969</time>
+        <pose>23.5294 16.8763 0 0 0 -5.95374</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.2980389073386098</time>
+        <pose>23.5059 16.8678 0 0 0 -5.93482</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.3694676714176541</time>
+        <pose>23.4826 16.8587 0 0 0 -5.90902</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.4408926638168444</time>
+        <pose>23.4596 16.8489 0 0 0 -5.87973</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.5123219840248634</time>
+        <pose>23.4367 16.839 0 0 0 -5.87524</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.5837529374708414</time>
+        <pose>23.4137 16.8291 0 0 0 -5.87273</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.6551841857365059</time>
+        <pose>23.3908 16.8191 0 0 0 -5.8718</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.7266109115259269</time>
+        <pose>23.3679 16.8091 0 0 0 -5.87164</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.7980381732368198</time>
+        <pose>23.3449 16.7992 0 0 0 -5.87377</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.8694650565567035</time>
+        <pose>23.3218 16.7898 0 0 0 -5.89363</pose>
+    </waypoint>
+    <waypoint>
+        <time>1.9408981673734886</time>
+        <pose>23.2984 16.7809 0 0 0 -5.91768</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.0123266344938524</time>
+        <pose>23.2748 16.7726 0 0 0 -5.94378</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.0837544794871001</time>
+        <pose>23.251 16.765 0 0 0 -5.97262</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.1551775942211617</time>
+        <pose>23.227 16.7581 0 0 0 -6.00143</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.2266082666826237</time>
+        <pose>23.2028 16.7519 0 0 0 -6.03131</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.2980424912817754</time>
+        <pose>23.1785 16.7459 0 0 0 -6.03963</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.3694680717717125</time>
+        <pose>23.1542 16.7399 0 0 0 -6.0386</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.4408926900255818</time>
+        <pose>23.1301 16.7333 0 0 0 -6.01538</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.5123219990578458</time>
+        <pose>23.1061 16.7263 0 0 0 -5.99675</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.5837505933703402</time>
+        <pose>23.0822 16.7191 0 0 0 -5.99077</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.6551814015346893</time>
+        <pose>23.0582 16.712 0 0 0 -5.99409</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.7266072917682127</time>
+        <pose>23.0342 16.7051 0 0 0 -5.99954</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.7980386571099496</time>
+        <pose>23.0102 16.6981 0 0 0 -5.99753</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.8694640672935621</time>
+        <pose>22.9863 16.6908 0 0 0 -5.98795</pose>
+    </waypoint>
+    <waypoint>
+        <time>2.9408938159042024</time>
+        <pose>22.9624 16.6833 0 0 0 -5.97698</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.0123247693501805</time>
+        <pose>22.9387 16.6755 0 0 0 -5.96417</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.0837486893361321</time>
+        <pose>22.915 16.6673 0 0 0 -5.94841</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.1551822860046945</time>
+        <pose>22.8916 16.6587 0 0 0 -5.92915</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.2266115317076474</time>
+        <pose>22.8683 16.6496 0 0 0 -5.90666</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.2980399770084179</time>
+        <pose>22.8451 16.6403 0 0 0 -5.90403</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.3694650801074131</time>
+        <pose>22.8218 16.6311 0 0 0 -5.90349</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.44089857832873</time>
+        <pose>22.7986 16.6219 0 0 0 -5.90485</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.5123199856645746</time>
+        <pose>22.7753 16.6128 0 0 0 -5.90728</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.5837563239013868</time>
+        <pose>22.752 16.6037 0 0 0 -5.91076</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.6551823700706065</time>
+        <pose>22.7286 16.5949 0 0 0 -5.92312</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.7266079478995104</time>
+        <pose>22.705 16.5867 0 0 0 -5.9439</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.7980346002455563</time>
+        <pose>22.6812 16.5789 0 0 0 -5.9671</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.8694691776541337</time>
+        <pose>22.6573 16.5718 0 0 0 -5.99219</pose>
+    </waypoint>
+    <waypoint>
+        <time>3.9408963520851401</time>
+        <pose>22.6331 16.5653 0 0 0 -6.01805</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.0123281867935674</time>
+        <pose>22.6088 16.5594 0 0 0 -6.0444</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.0837503350004845</time>
+        <pose>22.5844 16.5541 0 0 0 -6.06966</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.1551803300079904</time>
+        <pose>22.5599 16.5494 0 0 0 -6.09112</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.2266089434791123</time>
+        <pose>22.5355 16.5436 0 0 0 -6.04878</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.2980385462734967</time>
+        <pose>22.5116 16.5365 0 0 0 -5.99243</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.3694706821838665</time>
+        <pose>22.488 16.5283 0 0 0 -5.94548</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.4408950082517622</time>
+        <pose>22.4647 16.5191 0 0 0 -5.9065</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.512323408848955</time>
+        <pose>22.4417 16.5094 0 0 0 -5.88306</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.5837539621045309</time>
+        <pose>22.4185 16.4999 0 0 0 -5.89286</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.6551821924021235</time>
+        <pose>22.3953 16.4907 0 0 0 -5.90272</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.7266120022129288</time>
+        <pose>22.3721 16.4814 0 0 0 -5.90233</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.7980387567410414</time>
+        <pose>22.3489 16.4721 0 0 0 -5.8985</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.8694682967385523</time>
+        <pose>22.3258 16.4625 0 0 0 -5.88968</pose>
+    </waypoint>
+    <waypoint>
+        <time>4.9408936680709781</time>
+        <pose>22.3027 16.453 0 0 0 -5.88887</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.0123203294644005</time>
+        <pose>22.2795 16.4437 0 0 0 -5.9031</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.0837498263555512</time>
+        <pose>22.256 16.435 0 0 0 -5.92614</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.1551819862130177</time>
+        <pose>22.2324 16.4269 0 0 0 -5.94845</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.2266111717796822</time>
+        <pose>22.2086 16.4192 0 0 0 -5.97096</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.2980367139507312</time>
+        <pose>22.1846 16.4121 0 0 0 -5.99305</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.3694674513367442</time>
+        <pose>22.1605 16.4055 0 0 0 -6.01553</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.4408929014359382</time>
+        <pose>22.1363 16.3995 0 0 0 -6.03608</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.5123233823164144</time>
+        <pose>22.112 16.3935 0 0 0 -6.04138</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.5837493768619089</time>
+        <pose>22.0877 16.3877 0 0 0 -6.04526</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.6551795783525272</time>
+        <pose>22.0634 16.3819 0 0 0 -6.04816</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.7266115849484382</time>
+        <pose>22.039 16.3761 0 0 0 -6.05017</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.798040622036793</time>
+        <pose>22.0147 16.3704 0 0 0 -6.05142</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.8694702003510466</time>
+        <pose>21.9903 16.3647 0 0 0 -6.05192</pose>
+    </waypoint>
+    <waypoint>
+        <time>5.9408938281481678</time>
+        <pose>21.966 16.3591 0 0 0 -6.05228</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.0123234064624214</time>
+        <pose>21.9416 16.3534 0 0 0 -6.05192</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.083757507604469</time>
+        <pose>21.9173 16.3477 0 0 0 -6.05219</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.1551763819760588</time>
+        <pose>21.8929 16.342 0 0 0 -6.05364</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.2266056707855233</time>
+        <pose>21.8686 16.3364 0 0 0 -6.05518</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.2980388763250392</time>
+        <pose>21.8442 16.3308 0 0 0 -6.05494</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.3694639368472066</time>
+        <pose>21.8199 16.3251 0 0 0 -6.05166</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.4408980379892542</time>
+        <pose>21.7955 16.3194 0 0 0 -6.05219</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.5123286976786661</time>
+        <pose>21.7712 16.3138 0 0 0 -6.05618</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.5837520657513799</time>
+        <pose>21.7468 16.3084 0 0 0 -6.06329</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.6551834757948392</time>
+        <pose>21.7223 16.3032 0 0 0 -6.07256</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.7266073015779648</time>
+        <pose>21.6978 16.2981 0 0 0 -6.07603</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.7980363391985001</time>
+        <pose>21.6734 16.2927 0 0 0 -6.06294</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.869471470562253</time>
+        <pose>21.6491 16.2869 0 0 0 -6.04629</pose>
+    </waypoint>
+    <waypoint>
+        <time>6.9408928778980972</time>
+        <pose>21.6249 16.2805 0 0 0 -6.02548</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.0123282434010754</time>
+        <pose>21.6009 16.2736 0 0 0 -5.99996</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.083750668900433</time>
+        <pose>21.5771 16.2659 0 0 0 -5.96926</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.1551793148347738</time>
+        <pose>21.5536 16.2574 0 0 0 -5.93289</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.2266090692993457</time>
+        <pose>21.5304 16.2481 0 0 0 -5.90102</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.2980378530691548</time>
+        <pose>21.5072 16.2389 0 0 0 -5.90535</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.3694670051084863</time>
+        <pose>21.4839 16.2298 0 0 0 -5.90968</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.4408959969614523</time>
+        <pose>21.4606 16.2208 0 0 0 -5.91374</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.512327169127567</time>
+        <pose>21.4372 16.2119 0 0 0 -5.91741</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.5837533259949579</time>
+        <pose>21.4138 16.2031 0 0 0 -5.92104</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.6551831693327879</time>
+        <pose>21.3902 16.1948 0 0 0 -5.94263</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.726612119143426</time>
+        <pose>21.3664 16.1872 0 0 0 -5.97378</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.7980375224083351</time>
+        <pose>21.3424 16.1804 0 0 0 -6.00398</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.8694635499504413</time>
+        <pose>21.3181 16.1742 0 0 0 -6.03256</pose>
+    </waypoint>
+    <waypoint>
+        <time>7.9408949120991972</time>
+        <pose>21.2937 16.1687 0 0 0 -6.05944</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.012328331562621</time>
+        <pose>21.2692 16.1638 0 0 0 -6.08453</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.0837509518579438</time>
+        <pose>21.2446 16.1595 0 0 0 -6.10785</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.1551822176850308</time>
+        <pose>21.2199 16.1557 0 0 0 -6.12891</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.2266054127850232</time>
+        <pose>21.1951 16.1523 0 0 0 -6.14764</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.2980394394269918</time>
+        <pose>21.1703 16.1492 0 0 0 -6.15591</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.369461715369523</time>
+        <pose>21.1456 16.1456 0 0 0 -6.13802</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.4408960293685134</time>
+        <pose>21.121 16.1409 0 0 0 -6.09274</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.5123282211554301</time>
+        <pose>21.0966 16.1354 0 0 0 -6.05994</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.5837549852631039</time>
+        <pose>21.0723 16.1298 0 0 0 -6.05642</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.6551784150736726</time>
+        <pose>21.0479 16.1242 0 0 0 -6.05391</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.7266099789121299</time>
+        <pose>21.0236 16.1185 0 0 0 -6.0518</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.7980399861596315</time>
+        <pose>20.9992 16.1128 0 0 0 -6.05029</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.8694645783350197</time>
+        <pose>20.9749 16.107 0 0 0 -6.04902</pose>
+    </waypoint>
+    <waypoint>
+        <time>8.9408972171327292</time>
+        <pose>20.9506 16.1012 0 0 0 -6.04854</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.0123252531818441</time>
+        <pose>20.9263 16.0951 0 0 0 -6.03294</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.0837519023346989</time>
+        <pose>20.9022 16.0884 0 0 0 -6.01159</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.1551815987921135</time>
+        <pose>20.8783 16.0812 0 0 0 -5.98733</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.2266091287283309</time>
+        <pose>20.8546 16.0733 0 0 0 -5.96004</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.2980418845998347</time>
+        <pose>20.8311 16.0647 0 0 0 -5.92954</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.3694645740848532</time>
+        <pose>20.808 16.0552 0 0 0 -5.89571</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.4408941816688277</time>
+        <pose>20.785 16.0455 0 0 0 -5.87989</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.5123274893810361</time>
+        <pose>20.7619 16.0358 0 0 0 -5.88574</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.5837540698802286</time>
+        <pose>20.7388 16.0262 0 0 0 -5.88755</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.6551829840346954</time>
+        <pose>20.7158 16.0165 0 0 0 -5.88148</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.7266076656219784</time>
+        <pose>20.6928 16.0066 0 0 0 -5.87601</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.798035278047923</time>
+        <pose>20.6697 15.9971 0 0 0 -5.89007</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.8694645668573884</time>
+        <pose>20.6463 15.9884 0 0 0 -5.92509</pose>
+    </waypoint>
+    <waypoint>
+        <time>9.940898638199414</time>
+        <pose>20.6225 15.9806 0 0 0 -5.96521</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.012321009943507</time>
+        <pose>20.5985 15.9736 0 0 0 -5.99927</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.083756575528486</time>
+        <pose>20.5743 15.9672 0 0 0 -6.02377</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.155179911135583</time>
+        <pose>20.55 15.9614 0 0 0 -6.04751</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.226610583597045</time>
+        <pose>20.5256 15.9562 0 0 0 -6.06969</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.298035321066706</time>
+        <pose>20.501 15.9515 0 0 0 -6.09085</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.369471272446518</time>
+        <pose>20.4765 15.9468 0 0 0 -6.09262</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.440894732593771</time>
+        <pose>20.4519 15.9419 0 0 0 -6.08712</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.512327384163177</time>
+        <pose>20.4275 15.9369 0 0 0 -6.07905</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.583756985361031</time>
+        <pose>20.403 15.9317 0 0 0 -6.07268</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.655177132879066</time>
+        <pose>20.3786 15.9264 0 0 0 -6.06691</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.726613744096243</time>
+        <pose>20.3542 15.9209 0 0 0 -6.06246</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.798041572059416</time>
+        <pose>20.3298 15.9154 0 0 0 -6.05855</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.86946958469224</time>
+        <pose>20.3054 15.9098 0 0 0 -6.0558</pose>
+    </waypoint>
+    <waypoint>
+        <time>10.940894374850959</time>
+        <pose>20.2811 15.9042 0 0 0 -6.05328</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.012325442712664</time>
+        <pose>20.2567 15.8984 0 0 0 -6.04917</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.083755167375399</time>
+        <pose>20.2325 15.8924 0 0 0 -6.03786</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.155179629158241</time>
+        <pose>20.2083 15.886 0 0 0 -6.02436</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.226613348752633</time>
+        <pose>20.1842 15.8793 0 0 0 -6.00896</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.298040304451261</time>
+        <pose>20.1603 15.8721 0 0 0 -5.99127</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.369469801874589</time>
+        <pose>20.1365 15.8645 0 0 0 -5.97135</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.440898510606589</time>
+        <pose>20.1128 15.8563 0 0 0 -5.94934</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.512324922930643</time>
+        <pose>20.0893 15.8478 0 0 0 -5.93262</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.583750920137156</time>
+        <pose>20.0658 15.8393 0 0 0 -5.93587</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.655177830599078</time>
+        <pose>20.0423 15.8309 0 0 0 -5.93872</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.72660674635009</time>
+        <pose>20.0187 15.8226 0 0 0 -5.9412</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.798041449343502</time>
+        <pose>19.9951 15.8143 0 0 0 -5.94317</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.869465756251621</time>
+        <pose>19.9715 15.806 0 0 0 -5.94506</pose>
+    </waypoint>
+    <waypoint>
+        <time>11.940897207803797</time>
+        <pose>19.9479 15.798 0 0 0 -5.95413</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.012323073023714</time>
+        <pose>19.924 15.7906 0 0 0 -5.98374</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.083753476739481</time>
+        <pose>19.8999 15.784 0 0 0 -6.01186</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.155178994961215</time>
+        <pose>19.8756 15.7779 0 0 0 -6.03809</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.226611817351833</time>
+        <pose>19.8512 15.7725 0 0 0 -6.0627</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.298041863980172</time>
+        <pose>19.8267 15.7676 0 0 0 -6.08539</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.369465474213992</time>
+        <pose>19.8021 15.7633 0 0 0 -6.10637</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.440897116812391</time>
+        <pose>19.7774 15.7594 0 0 0 -6.1257</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.512319731253196</time>
+        <pose>19.7526 15.756 0 0 0 -6.1432</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.583750590505625</time>
+        <pose>19.7278 15.7529 0 0 0 -6.15922</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.655184529875973</time>
+        <pose>19.7029 15.7502 0 0 0 -6.17373</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.726610404143365</time>
+        <pose>19.6781 15.7473 0 0 0 -6.16597</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.798033579018826</time>
+        <pose>19.6533 15.7442 0 0 0 -6.1581</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.869468938668332</time>
+        <pose>19.6285 15.741 0 0 0 -6.15098</pose>
+    </waypoint>
+    <waypoint>
+        <time>12.940894803888249</time>
+        <pose>19.6037 15.7376 0 0 0 -6.14555</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.012326867957281</time>
+        <pose>19.579 15.7341 0 0 0 -6.14051</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.083754302098855</time>
+        <pose>19.5543 15.7305 0 0 0 -6.13667</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.155182907055032</time>
+        <pose>19.5295 15.7268 0 0 0 -6.13322</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.226611638138728</time>
+        <pose>19.5048 15.723 0 0 0 -6.13075</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.298039599681436</time>
+        <pose>19.4801 15.7192 0 0 0 -6.12841</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.369466371239879</time>
+        <pose>19.4554 15.7154 0 0 0 -6.12692</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.440892110327216</time>
+        <pose>19.4307 15.7115 0 0 0 -6.12544</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.51232736727483</time>
+        <pose>19.406 15.7076 0 0 0 -6.12459</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.583752231411051</time>
+        <pose>19.3813 15.7036 0 0 0 -6.12395</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.655179835321931</time>
+        <pose>19.3566 15.6997 0 0 0 -6.12371</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.726610903183635</time>
+        <pose>19.332 15.6957 0 0 0 -6.12186</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.798034269127456</time>
+        <pose>19.3073 15.6917 0 0 0 -6.12024</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.869467329389924</time>
+        <pose>19.2826 15.6877 0 0 0 -6.11865</pose>
+    </waypoint>
+    <waypoint>
+        <time>13.940891632572528</time>
+        <pose>19.2579 15.6836 0 0 0 -6.11715</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.012324539575372</time>
+        <pose>19.2333 15.6794 0 0 0 -6.11568</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.083756153969206</time>
+        <pose>19.2086 15.6753 0 0 0 -6.11432</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.155183683905424</time>
+        <pose>19.184 15.6711 0 0 0 -6.11319</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.226607219628223</time>
+        <pose>19.1594 15.6669 0 0 0 -6.11207</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.298033964044574</time>
+        <pose>19.1347 15.6626 0 0 0 -6.11109</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.369469604128028</time>
+        <pose>19.1101 15.6584 0 0 0 -6.11036</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.440896995694164</time>
+        <pose>19.0854 15.6541 0 0 0 -6.1096</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.512327769267605</time>
+        <pose>19.0608 15.6498 0 0 0 -6.10862</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.583749072284778</time>
+        <pose>19.0362 15.6453 0 0 0 -6.10103</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.655177417002459</time>
+        <pose>19.0117 15.6406 0 0 0 -6.09124</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.726613352950517</time>
+        <pose>18.9872 15.6355 0 0 0 -6.07943</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.798035092934166</time>
+        <pose>18.9628 15.6302 0 0 0 -6.06566</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.869463706405288</time>
+        <pose>18.9384 15.6244 0 0 0 -6.04878</pose>
+    </waypoint>
+    <waypoint>
+        <time>14.940895557610673</time>
+        <pose>18.9142 15.6182 0 0 0 -6.0288</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.012325005541483</time>
+        <pose>18.8902 15.6114 0 0 0 -6.00691</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.083751511000552</time>
+        <pose>18.8663 15.604 0 0 0 -5.98247</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.155181276108634</time>
+        <pose>18.8425 15.5963 0 0 0 -5.96776</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.226610253592705</time>
+        <pose>18.8187 15.5885 0 0 0 -5.96621</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.298036711153783</time>
+        <pose>18.795 15.5808 0 0 0 -5.96671</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.36946424907288</time>
+        <pose>18.7712 15.5731 0 0 0 -5.96864</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.440900052520576</time>
+        <pose>18.7474 15.5655 0 0 0 -5.97227</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.512321483274876</time>
+        <pose>18.7235 15.558 0 0 0 -5.97695</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.583756950947457</time>
+        <pose>18.6996 15.5506 0 0 0 -5.98289</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.655182286089717</time>
+        <pose>18.6757 15.5435 0 0 0 -5.99177</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.726609275848906</time>
+        <pose>18.6517 15.5365 0 0 0 -5.99992</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.798038723779715</time>
+        <pose>18.6276 15.5298 0 0 0 -6.00691</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.869468850766186</time>
+        <pose>18.6035 15.5231 0 0 0 -6.01325</pose>
+    </waypoint>
+    <waypoint>
+        <time>15.940899254481954</time>
+        <pose>18.5793 15.5166 0 0 0 -6.01882</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.012326388998343</time>
+        <pose>18.5552 15.5103 0 0 0 -6.02373</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.083756649560051</time>
+        <pose>18.531 15.504 0 0 0 -6.02791</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.155180349739215</time>
+        <pose>18.5068 15.4977 0 0 0 -6.02826</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.226610678951047</time>
+        <pose>18.4826 15.4913 0 0 0 -6.02261</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.298033980495841</time>
+        <pose>18.4585 15.4848 0 0 0 -6.01778</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.369465584778602</time>
+        <pose>18.4344 15.4782 0 0 0 -6.01364</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.440897352434835</time>
+        <pose>18.4103 15.4715 0 0 0 -6.00997</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.512324435860481</time>
+        <pose>18.3862 15.4647 0 0 0 -6.00703</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.58375106106439</time>
+        <pose>18.3622 15.4579 0 0 0 -6.00437</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.655184871123545</time>
+        <pose>18.3381 15.451 0 0 0 -6.00224</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.72660427934651</time>
+        <pose>18.314 15.4443 0 0 0 -6.01334</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.798035201926819</time>
+        <pose>18.2898 15.438 0 0 0 -6.0269</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.869465520495226</time>
+        <pose>18.2656 15.4321 0 0 0 -6.04088</pose>
+    </waypoint>
+    <waypoint>
+        <time>16.940896767164396</time>
+        <pose>18.2412 15.4265 0 0 0 -6.05506</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.0123195753362</time>
+        <pose>18.2168 15.4212 0 0 0 -6.06904</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.083756457936332</time>
+        <pose>18.1922 15.4163 0 0 0 -6.08305</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.155180168759909</time>
+        <pose>18.1677 15.4117 0 0 0 -6.09681</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.226605731687023</time>
+        <pose>18.143 15.4074 0 0 0 -6.11046</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.298037453045275</time>
+        <pose>18.1184 15.4035 0 0 0 -6.12335</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.369466640740658</time>
+        <pose>18.0936 15.3998 0 0 0 -6.13483</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.440892512347027</time>
+        <pose>18.069 15.3958 0 0 0 -6.11851</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.512325019170412</time>
+        <pose>18.0444 15.3912 0 0 0 -6.09882</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.58375320902179</time>
+        <pose>18.0199 15.3861 0 0 0 -6.07455</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.655179523420898</time>
+        <pose>17.9956 15.3802 0 0 0 -6.04576</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.726607081031098</time>
+        <pose>17.9715 15.3735 0 0 0 -6.01109</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.798035394881982</time>
+        <pose>17.9477 15.3659 0 0 0 -5.9698</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.869468647250667</time>
+        <pose>17.9243 15.3571 0 0 0 -5.92146</pose>
+    </waypoint>
+    <waypoint>
+        <time>17.940893265504535</time>
+        <pose>17.9013 15.3473 0 0 0 -5.88225</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.012324082715732</time>
+        <pose>17.8783 15.3376 0 0 0 -5.88016</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.083747035653211</time>
+        <pose>17.8553 15.3276 0 0 0 -5.87268</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.155180938837734</time>
+        <pose>17.8323 15.3178 0 0 0 -5.87819</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.226609342095855</time>
+        <pose>17.8093 15.308 0 0 0 -5.87962</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.298039926749428</time>
+        <pose>17.7863 15.2984 0 0 0 -5.88678</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.369462616234447</time>
+        <pose>17.7628 15.2899 0 0 0 -5.93312</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.440895524833746</time>
+        <pose>17.739 15.2822 0 0 0 -5.96841</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.51231936977678</time>
+        <pose>17.715 15.2751 0 0 0 -5.99571</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.583750742036642</time>
+        <pose>17.6908 15.2687 0 0 0 -6.0216</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.65517705643575</time>
+        <pose>17.6665 15.2629 0 0 0 -6.04576</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.726612068068921</time>
+        <pose>17.6421 15.2576 0 0 0 -6.06883</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.798036523465182</time>
+        <pose>17.6175 15.2528 0 0 0 -6.09023</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.869462406247845</time>
+        <pose>17.593 15.2483 0 0 0 -6.09732</pose>
+    </waypoint>
+    <waypoint>
+        <time>18.940892043633703</time>
+        <pose>17.5685 15.2432 0 0 0 -6.07804</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.012322000324691</time>
+        <pose>17.5441 15.2376 0 0 0 -6.05405</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.083752250775134</time>
+        <pose>17.5199 15.2312 0 0 0 -6.02501</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.155175825882338</time>
+        <pose>17.496 15.224 0 0 0 -5.98973</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.2266089755461</time>
+        <pose>17.4724 15.2158 0 0 0 -5.9473</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.298037425636537</time>
+        <pose>17.4492 15.2065 0 0 0 -5.89812</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.369464674574768</time>
+        <pose>17.4261 15.197 0 0 0 -5.89297</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.440893458344579</time>
+        <pose>17.4028 15.1878 0 0 0 -5.90535</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.51231986641103</time>
+        <pose>17.3795 15.1787 0 0 0 -5.91045</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.583754144756526</time>
+        <pose>17.3562 15.1698 0 0 0 -5.91729</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.655176915140181</time>
+        <pose>17.3328 15.1609 0 0 0 -5.91566</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.726603500429167</time>
+        <pose>17.3095 15.152 0 0 0 -5.91621</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.798034534764422</time>
+        <pose>17.2859 15.1435 0 0 0 -5.93784</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.86947044783091</time>
+        <pose>17.2622 15.1357 0 0 0 -5.96162</pose>
+    </waypoint>
+    <waypoint>
+        <time>19.940891867940458</time>
+        <pose>17.2383 15.1283 0 0 0 -5.98436</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.012321114175592</time>
+        <pose>17.2142 15.1215 0 0 0 -6.00603</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.083756083769977</time>
+        <pose>17.19 15.1153 0 0 0 -6.02717</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.15517739743192</time>
+        <pose>17.1657 15.1095 0 0 0 -6.04763</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.22660901661521</time>
+        <pose>17.1413 15.1041 0 0 0 -6.06732</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.298035896741911</time>
+        <pose>17.1168 15.0992 0 0 0 -6.08128</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.369466569203375</time>
+        <pose>17.0923 15.0939 0 0 0 -6.06969</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.44089492935445</time>
+        <pose>17.068 15.0884 0 0 0 -6.06018</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.512321693462123</time>
+        <pose>17.0436 15.0828 0 0 0 -6.05317</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.583753126920758</time>
+        <pose>17.0193 15.0769 0 0 0 -6.04704</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.655179856967763</time>
+        <pose>16.995 15.071 0 0 0 -6.04262</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.726607535917612</time>
+        <pose>16.9707 15.065 0 0 0 -6.03848</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.798039348275314</time>
+        <pose>16.9465 15.0589 0 0 0 -6.03573</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.869469530607731</time>
+        <pose>16.9223 15.0528 0 0 0 -6.03282</pose>
+    </waypoint>
+    <waypoint>
+        <time>20.940893992390571</time>
+        <pose>16.8981 15.0464 0 0 0 -6.02436</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.012320866663107</time>
+        <pose>16.874 15.0396 0 0 0 -6.00614</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.083753135612799</time>
+        <pose>16.8501 15.0322 0 0 0 -5.98262</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.155182485622824</time>
+        <pose>16.8265 15.0242 0 0 0 -5.9527</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.226604043581787</time>
+        <pose>16.8031 15.0152 0 0 0 -5.91605</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.298038766264327</time>
+        <pose>16.7802 15.0053 0 0 0 -5.87168</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.369464244570519</time>
+        <pose>16.7574 14.9949 0 0 0 -5.85426</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.440893008649564</time>
+        <pose>16.7346 14.9848 0 0 0 -5.86458</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.512324110037703</time>
+        <pose>16.7117 14.9747 0 0 0 -5.86753</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.583754117285203</time>
+        <pose>16.6888 14.9647 0 0 0 -5.86939</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.655182019754921</time>
+        <pose>16.666 14.9545 0 0 0 -5.86191</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.726606733274998</time>
+        <pose>16.643 14.9447 0 0 0 -5.87787</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.798041008959785</time>
+        <pose>16.6196 14.936 0 0 0 -5.92421</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.869463908674621</time>
+        <pose>16.5959 14.9279 0 0 0 -5.95486</pose>
+    </waypoint>
+    <waypoint>
+        <time>21.940892333220162</time>
+        <pose>16.572 14.9206 0 0 0 -5.98362</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.012322353772003</time>
+        <pose>16.5479 14.9139 0 0 0 -6.00869</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.08374958195466</time>
+        <pose>16.5237 14.9076 0 0 0 -6.02954</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.155177103907995</time>
+        <pose>16.4994 14.9019 0 0 0 -6.04991</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.22660689935007</time>
+        <pose>16.475 14.8961 0 0 0 -6.04766</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.298041024438557</time>
+        <pose>16.4508 14.8901 0 0 0 -6.03913</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.36946324928687</time>
+        <pose>16.4266 14.8839 0 0 0 -6.03128</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.440893091560351</time>
+        <pose>16.4024 14.8776 0 0 0 -6.02551</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.512326811154743</time>
+        <pose>16.3783 14.8708 0 0 0 -6.00896</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.583754341623152</time>
+        <pose>16.3543 14.8638 0 0 0 -5.99815</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.655177403134694</time>
+        <pose>16.3303 14.8567 0 0 0 -5.99316</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.726607005929079</time>
+        <pose>16.3064 14.8496 0 0 0 -5.99243</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.798035715725447</time>
+        <pose>16.2824 14.8425 0 0 0 -5.99204</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.869463503242176</time>
+        <pose>16.2584 14.8354 0 0 0 -5.99509</pose>
+    </waypoint>
+    <waypoint>
+        <time>22.940894997367373</time>
+        <pose>16.2344 14.8285 0 0 0 -6.00147</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.012317897082209</time>
+        <pose>16.2103 14.8218 0 0 0 -6.01133</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.083751239916246</time>
+        <pose>16.1861 14.8154 0 0 0 -6.02388</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.155178994969368</time>
+        <pose>16.1619 14.8094 0 0 0 -6.03898</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.226607706362284</time>
+        <pose>16.1375 14.8038 0 0 0 -6.0563</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.298035055352955</time>
+        <pose>16.1131 14.7985 0 0 0 -6.06531</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.369468154462428</time>
+        <pose>16.0888 14.7927 0 0 0 -6.04641</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.440895045765267</time>
+        <pose>16.0646 14.7862 0 0 0 -6.02184</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.512324497953497</time>
+        <pose>16.0406 14.7791 0 0 0 -5.99115</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.58374803207963</time>
+        <pose>16.017 14.771 0 0 0 -5.95332</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.655175149033578</time>
+        <pose>15.9936 14.7621 0 0 0 -5.91516</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.726606732562029</time>
+        <pose>15.9705 14.7527 0 0 0 -5.89866</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.798036563659835</time>
+        <pose>15.9472 14.7436 0 0 0 -5.90798</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.869463225053256</time>
+        <pose>15.9239 14.7344 0 0 0 -5.9031</pose>
+    </waypoint>
+    <waypoint>
+        <time>23.940896723274573</time>
+        <pose>15.9007 14.7252 0 0 0 -5.90485</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.012323384667994</time>
+        <pose>15.8775 14.7159 0 0 0 -5.9031</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.083753194478799</time>
+        <pose>15.8542 14.7067 0 0 0 -5.90233</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.155182765342577</time>
+        <pose>15.8309 14.6976 0 0 0 -5.91033</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.226606373979735</time>
+        <pose>15.8074 14.6892 0 0 0 -5.94104</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.298035258332014</time>
+        <pose>15.7836 14.6816 0 0 0 -5.97057</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.369468433538984</time>
+        <pose>15.7596 14.6746 0 0 0 -5.99919</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.440891277370007</time>
+        <pose>15.7354 14.6683 0 0 0 -6.02637</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.512323396251325</time>
+        <pose>15.711 14.6626 0 0 0 -6.05231</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.583753636058333</time>
+        <pose>15.6866 14.6575 0 0 0 -6.0768</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.655180497558138</time>
+        <pose>15.662 14.653 0 0 0 -6.09993</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.726610786857115</time>
+        <pose>15.6373 14.6489 0 0 0 -6.11369</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.798039113480471</time>
+        <pose>15.6127 14.6444 0 0 0 -6.10254</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.869463087752738</time>
+        <pose>15.5882 14.6396 0 0 0 -6.08899</pose>
+    </waypoint>
+    <waypoint>
+        <time>24.940896307660299</time>
+        <pose>15.5637 14.6344 0 0 0 -6.07244</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.012320394762821</time>
+        <pose>15.5394 14.6285 0 0 0 -6.04123</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.08374738452201</time>
+        <pose>15.5154 14.6215 0 0 0 -5.99992</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.155178597664815</time>
+        <pose>15.4917 14.6137 0 0 0 -5.96494</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.22660730905773</time>
+        <pose>15.4682 14.6052 0 0 0 -5.93147</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.298039630158769</time>
+        <pose>15.4449 14.5961 0 0 0 -5.90956</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.369465020650686</time>
+        <pose>15.4217 14.5869 0 0 0 -5.9048</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.440898127742418</time>
+        <pose>15.3984 14.5776 0 0 0 -5.90288</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.51232657304319</time>
+        <pose>15.3752 14.5684 0 0 0 -5.90403</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.583752626131051</time>
+        <pose>15.3519 14.5593 0 0 0 -5.90678</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.655180837802099</time>
+        <pose>15.3286 14.5502 0 0 0 -5.91072</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.726613187639579</time>
+        <pose>15.3051 14.5418 0 0 0 -5.9407</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.798039708532439</time>
+        <pose>15.2813 14.5342 0 0 0 -5.97108</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.869464096869578</time>
+        <pose>15.2572 14.5273 0 0 0 -6.00093</pose>
+    </waypoint>
+    <waypoint>
+        <time>25.940893939143059</time>
+        <pose>15.2331 14.521 0 0 0 -6.02551</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.012321948050563</time>
+        <pose>15.2087 14.5152 0 0 0 -6.05041</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.083750573761918</time>
+        <pose>15.1843 14.5097 0 0 0 -6.05906</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.155183129543548</time>
+        <pose>15.16 14.5041 0 0 0 -6.05444</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.226608884597045</time>
+        <pose>15.1357 14.4983 0 0 0 -6.04789</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.298034324584293</time>
+        <pose>15.1114 14.4922 0 0 0 -6.03658</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.369466314151122</time>
+        <pose>15.0872 14.4861 0 0 0 -6.03422</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.440889797183935</time>
+        <pose>15.0629 14.4801 0 0 0 -6.03872</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.512324034554499</time>
+        <pose>15.0386 14.4743 0 0 0 -6.04792</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.583751340969684</time>
+        <pose>15.0142 14.4688 0 0 0 -6.06081</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.655183702514599</time>
+        <pose>14.9897 14.4637 0 0 0 -6.07606</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.726611089823191</time>
+        <pose>14.9652 14.459 0 0 0 -6.0926</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.798038481389327</time>
+        <pose>14.9405 14.4547 0 0 0 -6.1096</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.869462568491848</time>
+        <pose>14.9158 14.4509 0 0 0 -6.12716</pose>
+    </waypoint>
+    <waypoint>
+        <time>26.940893342065291</time>
+        <pose>14.8912 14.4466 0 0 0 -6.10862</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.01232616445591</time>
+        <pose>14.8668 14.4412 0 0 0 -6.0627</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.083749385634892</time>
+        <pose>14.8426 14.4348 0 0 0 -6.02587</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.15517846955515</time>
+        <pose>14.8186 14.4279 0 0 0 -6.00158</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.226609669393838</time>
+        <pose>14.7946 14.4208 0 0 0 -5.99192</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.298033533496774</time>
+        <pose>14.7705 14.4142 0 0 0 -6.01589</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.369468151880088</time>
+        <pose>14.7467 14.4067 0 0 0 -5.97393</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.440895210824742</time>
+        <pose>14.7235 14.3973 0 0 0 -5.89719</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.512321784405344</time>
+        <pose>14.7003 14.388 0 0 0 -5.89982</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.583753848474377</time>
+        <pose>14.6762 14.3812 0 0 0 -6.00769</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.655177192597048</time>
+        <pose>14.6517 14.3764 0 0 0 -6.0865</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.726611967961283</time>
+        <pose>14.627 14.3723 0 0 0 -6.12002</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.79804066179215</time>
+        <pose>14.6023 14.3687 0 0 0 -6.13655</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.869463635486447</time>
+        <pose>14.5777 14.3643 0 0 0 -6.10364</pose>
+    </waypoint>
+    <waypoint>
+        <time>27.940890618327085</time>
+        <pose>14.5535 14.3581 0 0 0 -6.03004</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.01232203582083</time>
+        <pose>14.5303 14.3488 0 0 0 -5.89998</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.083753257478271</time>
+        <pose>14.5087 14.336 0 0 0 -5.74741</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.155181042866243</time>
+        <pose>14.4875 14.3229 0 0 0 -5.72884</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.226605637170486</time>
+        <pose>14.4644 14.3133 0 0 0 -5.88794</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.29803530382604</time>
+        <pose>14.4398 14.3088 0 0 0 -6.0977</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.369467197604205</time>
+        <pose>14.4148 14.309 0 0 0 -0.0080506</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.44089038205971</time>
+        <pose>14.3901 14.313 0 0 0 -0.160505</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.512324266087024</time>
+        <pose>14.3658 14.3189 0 0 0 -0.235718</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.583754254708445</time>
+        <pose>14.3417 14.3255 0 0 0 -0.263964</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.655184898432793</time>
+        <pose>14.3171 14.3299 0 0 0 -0.178326</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.726607518728116</time>
+        <pose>14.2923 14.3329 0 0 0 -0.118825</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.798042397327073</time>
+        <pose>14.2674 14.3356 0 0 0 -0.106396</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.86946279553306</time>
+        <pose>14.2426 14.3381 0 0 0 -0.096108</pose>
+    </waypoint>
+    <waypoint>
+        <time>28.940898674011112</time>
+        <pose>14.2177 14.3406 0 0 0 -0.0982946</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.012327000102278</time>
+        <pose>14.1928 14.3432 0 0 0 -0.105546</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.083756920605421</time>
+        <pose>14.168 14.3464 0 0 0 -0.125579</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.155180416411568</time>
+        <pose>14.1459 14.3581 0 0 0 -0.484386</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.226608768579855</time>
+        <pose>14.123 14.368 0 0 0 -0.40596</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.298035432102072</time>
+        <pose>14.0995 14.3765 0 0 0 -0.344519</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.369465952895297</time>
+        <pose>14.0764 14.3862 0 0 0 -0.397321</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.440895049587883</time>
+        <pose>14.0541 14.3974 0 0 0 -0.462655</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.512325563462898</time>
+        <pose>14.0338 14.412 0 0 0 -0.620814</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.583752674030507</time>
+        <pose>14.0129 14.4258 0 0 0 -0.584209</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.655181315707377</time>
+        <pose>13.9927 14.4405 0 0 0 -0.629726</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.726608679599465</time>
+        <pose>13.9751 14.4583 0 0 0 -0.786481</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.798032671967164</time>
+        <pose>13.9562 14.4746 0 0 0 -0.711231</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.869460003927642</time>
+        <pose>13.9386 14.4923 0 0 0 -0.786309</pose>
+    </waypoint>
+    <waypoint>
+        <time>29.940896844490087</time>
+        <pose>13.9229 14.5118 0 0 0 -0.89025</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.012318424270745</time>
+        <pose>13.9062 14.5305 0 0 0 -0.841243</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.083751587238265</time>
+        <pose>13.8946 14.5526 0 0 0 -1.08454</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.155180847842239</time>
+        <pose>13.884 14.5752 0 0 0 -1.13329</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.226610855089739</time>
+        <pose>13.874 14.5981 0 0 0 -1.157</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.298040488750363</time>
+        <pose>13.8592 14.6183 0 0 0 -0.934565</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.369466845725551</time>
+        <pose>13.8448 14.6388 0 0 0 -0.958278</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.440895557118466</time>
+        <pose>13.8347 14.6616 0 0 0 -1.15099</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.512325306793457</time>
+        <pose>13.8261 14.6851 0 0 0 -1.21726</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.583754548771154</time>
+        <pose>13.8235 14.7099 0 0 0 -1.46661</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.655181644437292</time>
+        <pose>13.8205 14.7348 0 0 0 -1.44929</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.726607173303169</time>
+        <pose>13.8197 14.7597 0 0 0 -1.5355</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.798039615735767</time>
+        <pose>13.8178 14.7847 0 0 0 -1.49517</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.869468547984411</time>
+        <pose>13.8028 14.8046 0 0 0 -0.922529</pose>
+    </waypoint>
+    <waypoint>
+        <time>30.940893643100253</time>
+        <pose>13.79 14.8261 0 0 0 -1.03469</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.012321134718629</time>
+        <pose>13.7838 14.8503 0 0 0 -1.31665</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.083756165508706</time>
+        <pose>13.7786 14.8748 0 0 0 -1.35993</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.155184361746329</time>
+        <pose>13.7743 14.8994 0 0 0 -1.39573</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.2266119912024</time>
+        <pose>13.7719 14.9243 0 0 0 -1.47556</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.298037784574671</time>
+        <pose>13.7697 14.9492 0 0 0 -1.47985</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.369465525258651</time>
+        <pose>13.7681 14.9742 0 0 0 -1.50495</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.44089990737173</time>
+        <pose>13.7662 14.9991 0 0 0 -1.4948</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.512326515013076</time>
+        <pose>13.7642 15.024 0 0 0 -1.48683</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.583755399365355</time>
+        <pose>13.7612 15.0488 0 0 0 -1.45113</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.655181299178555</time>
+        <pose>13.757 15.0735 0 0 0 -1.39733</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.726613786844357</time>
+        <pose>13.7505 15.0976 0 0 0 -1.30821</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.798042270462457</time>
+        <pose>13.7439 15.1217 0 0 0 -1.30187</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.869471245817802</time>
+        <pose>13.7372 15.1458 0 0 0 -1.29909</pose>
+    </waypoint>
+    <waypoint>
+        <time>31.940895063617631</time>
+        <pose>13.7306 15.1699 0 0 0 -1.29843</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.012327127686667</time>
+        <pose>13.7238 15.194 0 0 0 -1.2953</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.08375765220508</time>
+        <pose>13.717 15.218 0 0 0 -1.29402</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.155183040035958</time>
+        <pose>13.7101 15.2421 0 0 0 -1.2907</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.226614534161151</time>
+        <pose>13.7032 15.2661 0 0 0 -1.28908</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.298039335496334</time>
+        <pose>13.6962 15.2901 0 0 0 -1.28676</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.369466567404352</time>
+        <pose>13.6893 15.3141 0 0 0 -1.28664</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.440894452844013</time>
+        <pose>13.6823 15.3381 0 0 0 -1.28487</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.512321312215029</time>
+        <pose>13.6752 15.3621 0 0 0 -1.28448</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.583756496260172</time>
+        <pose>13.6682 15.3861 0 0 0 -1.28235</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.655178943048732</time>
+        <pose>13.6611 15.4101 0 0 0 -1.28166</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.726612633907237</time>
+        <pose>13.6539 15.434 0 0 0 -1.27942</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.798037094093431</time>
+        <pose>13.6468 15.458 0 0 0 -1.279</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.869469849964936</time>
+        <pose>13.6396 15.4819 0 0 0 -1.27776</pose>
+    </waypoint>
+    <waypoint>
+        <time>32.940899267561605</time>
+        <pose>13.6324 15.5059 0 0 0 -1.27749</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.012320418890646</time>
+        <pose>13.6252 15.5298 0 0 0 -1.27618</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.083754175203104</time>
+        <pose>13.618 15.5537 0 0 0 -1.2756</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.155182377294786</time>
+        <pose>13.6107 15.5776 0 0 0 -1.27417</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.226614927222712</time>
+        <pose>13.6034 15.6016 0 0 0 -1.27355</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.298037028593178</time>
+        <pose>13.5961 15.6255 0 0 0 -1.27236</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.369466114109976</time>
+        <pose>13.5888 15.6494 0 0 0 -1.27162</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.440900314762722</time>
+        <pose>13.5814 15.6733 0 0 0 -1.27139</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.512327449279113</time>
+        <pose>13.5741 15.6972 0 0 0 -1.27046</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.583756524684482</time>
+        <pose>13.5667 15.7211 0 0 0 -1.26996</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.655178628183876</time>
+        <pose>13.5593 15.7449 0 0 0 -1.26904</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.726607890384386</time>
+        <pose>13.5519 15.7688 0 0 0 -1.2683</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.798041760043787</time>
+        <pose>13.5445 15.7927 0 0 0 -1.26768</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.869469894015488</time>
+        <pose>13.537 15.8166 0 0 0 -1.26753</pose>
+    </waypoint>
+    <waypoint>
+        <time>33.940894345686246</time>
+        <pose>13.5296 15.8404 0 0 0 -1.26687</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.012326590156725</time>
+        <pose>13.5221 15.8643 0 0 0 -1.26652</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.083755199370373</time>
+        <pose>13.5147 15.8881 0 0 0 -1.26587</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.155185914405315</time>
+        <pose>13.5072 15.912 0 0 0 -1.26536</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.226607345159614</time>
+        <pose>13.4997 15.9358 0 0 0 -1.26456</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.298037093770255</time>
+        <pose>13.4922 15.9597 0 0 0 -1.26459</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.369471613707731</time>
+        <pose>13.4847 15.9835 0 0 0 -1.26397</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.4409004384556</time>
+        <pose>13.4772 16.0074 0 0 0 -1.26382</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.512325754438351</time>
+        <pose>13.4696 16.0312 0 0 0 -1.26317</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.583756326319858</time>
+        <pose>13.4621 16.0551 0 0 0 -1.26293</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.655186065883512</time>
+        <pose>13.4545 16.0789 0 0 0 -1.26216</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.726612767191817</time>
+        <pose>13.447 16.1027 0 0 0 -1.26189</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.79803907573671</time>
+        <pose>13.4394 16.1265 0 0 0 -1.26151</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.869468025547349</time>
+        <pose>13.4318 16.1504 0 0 0 -1.26139</pose>
+    </waypoint>
+    <waypoint>
+        <time>34.940899241883145</time>
+        <pose>13.4242 16.1742 0 0 0 -1.26089</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.01232708687639</time>
+        <pose>13.4166 16.198 0 0 0 -1.26023</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.083751930788551</time>
+        <pose>13.409 16.2218 0 0 0 -1.25996</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.155181750710682</time>
+        <pose>13.4014 16.2456 0 0 0 -1.25934</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.226614229862001</time>
+        <pose>13.3938 16.2694 0 0 0 -1.25923</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.298035424302441</time>
+        <pose>13.3862 16.2932 0 0 0 -1.25892</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.369470247559093</time>
+        <pose>13.3785 16.3171 0 0 0 -1.25872</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.440899131911372</time>
+        <pose>13.3709 16.3409 0 0 0 -1.25818</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.512325054609349</time>
+        <pose>13.3632 16.3646 0 0 0 -1.25791</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.583753368460236</time>
+        <pose>13.3555 16.3884 0 0 0 -1.25741</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.655184357561367</time>
+        <pose>13.3479 16.4122 0 0 0 -1.2573</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.726609462789206</time>
+        <pose>13.3402 16.436 0 0 0 -1.25676</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.798034568017044</time>
+        <pose>13.3325 16.4598 0 0 0 -1.25676</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.869470401796171</time>
+        <pose>13.3248 16.4836 0 0 0 -1.25629</pose>
+    </waypoint>
+    <waypoint>
+        <time>35.940900624573672</time>
+        <pose>13.3171 16.5074 0 0 0 -1.25614</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.012325008120868</time>
+        <pose>13.3094 16.5312 0 0 0 -1.2556</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.083754773228947</time>
+        <pose>13.3017 16.5549 0 0 0 -1.25537</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.155181631003373</time>
+        <pose>13.294 16.5787 0 0 0 -1.2551</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.226611183240955</time>
+        <pose>13.2862 16.6025 0 0 0 -1.25498</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.298043231877394</time>
+        <pose>13.2785 16.6263 0 0 0 -1.25448</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.369466989536363</time>
+        <pose>13.2707 16.65 0 0 0 -1.25444</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.440893262955967</time>
+        <pose>13.263 16.6738 0 0 0 -1.25394</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.51232765145474</time>
+        <pose>13.2552 16.6976 0 0 0 -1.25359</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.583756458640586</time>
+        <pose>13.2475 16.7213 0 0 0 -1.25344</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.65518510617148</time>
+        <pose>13.2397 16.7451 0 0 0 -1.25305</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.726608178327531</time>
+        <pose>13.2319 16.7689 0 0 0 -1.2529</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.798036676846813</time>
+        <pose>13.2241 16.7926 0 0 0 -1.25266</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.869470605574271</time>
+        <pose>13.2164 16.8164 0 0 0 -1.25243</pose>
+    </waypoint>
+    <waypoint>
+        <time>36.940896117941726</time>
+        <pose>13.2086 16.8401 0 0 0 -1.25201</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.012324350368068</time>
+        <pose>13.2008 16.8639 0 0 0 -1.25189</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.083752465713204</time>
+        <pose>13.1929 16.8876 0 0 0 -1.25151</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.155180581058339</time>
+        <pose>13.1851 16.9114 0 0 0 -1.25151</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.226608589965842</time>
+        <pose>13.1773 16.9351 0 0 0 -1.25112</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.298039326287515</time>
+        <pose>13.1695 16.9589 0 0 0 -1.251</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.369469970011863</time>
+        <pose>13.1617 16.9826 0 0 0 -1.25062</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.440895065127705</time>
+        <pose>13.1538 17.0064 0 0 0 -1.25046</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.512325626897997</time>
+        <pose>13.146 17.0301 0 0 0 -1.25023</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.583750644311102</time>
+        <pose>13.1381 17.0538 0 0 0 -1.25008</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.655183872733055</time>
+        <pose>13.1303 17.0776 0 0 0 -1.24973</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.72660882308756</time>
+        <pose>13.1224 17.1013 0 0 0 -1.24969</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.798041994037327</time>
+        <pose>13.1146 17.125 0 0 0 -1.24934</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.869464097536721</time>
+        <pose>13.1067 17.1488 0 0 0 -1.24904</pose>
+    </waypoint>
+    <waypoint>
+        <time>37.940899966968566</time>
+        <pose>13.0988 17.1725 0 0 0 -1.24884</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.01232203214721</time>
+        <pose>13.091 17.1962 0 0 0 -1.24865</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.083757868586986</time>
+        <pose>13.0831 17.2199 0 0 0 -1.24846</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.155179906089515</time>
+        <pose>13.0752 17.2437 0 0 0 -1.24826</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.226615720179815</time>
+        <pose>13.0673 17.2674 0 0 0 -1.24807</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.298037740650891</time>
+        <pose>13.0594 17.2911 0 0 0 -1.24788</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.369465270587106</time>
+        <pose>13.0515 17.3148 0 0 0 -1.24765</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.440898313820746</time>
+        <pose>13.0436 17.3385 0 0 0 -1.24741</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.512325843756962</time>
+        <pose>13.0357 17.3623 0 0 0 -1.24726</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.583756133055935</time>
+        <pose>13.0278 17.386 0 0 0 -1.24714</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.655183673635996</time>
+        <pose>13.0199 17.4097 0 0 0 -1.24687</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.726608470713479</time>
+        <pose>13.0119 17.4334 0 0 0 -1.2466</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.798044301831951</time>
+        <pose>13.004 17.4571 0 0 0 -1.24653</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.869466360623804</time>
+        <pose>12.9961 17.4808 0 0 0 -1.24633</pose>
+    </waypoint>
+    <waypoint>
+        <time>38.940893954423046</time>
+        <pose>12.9881 17.5045 0 0 0 -1.2461</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.012324317161656</time>
+        <pose>12.9802 17.5282 0 0 0 -1.24599</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.083757449796607</time>
+        <pose>12.9723 17.5519 0 0 0 -1.24587</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.155179591616736</time>
+        <pose>12.9643 17.5756 0 0 0 -1.24556</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.226607281210406</time>
+        <pose>12.9563 17.5993 0 0 0 -1.24533</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.298037746125779</time>
+        <pose>12.9484 17.623 0 0 0 -1.24521</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.369465499582333</time>
+        <pose>12.9404 17.6467 0 0 0 -1.24494</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.440893253038887</time>
+        <pose>12.9325 17.6704 0 0 0 -1.24494</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.51232656447614</time>
+        <pose>12.9245 17.6941 0 0 0 -1.24471</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.58375439243931</time>
+        <pose>12.9165 17.7178 0 0 0 -1.24456</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.655179521616603</time>
+        <pose>12.9085 17.7415 0 0 0 -1.24429</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.726607434730106</time>
+        <pose>12.9005 17.7652 0 0 0 -1.24417</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.798040918583432</time>
+        <pose>12.8926 17.7889 0 0 0 -1.24394</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.869466140365198</time>
+        <pose>12.8846 17.8126 0 0 0 -1.2439</pose>
+    </waypoint>
+    <waypoint>
+        <time>39.940896937354026</time>
+        <pose>12.8766 17.8363 0 0 0 -1.24367</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.012327734342854</time>
+        <pose>12.8686 17.8599 0 0 0 -1.24367</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.083750380717376</time>
+        <pose>12.8606 17.8836 0 0 0 -1.24325</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.155181287332681</time>
+        <pose>12.8526 17.9073 0 0 0 -1.24328</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.226609519759023</time>
+        <pose>12.8446 17.931 0 0 0 -1.24301</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.298040546643954</time>
+        <pose>12.8365 17.9547 0 0 0 -1.2429</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.369466110103275</time>
+        <pose>12.8285 17.9784 0 0 0 -1.24274</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.440894470254349</time>
+        <pose>12.8205 18.002 0 0 0 -1.24263</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.512328426653312</time>
+        <pose>12.8125 18.0257 0 0 0 -1.2424</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.583756925172594</time>
+        <pose>12.8045 18.0494 0 0 0 -1.24224</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.65517996752402</time>
+        <pose>12.7964 18.0731 0 0 0 -1.24209</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.726605811987959</time>
+        <pose>12.7884 18.0967 0 0 0 -1.24197</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.798037263540138</time>
+        <pose>12.7803 18.1204 0 0 0 -1.24174</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.869468715092317</time>
+        <pose>12.7723 18.1441 0 0 0 -1.24174</pose>
+    </waypoint>
+    <waypoint>
+        <time>40.940897522278163</time>
+        <pose>12.7643 18.1677 0 0 0 -1.24147</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.012329136672001</time>
+        <pose>12.7562 18.1914 0 0 0 -1.24135</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.083755304715638</time>
+        <pose>12.7481 18.2151 0 0 0 -1.2412</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.155184282199713</time>
+        <pose>12.7401 18.2388 0 0 0 -1.24108</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.226613259683788</time>
+        <pose>12.732 18.2624 0 0 0 -1.24108</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.298039605482757</time>
+        <pose>12.724 18.2861 0 0 0 -1.24081</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.369471577488341</time>
+        <pose>12.7159 18.3097 0 0 0 -1.24058</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.440895296827449</time>
+        <pose>12.7078 18.3334 0 0 0 -1.24054</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.512321831025297</time>
+        <pose>12.6998 18.3571 0 0 0 -1.24043</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.583753997800812</time>
+        <pose>12.6917 18.3807 0 0 0 -1.2402</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.655186164576328</time>
+        <pose>12.6836 18.4044 0 0 0 -1.2402</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.72661571681391</time>
+        <pose>12.6755 18.428 0 0 0 -1.23993</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.798037018234368</time>
+        <pose>12.6674 18.4517 0 0 0 -1.23989</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.869469390422402</time>
+        <pose>12.6594 18.4754 0 0 0 -1.23981</pose>
+    </waypoint>
+    <waypoint>
+        <time>41.940899155530481</time>
+        <pose>12.6513 18.499 0 0 0 -1.23954</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.012323494371557</time>
+        <pose>12.6432 18.5227 0 0 0 -1.23938</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.083750657626474</time>
+        <pose>12.6351 18.5463 0 0 0 -1.23927</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.155177820881391</time>
+        <pose>12.627 18.57 0 0 0 -1.23927</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.226610635821871</time>
+        <pose>12.6189 18.5936 0 0 0 -1.23904</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.298035202450983</time>
+        <pose>12.6108 18.6173 0 0 0 -1.239</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.369465425228483</time>
+        <pose>12.6026 18.6409 0 0 0 -1.23877</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.440898477508689</time>
+        <pose>12.5945 18.6646 0 0 0 -1.23865</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.512326113351058</time>
+        <pose>12.5864 18.6882 0 0 0 -1.2385</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.583753749193427</time>
+        <pose>12.5783 18.7118 0 0 0 -1.2385</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.655178803329065</time>
+        <pose>12.5702 18.7355 0 0 0 -1.23823</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.726612103591187</time>
+        <pose>12.562 18.7591 0 0 0 -1.23827</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.798042826608658</time>
+        <pose>12.5539 18.7828 0 0 0 -1.238</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.869465304266548</time>
+        <pose>12.5458 18.8064 0 0 0 -1.23796</pose>
+    </waypoint>
+    <waypoint>
+        <time>42.940893455268252</time>
+        <pose>12.5376 18.8301 0 0 0 -1.23773</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.012329850974702</time>
+        <pose>12.5295 18.8537 0 0 0 -1.23776</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.083752595811426</time>
+        <pose>12.5214 18.8773 0 0 0 -1.23757</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.155186423963514</time>
+        <pose>12.5132 18.901 0 0 0 -1.23749</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.226614848509058</time>
+        <pose>12.5051 18.9246 0 0 0 -1.23734</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.298037871168134</time>
+        <pose>12.4969 18.9482 0 0 0 -1.23718</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.369471979228045</time>
+        <pose>12.4888 18.9719 0 0 0 -1.23711</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.440900687960045</time>
+        <pose>12.4806 18.9955 0 0 0 -1.23695</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.512321154293389</time>
+        <pose>12.4725 19.0191 0 0 0 -1.23691</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.583755552902836</time>
+        <pose>12.4643 19.0428 0 0 0 -1.23672</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.655181709770225</time>
+        <pose>12.4562 19.0664 0 0 0 -1.23668</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.726615934369377</time>
+        <pose>12.4478 19.09 0 0 0 -1.22896</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.798041390855062</time>
+        <pose>12.439 19.1133 0 0 0 -1.20695</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.869471163945775</time>
+        <pose>12.4297 19.1366 0 0 0 -1.18797</pose>
+    </waypoint>
+    <waypoint>
+        <time>43.940899236715879</time>
+        <pose>12.4201 19.1597 0 0 0 -1.17927</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.012324461158691</time>
+        <pose>12.4104 19.1827 0 0 0 -1.16827</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.083755079338928</time>
+        <pose>12.4006 19.2057 0 0 0 -1.16684</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.155180325070113</time>
+        <pose>12.3894 19.228 0 0 0 -1.10425</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.22660887042165</time>
+        <pose>12.3775 19.25 0 0 0 -1.07274</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.298043312134503</time>
+        <pose>12.3647 19.2715 0 0 0 -1.03065</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.369469775017578</time>
+        <pose>12.3511 19.2925 0 0 0 -0.99725</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.440900769972536</time>
+        <pose>12.3365 19.3128 0 0 0 -0.944697</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.512324056615064</time>
+        <pose>12.3204 19.3319 0 0 0 -0.86937</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.583750740893024</time>
+        <pose>12.3041 19.3508 0 0 0 -0.856896</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.65517794512693</time>
+        <pose>12.2864 19.3685 0 0 0 -0.782165</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.726607948117042</time>
+        <pose>12.2674 19.3848 0 0 0 -0.707775</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.798037343362225</time>
+        <pose>12.2485 19.4011 0 0 0 -0.710198</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.869469690006767</time>
+        <pose>12.2285 19.4162 0 0 0 -0.64474</pose>
+    </waypoint>
+    <waypoint>
+        <time>44.940894356692077</time>
+        <pose>12.2077 19.43 0 0 0 -0.584378</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.012327778816243</time>
+        <pose>12.1849 19.4403 0 0 0 -0.424217</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.083753401350492</time>
+        <pose>12.1634 19.4531 0 0 0 -0.536042</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.155185129094676</time>
+        <pose>12.1415 19.4651 0 0 0 -0.497764</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.226612647854857</time>
+        <pose>12.1193 19.4766 0 0 0 -0.475267</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.298042975470175</time>
+        <pose>12.0965 19.4868 0 0 0 -0.421156</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.369473230710163</time>
+        <pose>12.0719 19.4915 0 0 0 -0.185652</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.44089317065152</time>
+        <pose>12.0491 19.5016 0 0 0 -0.418144</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.512329385434882</time>
+        <pose>12.0261 19.5115 0 0 0 -0.404982</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.583752004133515</time>
+        <pose>12.003 19.5211 0 0 0 -0.391677</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.655185486390401</time>
+        <pose>11.9799 19.5306 0 0 0 -0.386598</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.726610824193706</time>
+        <pose>11.9567 19.5399 0 0 0 -0.382427</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.798042241687448</time>
+        <pose>11.9335 19.5493 0 0 0 -0.380024</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.86946901324589</time>
+        <pose>11.9103 19.5585 0 0 0 -0.376239</pose>
+    </waypoint>
+    <waypoint>
+        <time>45.940896147230085</time>
+        <pose>11.8864 19.566 0 0 0 -0.302902</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.012326193858428</time>
+        <pose>11.8619 19.5708 0 0 0 -0.194606</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.083754120276659</time>
+        <pose>11.8371 19.574 0 0 0 -0.126321</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.155180132384871</time>
+        <pose>11.8122 19.5762 0 0 0 -0.0835964</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.226609035363516</time>
+        <pose>11.7872 19.5776 0 0 0 -0.0548335</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.298042915133671</time>
+        <pose>11.7623 19.5786 0 0 0 -0.0385763</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.369473487015178</time>
+        <pose>11.7373 19.5793 0 0 0 -0.0264864</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.440900921156754</time>
+        <pose>11.7123 19.5798 0 0 0 -0.0197716</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.512329768788469</time>
+        <pose>11.6873 19.5802 0 0 0 -0.0142771</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.58375548978082</time>
+        <pose>11.6623 19.5805 0 0 0 -0.0112256</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.655179279372994</time>
+        <pose>11.6373 19.5808 0 0 0 -0.00890629</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.726610610656259</time>
+        <pose>11.6123 19.581 0 0 0 -0.00719618</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.798041295357599</time>
+        <pose>11.5873 19.5812 0 0 0 -0.00609762</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.869471477690013</time>
+        <pose>11.5623 19.5814 0 0 0 -0.00512111</pose>
+    </waypoint>
+    <waypoint>
+        <time>46.940901380631402</time>
+        <pose>11.5373 19.5815 0 0 0 -0.00451079</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.012322311612891</time>
+        <pose>11.5123 19.5817 0 0 0 -0.00390113</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.083751822872834</time>
+        <pose>11.4873 19.5818 0 0 0 -0.00353425</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.15518116383582</time>
+        <pose>11.4623 19.5819 0 0 0 -0.00304599</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.226610426036331</time>
+        <pose>11.4373 19.582 0 0 0 -0.00280185</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.29803957807566</time>
+        <pose>11.4123 19.5821 0 0 0 -0.00243564</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.369468661995917</time>
+        <pose>11.3873 19.5822 0 0 0 -0.00219151</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.440897651720157</time>
+        <pose>11.3623 19.5823 0 0 0 -0.0018253</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.512326612174427</time>
+        <pose>11.3373 19.5824 0 0 0 -0.00170323</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.583755517281801</time>
+        <pose>11.3123 19.5825 0 0 0 -0.00145909</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.655184396312265</time>
+        <pose>11.2873 19.5825 0 0 0 -0.00133703</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.726613226381957</time>
+        <pose>11.2623 19.5826 0 0 0 -0.00109289</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.798042033567803</time>
+        <pose>11.2373 19.5827 0 0 0 -0.000970817</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.869470818934161</time>
+        <pose>11.2123 19.5827 0 0 0 -0.000848748</pose>
+    </waypoint>
+    <waypoint>
+        <time>47.940899563854614</time>
+        <pose>11.1873 19.5828 0 0 0 -0.000604608</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.012328308775068</time>
+        <pose>11.1623 19.5828 0 0 0 -0.000604608</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.083757017507068</time>
+        <pose>11.1373 19.5829 0 0 0 -0.000360469</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.155185726239068</time>
+        <pose>11.1123 19.5829 0 0 0 -0.000360469</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.226614418473382</time>
+        <pose>11.0873 19.583 0 0 0 -0.000238399</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.298043080905416</time>
+        <pose>11.0623 19.583 0 0 0 5.74086e-06</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.369471743337449</time>
+        <pose>11.0373 19.5831 0 0 0 5.74086e-06</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.440900405769483</time>
+        <pose>11.0123 19.5831 0 0 0 5.74086e-06</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.512329042656695</time>
+        <pose>10.9873 19.5831 0 0 0 0.000249881</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.583757691784136</time>
+        <pose>10.9623 19.5832 0 0 0 0.000127811</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.655186317495492</time>
+        <pose>10.9373 19.5832 0 0 0 0.000371951</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.726614943206847</time>
+        <pose>10.9123 19.5832 0 0 0 0.000371951</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.798043558806704</time>
+        <pose>10.8873 19.5833 0 0 0 0.000494021</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.86947217440656</time>
+        <pose>10.8623 19.5833 0 0 0 0.000494021</pose>
+    </waypoint>
+    <waypoint>
+        <time>48.940900780959289</time>
+        <pose>10.8373 19.5833 0 0 0 0.000616091</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.012329387512018</time>
+        <pose>10.8123 19.5833 0 0 0 0.000616091</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.083757986081984</time>
+        <pose>10.7873 19.5834 0 0 0 0.000738162</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.155186592634713</time>
+        <pose>10.7623 19.5834 0 0 0 0.000616091</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.226615184286288</time>
+        <pose>10.7373 19.5834 0 0 0 0.000860232</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.298043782856254</time>
+        <pose>10.7123 19.5834 0 0 0 0.000738162</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.369472374507829</time>
+        <pose>10.6873 19.5834 0 0 0 0.000860232</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.440900960305378</time>
+        <pose>10.6623 19.5834 0 0 0 0.000982302</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.512329551956952</time>
+        <pose>10.6373 19.5835 0 0 0 0.000860232</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.583758137754501</time>
+        <pose>10.6123 19.5835 0 0 0 0.000982302</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.655186723552049</time>
+        <pose>10.5873 19.5835 0 0 0 0.000982302</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.726615304559935</time>
+        <pose>10.5623 19.5835 0 0 0 0.00110437</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.798043890357484</time>
+        <pose>10.5373 19.5835 0 0 0 0.000982302</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.86947247136537</time>
+        <pose>10.5123 19.5835 0 0 0 0.00110437</pose>
+    </waypoint>
+    <waypoint>
+        <time>49.940901052373256</time>
+        <pose>10.4873 19.5835 0 0 0 0.00110437</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.012329633381142</time>
+        <pose>10.4623 19.5836 0 0 0 0.00110437</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.083758210663738</time>
+        <pose>10.4373 19.5836 0 0 0 0.00122644</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.155186791671625</time>
+        <pose>10.4123 19.5836 0 0 0 0.00110437</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.226615368954221</time>
+        <pose>10.3873 19.5836 0 0 0 0.00122644</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.298043946236817</time>
+        <pose>10.3623 19.5836 0 0 0 0.00122644</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.369472523519413</time>
+        <pose>10.3373 19.5836 0 0 0 0.00122644</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.44090109814109</time>
+        <pose>10.3123 19.5836 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.512329675423686</time>
+        <pose>10.2873 19.5836 0 0 0 0.00122644</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.583758250045364</time>
+        <pose>10.2623 19.5836 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.65518682732796</time>
+        <pose>10.2373 19.5836 0 0 0 0.00122644</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.726615401949637</time>
+        <pose>10.2123 19.5836 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.798043976571314</time>
+        <pose>10.1873 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.869472551192992</time>
+        <pose>10.1623 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>50.940901125814669</time>
+        <pose>10.1373 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.012329700436347</time>
+        <pose>10.1123 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.083758275058024</time>
+        <pose>10.0873 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.155186848083147</time>
+        <pose>10.0623 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.226615422704825</time>
+        <pose>10.0373 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.298043995729948</time>
+        <pose>10.0123 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.369472570351626</time>
+        <pose>9.98729 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.440901143376749</time>
+        <pose>9.96229 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.512329716401872</time>
+        <pose>9.93729 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.58375829102355</time>
+        <pose>9.91229 19.5837 0 0 0 0.00134851</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.655186864048673</time>
+        <pose>9.88729 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.726615437073796</time>
+        <pose>9.86229 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.79804401009892</time>
+        <pose>9.83729 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.869472583124043</time>
+        <pose>9.81229 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>51.940901156149167</time>
+        <pose>9.78729 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.012329728642108</time>
+        <pose>9.76229 19.5837 0 0 0 0.00159265</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.083758301667231</time>
+        <pose>9.73729 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.155186874692355</time>
+        <pose>9.71229 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.226615447717478</time>
+        <pose>9.68729 19.5837 0 0 0 0.00147058</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.298044020210419</time>
+        <pose>9.66229 19.5837 0 0 0 0.00159265</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.36947259270336</time>
+        <pose>9.63729 19.5837 0 0 0 0.00159265</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.440901165196301</time>
+        <pose>9.61229 19.5837 0 0 0 0.00159265</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.512329737689242</time>
+        <pose>9.58729 19.5837 0 0 0 0.00159265</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.583758310714366</time>
+        <pose>9.56229 19.5837 0 0 0 -6.28147</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.655186885336043</time>
+        <pose>9.53729 19.5837 0 0 0 -6.28135</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.726615466343929</time>
+        <pose>9.51229 19.5837 0 0 0 -6.2811</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.798044057995504</time>
+        <pose>9.48729 19.5837 0 0 0 -6.28086</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.869472694882717</time>
+        <pose>9.46229 19.5837 0 0 0 -6.28025</pose>
+    </waypoint>
+    <waypoint>
+        <time>52.940901421176761</time>
+        <pose>9.43729 19.5836 0 0 0 -6.27952</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.012330410901001</time>
+        <pose>9.41229 19.5835 0 0 0 -6.27817</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.083751390316429</time>
+        <pose>9.38729 19.5834 0 0 0 -6.27598</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.155182876991347</time>
+        <pose>9.36229 19.5832 0 0 0 -6.27256</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.226610522413154</time>
+        <pose>9.33729 19.5828 0 0 0 -6.26682</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.298041894673013</time>
+        <pose>9.3123 19.5822 0 0 0 -6.25779</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.369471649137587</time>
+        <pose>9.28732 19.5812 0 0 0 -6.24289</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.440901449901418</time>
+        <pose>9.26237 19.5797 0 0 0 -6.21881</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.51232712831731</time>
+        <pose>9.2375 19.5771 0 0 0 -6.17948</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.58375431818196</time>
+        <pose>9.21284 19.573 0 0 0 -6.11542</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.655185453628683</time>
+        <pose>9.18836 19.5679 0 0 0 -6.07855</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.726612613690428</time>
+        <pose>9.16369 19.5638 0 0 0 -6.11691</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.798040752984008</time>
+        <pose>9.13887 19.5608 0 0 0 -6.16155</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.869472127372525</time>
+        <pose>9.11397 19.5586 0 0 0 -6.19273</pose>
+    </waypoint>
+    <waypoint>
+        <time>53.94089944389939</time>
+        <pose>9.08904 19.5568 0 0 0 -6.20853</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.012330818287907</time>
+        <pose>9.06414 19.5546 0 0 0 -6.19273</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.083754213503994</time>
+        <pose>9.03928 19.5519 0 0 0 -6.17396</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.15517898663191</time>
+        <pose>9.01454 19.5483 0 0 0 -6.13778</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.226614695360318</time>
+        <pose>8.99011 19.543 0 0 0 -6.06821</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.298037437535903</time>
+        <pose>8.96616 19.5358 0 0 0 -5.99062</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.36947333783128</time>
+        <pose>8.94289 19.5267 0 0 0 -5.90709</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.440898753869178</time>
+        <pose>8.92065 19.5153 0 0 0 -5.80719</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.512328174126736</time>
+        <pose>8.89969 19.5017 0 0 0 -5.7053</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.583758190953361</time>
+        <pose>8.87983 19.4865 0 0 0 -5.62864</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.655184328129266</time>
+        <pose>8.86039 19.4708 0 0 0 -5.60205</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.726612479130971</time>
+        <pose>8.84084 19.4552 0 0 0 -5.60864</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.798044241465597</time>
+        <pose>8.82226 19.4384 0 0 0 -5.54835</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.869467636681684</time>
+        <pose>8.80444 19.4209 0 0 0 -5.50448</pose>
+    </waypoint>
+    <waypoint>
+        <time>54.940897207545461</time>
+        <pose>8.7874 19.4026 0 0 0 -5.46045</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.012325586323037</time>
+        <pose>8.77197 19.3829 0 0 0 -5.37627</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.08375388740145</time>
+        <pose>8.7571 19.3628 0 0 0 -5.34788</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.155181267791527</time>
+        <pose>8.74316 19.3421 0 0 0 -5.30232</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.226616500793085</time>
+        <pose>8.73153 19.32 0 0 0 -5.19421</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.298044215931917</time>
+        <pose>8.72123 19.2972 0 0 0 -5.13584</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.369467244977699</time>
+        <pose>8.7102 19.2747 0 0 0 -5.16746</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.44089946709758</time>
+        <pose>8.69772 19.2531 0 0 0 -5.23338</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.512329610581403</time>
+        <pose>8.68805 19.23 0 0 0 -5.10812</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.583753811578433</time>
+        <pose>8.68117 19.206 0 0 0 -4.98968</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.655182024846042</time>
+        <pose>8.67593 19.1816 0 0 0 -4.92196</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.726611706402529</time>
+        <pose>8.67195 19.1569 0 0 0 -4.87041</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.798045181741493</time>
+        <pose>8.66803 19.1322 0 0 0 -4.86842</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.869467106410532</time>
+        <pose>8.66322 19.1076 0 0 0 -4.90453</pose>
+    </waypoint>
+    <waypoint>
+        <time>55.940900092171837</time>
+        <pose>8.65597 19.0837 0 0 0 -5.00479</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.01233060657902</time>
+        <pose>8.64562 19.061 0 0 0 -5.1377</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.083755645812765</time>
+        <pose>8.63506 19.0383 0 0 0 -5.14687</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.155183737741631</time>
+        <pose>8.62909 19.014 0 0 0 -4.9519</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.226607909998947</time>
+        <pose>8.62818 18.989 0 0 0 -4.74743</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.298037169006385</time>
+        <pose>8.63085 18.9642 0 0 0 -4.60354</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.369466442382659</time>
+        <pose>8.63515 18.9396 0 0 0 -4.53794</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.440896299024857</time>
+        <pose>8.63794 18.9147 0 0 0 -4.59899</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.512321645343491</time>
+        <pose>8.63972 18.8898 0 0 0 -4.63981</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.583755518727905</time>
+        <pose>8.64116 18.8648 0 0 0 -4.65315</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.65518010025901</time>
+        <pose>8.6423 18.8398 0 0 0 -4.66512</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.726612587924812</time>
+        <pose>8.64329 18.8149 0 0 0 -4.67112</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.798040199286376</time>
+        <pose>8.64415 18.7899 0 0 0 -4.67624</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.869463984620793</time>
+        <pose>8.64498 18.7649 0 0 0 -4.67783</pose>
+    </waypoint>
+    <waypoint>
+        <time>56.940897847362315</time>
+        <pose>8.65541 18.7422 0 0 0 -4.28056</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.012330997026076</time>
+        <pose>8.66361 18.7186 0 0 0 -4.3765</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.083753971784823</time>
+        <pose>8.67034 18.6945 0 0 0 -4.43825</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.155184956628624</time>
+        <pose>8.67768 18.6706 0 0 0 -4.41271</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.226608876614577</time>
+        <pose>8.68586 18.647 0 0 0 -4.37762</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.298042920285141</time>
+        <pose>8.69551 18.6239 0 0 0 -4.31429</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.369468921217077</time>
+        <pose>8.70356 18.6002 0 0 0 -4.38318</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.44089537026295</time>
+        <pose>8.71331 18.5772 0 0 0 -4.31014</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.512328652431997</time>
+        <pose>8.72455 18.5549 0 0 0 -4.24426</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.583755883807818</time>
+        <pose>8.73664 18.533 0 0 0 -4.20597</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.655187841445105</time>
+        <pose>8.74929 18.5114 0 0 0 -4.18045</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.726611049318478</time>
+        <pose>8.76241 18.4902 0 0 0 -4.15815</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.798043262391687</time>
+        <pose>8.77593 18.4691 0 0 0 -4.13962</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.8694642716126</time>
+        <pose>8.78967 18.4482 0 0 0 -4.12889</pose>
+    </waypoint>
+    <waypoint>
+        <time>57.940895109578335</time>
+        <pose>8.8039 18.4277 0 0 0 -4.10512</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.012325751706179</time>
+        <pose>8.81823 18.4072 0 0 0 -4.10021</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.083752315707194</time>
+        <pose>8.83271 18.3868 0 0 0 -4.0933</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.155181043597793</time>
+        <pose>8.84731 18.3665 0 0 0 -4.08717</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.226607362254512</time>
+        <pose>8.86213 18.3464 0 0 0 -4.07643</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.298037212510614</time>
+        <pose>8.87701 18.3263 0 0 0 -4.07328</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.369466815304996</time>
+        <pose>8.8919 18.3062 0 0 0 -4.07267</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.440897142920313</time>
+        <pose>8.90691 18.2862 0 0 0 -4.06673</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.512327572712444</time>
+        <pose>8.92195 18.2663 0 0 0 -4.06551</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.583756281444444</time>
+        <pose>8.93698 18.2463 0 0 0 -4.06534</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.655185527679578</time>
+        <pose>8.95215 18.2264 0 0 0 -4.05907</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.726610797360166</time>
+        <pose>8.96729 18.2065 0 0 0 -4.05995</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.798036400734986</time>
+        <pose>8.98245 18.1866 0 0 0 -4.05934</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.869471312326453</time>
+        <pose>8.99763 18.1668 0 0 0 -4.05836</pose>
+    </waypoint>
+    <waypoint>
+        <time>58.940900134413411</time>
+        <pose>9.01284 18.1469 0 0 0 -4.05707</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.012324590874101</time>
+        <pose>9.02806 18.1271 0 0 0 -4.05594</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.08375596313396</time>
+        <pose>9.04329 18.1073 0 0 0 -4.05602</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.155183054010344</time>
+        <pose>9.05853 18.0875 0 0 0 -4.05489</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.226610698899961</time>
+        <pose>9.07379 18.0677 0 0 0 -4.05428</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.298039929701893</time>
+        <pose>9.08905 18.0478 0 0 0 -4.05445</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.369468155209802</time>
+        <pose>9.10432 18.0281 0 0 0 -4.05367</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.440900132004813</time>
+        <pose>9.1196 18.0083 0 0 0 -4.0534</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.512323634729846</time>
+        <pose>9.13488 17.9885 0 0 0 -4.05316</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.583756230423063</time>
+        <pose>9.15017 17.9687 0 0 0 -4.05279</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.65518192746616</time>
+        <pose>9.16545 17.9489 0 0 0 -4.05272</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.726609832596822</time>
+        <pose>9.18075 17.9291 0 0 0 -4.05228</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.798037737727483</time>
+        <pose>9.19605 17.9094 0 0 0 -4.05228</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.869469420770137</time>
+        <pose>9.21136 17.8896 0 0 0 -4.05201</pose>
+    </waypoint>
+    <waypoint>
+        <time>59.940897993795261</time>
+        <pose>9.22667 17.8698 0 0 0 -4.05167</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.01232433959423</time>
+        <pose>9.24197 17.8501 0 0 0 -4.05211</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.083751360752984</time>
+        <pose>9.25728 17.8303 0 0 0 -4.0515</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.155185274048257</time>
+        <pose>9.2726 17.8105 0 0 0 -4.05157</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.226612295207012</time>
+        <pose>9.28791 17.7908 0 0 0 -4.0515</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.298043109225205</time>
+        <pose>9.30323 17.771 0 0 0 -4.05123</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.369470130383959</time>
+        <pose>9.31854 17.7513 0 0 0 -4.0515</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.440900944402152</time>
+        <pose>9.33386 17.7315 0 0 0 -4.05123</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.512326415789644</time>
+        <pose>9.34918 17.7118 0 0 0 -4.05133</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.583751887177137</time>
+        <pose>9.3645 17.692 0 0 0 -4.05133</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.655188044490714</time>
+        <pose>9.37982 17.6722 0 0 0 -4.05113</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.726608173912346</time>
+        <pose>9.39513 17.6525 0 0 0 -4.05142</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.798038987930539</time>
+        <pose>9.41045 17.6327 0 0 0 -4.05123</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.869469801948732</time>
+        <pose>9.42577 17.613 0 0 0 -4.05123</pose>
+    </waypoint>
+    <waypoint>
+        <time>60.940902164557961</time>
+        <pose>9.44109 17.5932 0 0 0 -4.0514</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.012327635945454</time>
+        <pose>9.45641 17.5735 0 0 0 -4.05133</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.083759998554683</time>
+        <pose>9.47172 17.5537 0 0 0 -4.0514</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.155180127976315</time>
+        <pose>9.48704 17.5339 0 0 0 -4.05142</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.226612490585545</time>
+        <pose>9.50235 17.5142 0 0 0 -4.0514</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.2980395117443</time>
+        <pose>9.51767 17.4944 0 0 0 -4.0515</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.369473425039573</time>
+        <pose>9.53298 17.4747 0 0 0 -4.05157</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.440896658459714</time>
+        <pose>9.54829 17.4549 0 0 0 -4.05177</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.512325231484837</time>
+        <pose>9.5636 17.4351 0 0 0 -4.05167</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.583753804509961</time>
+        <pose>9.57891 17.4154 0 0 0 -4.05167</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.655185487552615</time>
+        <pose>9.59421 17.3956 0 0 0 -4.05201</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.726615614539085</time>
+        <pose>9.60952 17.3758 0 0 0 -4.05184</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.798041960338054</time>
+        <pose>9.62482 17.3561 0 0 0 -4.05211</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.869473643380708</time>
+        <pose>9.64013 17.3363 0 0 0 -4.05201</pose>
+    </waypoint>
+    <waypoint>
+        <time>61.940899989179677</time>
+        <pose>9.65543 17.3165 0 0 0 -4.05211</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.012322558913255</time>
+        <pose>9.67073 17.2967 0 0 0 -4.05238</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.083750464043916</time>
+        <pose>9.68602 17.277 0 0 0 -4.05228</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.155179930600944</time>
+        <pose>9.70132 17.2572 0 0 0 -4.05245</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.226609397157972</time>
+        <pose>9.71661 17.2374 0 0 0 -4.05245</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.298040427235897</time>
+        <pose>9.73191 17.2176 0 0 0 -4.05262</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.369473022929114</time>
+        <pose>9.7472 17.1979 0 0 0 -4.05279</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.440898719972211</time>
+        <pose>9.76249 17.1781 0 0 0 -4.05272</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.512325983811877</time>
+        <pose>9.77777 17.1583 0 0 0 -4.05289</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.583760147214647</time>
+        <pose>9.79306 17.1385 0 0 0 -4.05296</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.655182079867195</time>
+        <pose>9.80834 17.1187 0 0 0 -4.05299</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.726612483582961</time>
+        <pose>9.82362 17.099 0 0 0 -4.05323</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.798042887298728</time>
+        <pose>9.8389 17.0792 0 0 0 -4.05323</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.869467962190576</time>
+        <pose>9.85418 17.0594 0 0 0 -4.05333</pose>
+    </waypoint>
+    <waypoint>
+        <time>62.940899938985588</time>
+        <pose>9.86946 17.0396 0 0 0 -4.0534</pose>
+    </waypoint>
+    <waypoint>
+        <time>63.012326588138443</time>
+        <pose>9.88473 17.0198 0 0 0 -4.0535</pose>
+    </waypoint>
+    <waypoint>
+        <time>63.083754813646351</time>
+        <pose>9.9 17 0 0 0 -4.05367</pose>
+    </waypoint>
+    <waypoint>
+        <time>63.285785325567282</time>
+        <pose>9.95 16.95 0 0 0 -3.9254</pose>
+    </waypoint>
+    <waypoint>
+        <time>63.487813368887409</time>
+        <pose>10 17 0 0 0 -2.3546</pose>
+    </waypoint>
+</trajectory>

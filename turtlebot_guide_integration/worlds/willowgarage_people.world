@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://willowgarage</uri>
+    </include>
+    
+    <light type="point" name="point">
+      <pose>22 17 3 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>.1 .1 .1 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.2</linear>
+        <constant>0.8</constant>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    
+    <!--<model name="follower">
+      <pose>24 17.0 -0.25 0 0 -1.57</pose>
+      <static>true</static>
+      <link name="follower_body">
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://turtlebot_guide_integration/models/people_v3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://turtlebot_guide_integration/models/people_v3.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <model name="table">
+      <pose>25.1 18.5 0 0 0 3.14</pose>
+      <static>true</static>
+      <link name="table_body">
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://turtlebot_guide_integration/models/Table/table.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://turtlebot_guide_integration/models/Table/table.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model> 
+    
+    <model name="chair">
+      <pose>24.5 16.2 0 1.57 0 -1.57</pose>
+      <static>true</static>
+      <link name="chair_body">
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://turtlebot_guide_integration/models/chair/chair.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://turtlebot_guide_integration/models/chair/chair.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>  -->
+    <actor name="actor1">
+      <pose>24 17.0 0.98 1.57 0 -1.57</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <plugin name="actor1_plugin" filename="libgazebo_ros_actor.so">
+        <topic>actor_state</topic>
+        <velocity>0.5</velocity>
+        <trajectory_type>0</trajectory_type>
+        <oscillation_enable>true</oscillation_enable>
+      </plugin>
+    </actor>
+     
+  </world>
+</sdf>

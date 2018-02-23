@@ -1,7 +1,9 @@
 <launch>  
   <arg name="gui" default="false"/>
-  <arg name="rviz" default="true"/>
+  <arg name="rviz" default="false"/>
+  <arg name="visual" default="true"/>
   <arg name="map_file" default="$(find turtlebot_navigation)/maps/willow_v2.yaml"/>
+  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/willowgarage_people.world"/>
   
   <arg name="initial_pose_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
@@ -12,15 +14,12 @@
   <param name="init_th" value="$(arg initial_pose_a)"/>
   <param name ="/use_sim_time" value="true"/>
   
+  <!-- Gazebo simulation environment -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find turtlebot_guide_integration)/worlds/willowgarage.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
-    <arg name="paused" value="false"/>
+    <arg name="world_name" value="$(arg world_name)"/> 
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="$(arg gui)"/>
-    <arg name="headless" value="false"/> <!-- Inert - see gazebo_ros_pkgs issue #491 -->
-    <arg name="recording" value="false"/>
-    <arg name="debug" value="false"/>
-  </include>
+  </include> 
   
   <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/turtlebot_guidance.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
@@ -44,20 +43,40 @@
     <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
   </node>
   
+  <!-- Depth image nodelet includes Fake laser, follower tracker -->
+  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="people_detection" 
+        args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager"
+        output="screen">
+    <remap from="input" to="/camera/depth/points" />
+    <remap from="output" to="/turtlebot_people_detection/detected_persons" />
+  </node>
+  
   <!-- People tracking -->
-  <include file="$(find spencer_people_tracking_launch)/launch/tracking_turtlebot_xtion.launch" /> 
+  <include file="$(find spencer_people_tracking_launch)/launch/tracking/freiburg_people_tracking.launch">
+    <arg name="rgbd" default="true"/>
+    <arg name="laser_low_confidence_detections" default="false"/>
+    <arg name="fuse_detections" default="false"/>
+    <arg name="static_map_filter" default="false"/>
+  </include>
+  
+  <!-- Visualization for the different regions -->
+  <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)">
+  </include>
   
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
     <param name="frame_id" value="/map"/>
   </node>
   
+  <!-- Localization for navigation -->
   <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
     
-  <!-- Move base -->
-  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml" />
+  <!-- Move base flex server -->
+  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
   
   <!-- RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/robot_guidance.rviz" if="$(arg rviz)"/>
+  
     
  </launch>

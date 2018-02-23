@@ -37,7 +37,7 @@ class FollowerTracker
 {
 public:
 
-  FollowerTracker(const float &voxel_size, const std::string& mesh_model_name);
+  FollowerTracker(const float &voxel_size, const std::string& mesh_model_name, const float& initial_y);
 
   ~FollowerTracker();
 
@@ -54,6 +54,7 @@ public:
 private:
 
   void alignTarget();
+  void updateICPInitialGuess(const float &x, const float &z);
 
   void extractTarget();
 
@@ -66,8 +67,10 @@ private:
   pcl::VoxelGrid<PointT> down_sampler_filter_;
   pcl::PassThrough<PointT> roi_filter_;
   pcl::IterativeClosestPoint<PointT, PointT> icp;
+  geometry_msgs::Pose initial_guess_;
 
   const float voxel_size_;
+  float initial_y_;
 
   std::shared_ptr<MeshModelLoader> mesh_loader_;
   std::string mesh_model_name_;

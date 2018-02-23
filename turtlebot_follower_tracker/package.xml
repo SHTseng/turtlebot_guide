@@ -18,6 +18,7 @@
   <depend>gazebo_ir_camera_plugin</depend>
   <depend>sensor_msgs</depend>
   <depend>rviz_visual_tools</depend>
+  <depend>spencer_tracking_msgs</depend>
 
   <export>
     <nodelet plugin="${prefix}/nodelet.xml" />

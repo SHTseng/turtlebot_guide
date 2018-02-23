@@ -9,5 +9,13 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
   <depend>geometry_msgs</depend>
-
+  <depend>gazebo_ros</depend>
+  <depend>libtinyxml2-dev</depend>
+  
+  <export>
+    <gazebo_ros 
+        gazebo_plugin_path="${prefix}/lib"
+        gazebo_model_path="${prefix}/.."/>
+  </export>
+  
 </package>
