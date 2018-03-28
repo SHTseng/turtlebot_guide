@@ -23,7 +23,7 @@
 namespace turtlebot_guide
 {
 
-typedef pcl::PointXYZRGBA PointT;
+typedef pcl::PointXYZRGB PointT;
 typedef pcl::PointCloud<PointT> PointCloud;
 typedef std::vector<pcl::people::PersonCluster<PointT> > P_Clusters;
 

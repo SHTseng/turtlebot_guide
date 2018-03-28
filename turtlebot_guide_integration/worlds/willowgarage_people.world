@@ -105,8 +105,12 @@
       </animation>
       <plugin name="actor1_plugin" filename="libgazebo_ros_actor.so">
         <topic>actor_state</topic>
-        <velocity>0.5</velocity>
-        <trajectory_type>0</trajectory_type>
+        <velocity>0.45</velocity>
+        <!-- 
+          0. walk straight line
+          1. walk to room A
+        -->
+        <trajectory_type>1</trajectory_type>
         <oscillation_enable>true</oscillation_enable>
       </plugin>
     </actor>

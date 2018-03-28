@@ -20,11 +20,11 @@ FollowerTrackerROS::FollowerTrackerROS(ros::NodeHandle &n, ros::NodeHandle &pnh)
                                ros::Time::now(), camera_base_tf_);
 
   // prepare rviz visual tools for visualizing the bounding box
-  visual_tools_.reset(new rviz_visual_tools::RvizVisualTools("base_link","/rviz_visual_markers"));
-  visual_tools_->loadMarkerPub();
+//  visual_tools_.reset(new rviz_visual_tools::RvizVisualTools("base_link","/rviz_visual_markers"));
+//  visual_tools_->loadMarkerPub();
 
-  visual_tools_->deleteAllMarkers();
-  visual_tools_->enableBatchPublishing();
+//  visual_tools_->deleteAllMarkers();
+//  visual_tools_->enableBatchPublishing();
 //  visual_tools_->setLifetime(0.5);
 
   // initial the tracked pose
@@ -115,8 +115,8 @@ void FollowerTrackerROS::publishBoundingBox(const geometry_msgs::Pose& msg)
 {
   Eigen::Affine3d pose = Eigen::Affine3d::Identity();
   pose.translation() << msg.position.x, msg.position.y, msg.position.z;
-  visual_tools_->publishWireframeCuboid(pose, 0.46, 0.354, 0.354, rviz_visual_tools::YELLOW);
-  visual_tools_->trigger();
+//  visual_tools_->publishWireframeCuboid(pose, 0.46, 0.354, 0.354, rviz_visual_tools::YELLOW);
+//  visual_tools_->trigger();
 }
 
 void FollowerTrackerROS::frameTransformation(const geometry_msgs::Pose& camera_frame,

@@ -17,6 +17,16 @@
   <stack_hexagons                 parent="base_link"/>
   <sensor_asus_xtion_pro          parent="base_link"/>
 
+  <link name="laser_link">
+  </link>
+  
+  <joint name="laser_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 0.015" rpy="0 0 0"/>
+    <parent link="plate_middle_link"/>
+    <child link="laser_link"/>
+  </joint>
+  
   <link name="ir_camera_link_mid">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
