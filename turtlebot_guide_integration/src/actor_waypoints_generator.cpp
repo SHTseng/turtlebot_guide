@@ -111,6 +111,15 @@ int main(int argc, char* argv[])
   ros::init(argc, argv, "global_path_plan_node");
   ros::NodeHandle nh;
 
+  float goal_x = 8.0;
+  float goal_y = 17.0;
+  if (argc == 2)
+  {
+    goal_x = std::atof(argv[1]);
+    goal_y = std::atof(argv[2]);
+  }
+
+
   ros::ServiceClient nav_plan_srv_client = nh.serviceClient<nav_msgs::GetPlan>("/move_base_legacy_relay/make_plan");
 
   geometry_msgs::PoseStamped start_p, goal_p;
@@ -120,8 +129,8 @@ int main(int argc, char* argv[])
   start_p.pose.orientation.w = 1.0;
 
   goal_p.header.frame_id = "map";
-  goal_p.pose.position.x = 18.0;
-  goal_p.pose.position.y = 17.0;
+  goal_p.pose.position.x = goal_x;
+  goal_p.pose.position.y = goal_y;
 //  goal_p.pose.position.x = 13.0;
 //  goal_p.pose.position.y = 8.0;
   goal_p.pose.orientation.w = 1.0;

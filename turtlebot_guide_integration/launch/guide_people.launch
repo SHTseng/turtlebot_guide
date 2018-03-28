@@ -21,6 +21,7 @@
     <arg name="gui" value="$(arg gui)"/>
   </include> 
   
+  <!-- Turtlebot robot model -->
   <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/turtlebot_guidance.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
@@ -34,8 +35,7 @@
   
   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
         args="$(arg initial_pose_x) $(arg initial_pose_y) 0 $(arg initial_pose_a) 0 0 /map /odom 100" />
-  
-  <!-- Velocity muxer -->
+
   <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
   <node pkg="nodelet" type="nodelet" name="cmd_vel_mux"
         args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
@@ -43,11 +43,10 @@
     <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
   </node>
   
-  <!-- Depth image nodelet includes Fake laser, follower tracker -->
-  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager" output="screen"/>
+  <!-- People detection -->
+  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager"/>
   <node pkg="nodelet" type="nodelet" name="people_detection" 
-        args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager"
-        output="screen">
+        args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager">
     <remap from="input" to="/camera/depth/points" />
     <remap from="output" to="/turtlebot_people_detection/detected_persons" />
   </node>

@@ -12,6 +12,7 @@
   <run_depend>turtlebot_mbf_nav</run_depend>
   <run_depend>turtlebot_guide_integration</run_depend>
   <run_depend>turtlebot_guide_visualization</run_depend>
+  <run_depend>turtlebot_guide_demo</run_depend>
 
   <export>
     <metapackage/> 

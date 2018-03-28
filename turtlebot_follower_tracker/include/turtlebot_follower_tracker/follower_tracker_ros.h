@@ -10,7 +10,7 @@
 #include <tf/transform_listener.h>
 
 #include <turtlebot_follower_tracker/follower_tracker.h>
-#include <rviz_visual_tools/rviz_visual_tools.h>
+//#include <rviz_visual_tools/rviz_visual_tools.h>
 
 namespace turtlebot_guide
 {
@@ -56,7 +56,7 @@ private:
   /// 1. camera look in front
   int camera_mode_;
 
-  rviz_visual_tools::RvizVisualToolsPtr visual_tools_;
+//  rviz_visual_tools::RvizVisualToolsPtr visual_tools_;
 };
 }
 

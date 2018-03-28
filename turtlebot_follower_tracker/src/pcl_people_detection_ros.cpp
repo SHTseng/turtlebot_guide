@@ -66,7 +66,8 @@ void PCLPeopleDetectionROS::depthCB(const sensor_msgs::PointCloud2ConstPtr& dept
     person_pub_.publish(persons_msg);
   }
 
-//  ros::Time current_t = ros::Time::now();
+  ros::Time current_t = ros::Time::now();
+  ROS_INFO_STREAM("Loop time: " << (current_t-last_time_).toSec() << "sec...");
 //  if ((current_t-last_time_).toSec() < 5.0){
 //    ROS_INFO_STREAM("sleep " << (current_t-last_time_).toSec() << " secs...");
 //    ros::Duration((current_t-last_time_).toSec()).sleep();
