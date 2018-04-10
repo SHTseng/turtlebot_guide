@@ -1,4 +1,4 @@
-<library path="lib/libFollowerTrackerNodelet">
+<library path="lib/libfollower_tracker_nodelet">
   <class name="turtlebot_guide/FollowerTrackerNodelet" 
          type="turtlebot_guide::FollowerTrackerNodelet" 
          base_class_type="nodelet::Nodelet">

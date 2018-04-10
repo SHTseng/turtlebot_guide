@@ -15,9 +15,7 @@
   <depend>tf</depend> 
   <depend>eigen_conversions</depend>
   <depend>nodelet</depend>
-  <depend>gazebo_ir_camera_plugin</depend>
   <depend>sensor_msgs</depend>
-  <depend>rviz_visual_tools</depend>
   <depend>spencer_tracking_msgs</depend>
 
   <export>

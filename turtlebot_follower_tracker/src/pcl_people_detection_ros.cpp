@@ -9,8 +9,9 @@ PCLPeopleDetectionROS::PCLPeopleDetectionROS(ros::NodeHandle& n, ros::NodeHandle
   // make sure the transfromation between camera frame and base frame exist
 //  tf_listener_.lookupTransform("base_footprint", "camera_depth_optical_frame",
 //                               ros::Time::now(), camera_base_tf_);
-
-  people_detector_.reset(new PCLPeopleDetection(0.887));
+  double camera_height = 0.887;
+  pnh_.param("camera_height", camera_height_, 0.087);
+  people_detector_.reset(new PCLPeopleDetection(camera_height));
 
   person_pub_ = nh_.advertise<spencer_tracking_msgs::DetectedPersons> ("output", 1,
                                                    boost::bind(&PCLPeopleDetectionROS::connectCB, this, _1),
