@@ -33,8 +33,5 @@ link_directories(
   ${catkin_LIBRARY_DIRS}
 )
 
-add_executable(guide_straight_path src/guide_straight_path.cpp)
-target_link_libraries(guide_straight_path ${catkin_LIBRARIES})
-
 add_executable(actor_waypoints_generator src/actor_waypoints_generator.cpp)
 target_link_libraries(actor_waypoints_generator ${catkin_LIBRARIES} ${TinyXML2_LIBRARIES})
