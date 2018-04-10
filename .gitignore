@@ -1,5 +1,3 @@
 *~
-/rviz
-/worlds
-/maps
-/.idea
+*.user
+*.DS_Store
