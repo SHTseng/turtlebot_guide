@@ -1,0 +1,11 @@
+<launch>
+  <arg name="input" default="/camera/depth/points" />
+  <arg name="output" default="/turtlebot_people_detection/detected_persons" />
+  <arg name="nodelet_manager" default="depthimage_nodelet_manager" />
+  
+  <node pkg="nodelet" type="nodelet" name="people_detection" 
+        args="load turtlebot_guide/FollowerTrackerNodelet $(arg nodelet_manager)">
+    <remap from="input" to="$(arg input)" />
+    <remap from="output" to="$(arg output)" />
+  </node>
+</launch>

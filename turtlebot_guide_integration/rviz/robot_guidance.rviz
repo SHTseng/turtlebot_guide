@@ -10,7 +10,6 @@ Panels:
         - /Map1/Orientation1
         - /Local Planning1/Costmap1
         - /Local Planning1/Planner1
-        - /Global Planning1
         - /Global Planning1/Costmap1
         - /Global Planning1/Planner1
         - /DetectedPersons1/Style1
@@ -844,10 +843,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.909796596
+      Pitch: 0.679796636
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 5.45501709
+      Yaw: 5.9850173
     Saved: ~
 Window Geometry:
   Displays:
