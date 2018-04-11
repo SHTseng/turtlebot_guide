@@ -2,7 +2,7 @@
   <arg name="gui" default="false"/>
   <arg name="rviz" default="false"/>
   <arg name="visual" default="true"/>
-  <arg name="map_file" default="$(find turtlebot_navigation)/maps/willow_v2.yaml"/>
+  <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/willow_v2.yaml"/>
   <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/willowgarage_people.world"/>
   
   <arg name="initial_pose_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
@@ -46,7 +46,7 @@
   <!-- People detection -->
   <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager"/>
   <node pkg="nodelet" type="nodelet" name="people_detection" 
-        args="load turtlebot_guide/FollowerTrackerNodelet depthimage_nodelet_manager">
+        args="load turtlebot_guide/libfollower_tracker_nodelet depthimage_nodelet_manager">
     <remap from="input" to="/camera/depth/points" />
     <remap from="output" to="/turtlebot_people_detection/detected_persons" />
   </node>

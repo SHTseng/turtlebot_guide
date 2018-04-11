@@ -98,16 +98,6 @@ CostmapNavigationServer::CostmapNavigationServer(const boost::shared_ptr<tf::Tra
 
   current_goal_pub_ = private_nh_.advertise<geometry_msgs::PoseStamped>("current_goal", 0);
 
-  // prepare rviz visual tools for visualizing the bounding box
-//  visual_tools_.reset(new rviz_visual_tools::RvizVisualTools("base_link","/rviz_visual_markers"));
-//  visual_tools_->loadMarkerPub();
-
-//  visual_tools_->deleteAllMarkers();
-//  visual_tools_->enableBatchPublishing();
-
-//  following_region_ = getFollowingRegion();
-//  not_following_region_ = getNotFollowingRegion();
-
   ros::NodeHandle nh;
   actor_pub_ = nh.advertise<std_msgs::String>("actor_state", 1);
 
@@ -483,22 +473,17 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   ros::Time last_oscillation_reset = ros::Time::now();
 
   std::string type; // recovery behavior type
-
+  std_msgs::String state_msg;
   while (ros::ok() && run)
   {
-    std_msgs::String state_msg;
-    state_msg.data = "active";
-    actor_pub_.publish(state_msg);
-
-//    visual_tools_->deleteAllMarkers();
-//    visual_tools_->publishPath(following_region_, rviz_visual_tools::RED, rviz_visual_tools::LARGE);
-//    visual_tools_->publishPath(not_following_region_, rviz_visual_tools::GREEN, rviz_visual_tools::LARGE);
-//    visual_tools_->trigger();
-
     bool try_recovery = false;
     switch (state)
     {
       case GET_PATH:
+        // To make the actor stop moving except exe_path state
+        state_msg.data = "false";
+        actor_pub_.publish(state_msg);
+
         if (!action_client_get_path_.waitForResult(wait))
         { // no result -> action server is still running
           if (action_server_move_base_ptr_->isPreemptRequested() && !preempted)
@@ -527,6 +512,9 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
               ROS_DEBUG_STREAM_NAMED(name_action_move_base, "Action \""
                 << name_action_move_base << "\" sends the path to \""
                 << name_action_exe_path << "\".");
+
+              // Parse the turning point from global planner to local planner
+              exe_path_goal.turning_points = get_path_result.turning_points;
 
               if (recovery_trigger == GET_PATH)
               {
@@ -631,6 +619,10 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         break;
 
       case EXE_PATH:
+
+        // Control the state of the follower
+        state_msg.data = "active";
+        actor_pub_.publish(state_msg);
 
         if (has_new_plan)
         {
@@ -813,6 +805,11 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         break;
 
       case RECOVERY:
+
+        // To make the actor stop moving except exe_path state
+        state_msg.data = "false";
+        actor_pub_.publish(state_msg);
+
         if (!action_client_recovery_.waitForResult(wait))
         {
           if (action_server_move_base_ptr_->isPreemptRequested() && !preempted)
@@ -903,10 +900,6 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   planner_thread.join();
 
   active_move_base_ = false;
-
-  std_msgs::String state_msg;
-  state_msg.data = "false";
-  actor_pub_.publish(state_msg);
 }
 
 void CostmapNavigationServer::plannerThread(boost::condition_variable &cond, boost::unique_lock<boost::mutex> &lock,
@@ -932,46 +925,6 @@ void CostmapNavigationServer::plannerThread(boost::condition_variable &cond, boo
       has_new_plan = true;
     rate.sleep();
   }
-}
-
-std::vector<geometry_msgs::Point> CostmapNavigationServer::getFollowingRegion()
-{
-  std::vector<geometry_msgs::Point> points;
-  geometry_msgs::Point origin;
-  origin.x = -0.6314-0.11; origin.y = 0.2944; origin.z = 0.0;
-  points.push_back(origin);
-
-  geometry_msgs::Point via1, via2, via3;
-  via1.x = -3.61; via1.y = 2.084-0.09; via1.z = 0.0;
-  points.push_back(via1);
-
-  via2.x = -3.61; via2.y = -2.084; via2.z = 0.0;
-  points.push_back(via2);
-
-  via3.x = -0.6314-0.11; via3.y = -0.2944-0.1; via3.z = 0.0;
-  points.push_back(via3);
-  points.push_back(origin);
-  return points;
-}
-
-std::vector<geometry_msgs::Point> CostmapNavigationServer::getNotFollowingRegion()
-{
-  std::vector<geometry_msgs::Point> points;
-  geometry_msgs::Point origin;
-  origin.x = -0.7314-0.11; origin.y = 0.2944; origin.z = 0.0;
-  points.push_back(origin);
-
-  geometry_msgs::Point via1, via2, via3;
-  via1.x = -2.8; via1.y = 1.3-0.09; via1.z = 0.0;
-  points.push_back(via1);
-
-  via2.x = -2.8; via2.y = -1.3; via2.z = 0.0;
-  points.push_back(via2);
-
-  via3.x = -0.7314-0.11; via3.y = -0.2944-0.1; via3.z = 0.0;
-  points.push_back(via3);
-  points.push_back(origin);
-  return points;
 }
 
 } /* namespace mbf_costmap_nav */

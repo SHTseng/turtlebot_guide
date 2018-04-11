@@ -1,0 +1,5 @@
+controllers:
+  - name: 'controller'
+    type: 'teb_local_planner/TebLocalPlannerROS'
+controller:
+  holonomic_robot: false

@@ -52,4 +52,4 @@ add_library(pcl_people_detection_ros src/pcl_people_detection_ros.cpp src/pcl_pe
 target_link_libraries(pcl_people_detection_ros ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${Eigen3_LIBRARIES})
 
 add_library(follower_tracker_nodelet src/follower_tracker_nodelet.cpp)
-target_link_libraries(follower_tracker_nodelet  pcl_people_detection_ros ${catkin_LIBRARIES})
+target_link_libraries(follower_tracker_nodelet pcl_people_detection_ros ${catkin_LIBRARIES})

@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 
   float goal_x = 8.0;
   float goal_y = 17.0;
-  if (argc == 2)
+  if (argc == 3)
   {
     goal_x = std::atof(argv[1]);
     goal_y = std::atof(argv[2]);
@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
 
   geometry_msgs::PoseStamped start_p, goal_p;
   start_p.header.frame_id = "map";
-  start_p.pose.position.x = 24.0;
+  start_p.pose.position.x = 22.0; // 24 for follower, 22 for robot
   start_p.pose.position.y = 17.0;
   start_p.pose.orientation.w = 1.0;
 

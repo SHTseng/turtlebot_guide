@@ -52,7 +52,6 @@
 #include <mbf_msgs/CheckPose.h>
 
 #include <std_msgs/String.h>
-#include <rviz_visual_tools/rviz_visual_tools.h>
 
 namespace mbf_costmap_nav
 {
@@ -238,15 +237,6 @@ private:
 
   //! Stop publisher for handling the state of the actor
   ros::Publisher actor_pub_;
-
-  ///
-  /// \brief Follower class variable
-  ///
-  std::vector<geometry_msgs::Point> following_region_;
-  std::vector<geometry_msgs::Point> not_following_region_;
-  geometry_msgs::Pose follower_pose_;
-
-  rviz_visual_tools::RvizVisualToolsPtr visual_tools_;
 };
 
 } /* namespace mbf_costmap_nav */
