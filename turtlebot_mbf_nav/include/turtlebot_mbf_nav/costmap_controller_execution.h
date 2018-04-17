@@ -8,7 +8,6 @@
 namespace turtlebot_mbf_nav
 {
 
-
 class CostmapControllerExecution : public mbf_abstract_nav::AbstractControllerExecution
 {
 public:
@@ -44,7 +43,14 @@ protected:
       std::string& message);
 
 private:
+  /**
+   * @brief The main run method, a thread will execute this method. It contains the main controller execution loop.
+   */
+  virtual void run();
 
+  std::vector<geometry_msgs::PoseStamped> getTurningPoints();
+  
+  int nearestTurningPoint(const geometry_msgs::PoseStamped& robot_pose, const std::vector<geometry_msgs::PoseStamped>& points);
   /**
    * @brief Loads the plugin associated with the given controller type parameter
    * @param controller_type The type of the controller plugin
