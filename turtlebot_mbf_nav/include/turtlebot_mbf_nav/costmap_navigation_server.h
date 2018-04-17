@@ -43,7 +43,7 @@
 
 #include <mbf_abstract_nav/abstract_navigation_server.h>
 
-#include <mbf_costmap_nav/costmap_controller_execution.h>
+#include <turtlebot_mbf_nav//costmap_controller_execution.h>
 #include <mbf_costmap_nav/costmap_planner_execution.h>
 #include <mbf_costmap_nav/costmap_recovery_execution.h>
 
@@ -53,7 +53,7 @@
 
 #include <std_msgs/String.h>
 
-namespace mbf_costmap_nav
+namespace turtlebot_mbf_nav
 {
 
 //! GetPath action server

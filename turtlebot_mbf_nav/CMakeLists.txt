@@ -57,6 +57,7 @@ include_directories(
 
 add_library(${TURTLEBOT_MBF_SERVER_LIB}
   src/costmap_navigation_server.cpp
+  src/costmap_controller_execution.cpp
 )
 target_link_libraries(${TURTLEBOT_MBF_SERVER_LIB}
   ${MBF_NAV_CORE_WRAPPER_LIB}

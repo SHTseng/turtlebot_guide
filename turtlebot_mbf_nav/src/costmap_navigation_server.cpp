@@ -48,19 +48,19 @@
 
 #include "turtlebot_mbf_nav/costmap_navigation_server.h"
 
-namespace mbf_costmap_nav
+namespace turtlebot_mbf_nav
 {
 
 
 CostmapNavigationServer::CostmapNavigationServer(const boost::shared_ptr<tf::TransformListener> &tf_listener_ptr) :
   AbstractNavigationServer(tf_listener_ptr,
-                           CostmapPlannerExecution::Ptr(
-                                new CostmapPlannerExecution(condition_, global_costmap_ptr_)),
-                           CostmapControllerExecution::Ptr(
-                                new CostmapControllerExecution(condition_, tf_listener_ptr,
+                           mbf_costmap_nav::CostmapPlannerExecution::Ptr(
+                                new mbf_costmap_nav::CostmapPlannerExecution(condition_, global_costmap_ptr_)),
+                           turtlebot_mbf_nav::CostmapControllerExecution::Ptr(
+                                new turtlebot_mbf_nav::CostmapControllerExecution(condition_, tf_listener_ptr,
                                                                local_costmap_ptr_)),
-                           CostmapRecoveryExecution::Ptr(
-                                new CostmapRecoveryExecution(condition_, tf_listener_ptr,
+                           mbf_costmap_nav::CostmapRecoveryExecution::Ptr(
+                                new mbf_costmap_nav::CostmapRecoveryExecution(condition_, tf_listener_ptr,
                                                              global_costmap_ptr_,
                                                              local_costmap_ptr_))),
     global_costmap_ptr_(new costmap_2d::Costmap2DROS("global_costmap", *tf_listener_ptr_)),

@@ -45,7 +45,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "mbf_2d_nav_server");
 
   typedef boost::shared_ptr<tf::TransformListener> TransformListenerPtr;
-  typedef boost::shared_ptr<mbf_costmap_nav::CostmapNavigationServer> CostmapNavigationServerPtr;
+  typedef boost::shared_ptr<turtlebot_mbf_nav::CostmapNavigationServer> CostmapNavigationServerPtr;
 
   ros::NodeHandle nh;
   ros::NodeHandle private_nh("~");
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
   TransformListenerPtr tf_listener_ptr(new tf::TransformListener(nh, ros::Duration(cache_time), true));
   CostmapNavigationServerPtr controller_ptr(
-      new mbf_costmap_nav::CostmapNavigationServer(TransformListenerPtr(tf_listener_ptr)));
+      new turtlebot_mbf_nav::CostmapNavigationServer(TransformListenerPtr(tf_listener_ptr)));
   ros::spin();
   return EXIT_SUCCESS;
 }
