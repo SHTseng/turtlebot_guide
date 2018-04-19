@@ -93,138 +93,138 @@ void CostmapControllerExecution::run()
     ROS_ERROR("robot navigation moving has no plan!");
   }
 
-//  int retries = 0;
-//  int seq = 0;
+  int retries = 0;
+  int seq = 0;
 
-//  try
-//  {
-//    while (moving_ && ros::ok())
-//    {
-//      boost::recursive_mutex::scoped_lock sl(configuration_mutex_);
+  try
+  {
+    while (moving_ && ros::ok())
+    {
+      boost::recursive_mutex::scoped_lock sl(configuration_mutex_);
 
-//      boost::chrono::thread_clock::time_point loop_start_time = boost::chrono::thread_clock::now();
+      boost::chrono::thread_clock::time_point loop_start_time = boost::chrono::thread_clock::now();
 
-//      // update plan dynamically
-//      if (hasNewPlan())
-//      {
-//        plan = getNewPlan();
+      // update plan dynamically
+      if (hasNewPlan())
+      {
+        plan = getNewPlan();
         
-//        // check if plan is empty
-//        if (plan.empty())
-//        {
-//          setState(EMPTY_PLAN);
-//          condition_.notify_all();
-//          moving_ = false;
-//          return;
-//        }
+        // check if plan is empty
+        if (plan.empty())
+        {
+          setState(EMPTY_PLAN);
+          condition_.notify_all();
+          moving_ = false;
+          return;
+        }
 
-//        // obtain turning point from global planner
-//        turning_points = getTurningPoints();
+        // obtain turning point from global planner
+        turning_points = getTurningPoints();
 
-//        // check if plan could be set
-//        if(!controller_->setPlan(plan))
-//        {
-//          setState(INVALID_PLAN);
-//          condition_.notify_all();
-//          moving_ = false;
-//          return;
-//        }
+        // check if plan could be set
+        if(!controller_->setPlan(plan))
+        {
+          setState(INVALID_PLAN);
+          condition_.notify_all();
+          moving_ = false;
+          return;
+        }
 
-//      }
+      }
 
-//      // compute robot pose and store it in robot_pose_
-//      computeRobotPose();
+      // compute robot pose and store it in robot_pose_
+      computeRobotPose();
 
-//      // ask planner if the goal is reached
-//      if (reachedGoalCheck())
-//      {
-//        setState(ARRIVED_GOAL);
-//        // goal reached, tell it the controller
-//        condition_.notify_all();
-//        moving_ = false;
-//        // if not, keep moving
-//      }
-//      else
-//      {
-//        setState(PLANNING);
+      // ask planner if the goal is reached
+      if (reachedGoalCheck())
+      {
+        setState(ARRIVED_GOAL);
+        // goal reached, tell it the controller
+        condition_.notify_all();
+        moving_ = false;
+        // if not, keep moving
+      }
+      else
+      {
+        setState(PLANNING);
 
-//        // save time and call the plugin
-//        lct_mtx_.lock();
-//        last_call_time_ = ros::Time::now();
-//        lct_mtx_.unlock();
+        // save time and call the plugin
+        lct_mtx_.lock();
+        last_call_time_ = ros::Time::now();
+        lct_mtx_.unlock();
 
-//        // call plugin to compute the next velocity command
-//        geometry_msgs::TwistStamped cmd_vel_stamped;
-//        outcome_ = computeVelocityCmd(cmd_vel_stamped, message_);
+        // call plugin to compute the next velocity command
+        geometry_msgs::TwistStamped cmd_vel_stamped;
+        outcome_ = computeVelocityCmd(cmd_vel_stamped, message_);
 
-//        if (outcome_ < 10)
-//        {
-//          // set stamped values: frame id, time stamp and sequence number
-//          cmd_vel_stamped.header.seq = seq++;
-//          setVelocityCmd(cmd_vel_stamped);
-//          setState(GOT_LOCAL_CMD);
-//          vel_pub_.publish(cmd_vel_stamped.twist);
-//          condition_.notify_all();
-//          retries = 0;
-//        }
-//        else
-//        {
-//          if (++retries > max_retries_)
-//          {
-//            setState(MAX_RETRIES);
-//            moving_ = false;
-//            condition_.notify_all();
-//          }
-//          else if (ros::Time::now() - getLastValidCmdVelTime() > patience_
-//              && ros::Time::now() - start_time_ > patience_)  // why not isPatienceExceeded() ?
-//          {
-//            setState(PAT_EXCEEDED);
-//            moving_ = false;
-//            condition_.notify_all();
-//          }
-//          else
-//          {
-//            setState(NO_LOCAL_CMD); // useful for server feedback
-//            condition_.notify_all();
-//          }
-//          // could not compute a valid velocity command -> stop moving the robot
-//          publishZeroVelocity(); // command the robot to stop
-//        }
-//      }
+        if (outcome_ < 10)
+        {
+          // set stamped values: frame id, time stamp and sequence number
+          cmd_vel_stamped.header.seq = seq++;
+          setVelocityCmd(cmd_vel_stamped);
+          setState(GOT_LOCAL_CMD);
+          vel_pub_.publish(cmd_vel_stamped.twist);
+          condition_.notify_all();
+          retries = 0;
+        }
+        else
+        {
+          if (++retries > max_retries_)
+          {
+            setState(MAX_RETRIES);
+            moving_ = false;
+            condition_.notify_all();
+          }
+          else if (ros::Time::now() - getLastValidCmdVelTime() > patience_
+              && ros::Time::now() - start_time_ > patience_)  // why not isPatienceExceeded() ?
+          {
+            setState(PAT_EXCEEDED);
+            moving_ = false;
+            condition_.notify_all();
+          }
+          else
+          {
+            setState(NO_LOCAL_CMD); // useful for server feedback
+            condition_.notify_all();
+          }
+          // could not compute a valid velocity command -> stop moving the robot
+          publishZeroVelocity(); // command the robot to stop
+        }
+      }
 
-//      boost::chrono::thread_clock::time_point end_time = boost::chrono::thread_clock::now();
-//      boost::chrono::microseconds execution_duration =
-//          boost::chrono::duration_cast<boost::chrono::microseconds>(end_time - loop_start_time);
-//      boost::chrono::microseconds sleep_time = calling_duration_ - execution_duration;
-//      if (moving_ && ros::ok())
-//      {
-//        if (sleep_time > boost::chrono::microseconds(0))
-//        {
-//          // interruption point
-//          boost::this_thread::sleep_for(sleep_time);
-//        }
-//        else
-//        {
-//          ROS_WARN_THROTTLE(1.0, "Calculation needs too much time to stay in the moving frequency!");
-//        }
-//      }
-//    }
-//  }
-//  catch (const boost::thread_interrupted &ex)
-//  {
-//    // Controller thread interrupted; in most cases we have started a new plan
-//    // Can also be that robot is oscillating or we have exceeded planner patience
-//    ROS_DEBUG_STREAM("Controller thread interrupted!");
-//    // publishZeroVelocity();  TODO comment this makes sense for continuous replanning
-//    setState(STOPPED);
-//    condition_.notify_all();
-//    moving_ = false;
-//  }
-//  catch (...){
-//    message_ = "Unknown error occurred: " + boost::current_exception_diagnostic_information();
-//    ROS_FATAL_STREAM(message_);
-//    setState(INTERNAL_ERROR);
-//  }
+      boost::chrono::thread_clock::time_point end_time = boost::chrono::thread_clock::now();
+      boost::chrono::microseconds execution_duration =
+          boost::chrono::duration_cast<boost::chrono::microseconds>(end_time - loop_start_time);
+      boost::chrono::microseconds sleep_time = calling_duration_ - execution_duration;
+      if (moving_ && ros::ok())
+      {
+        if (sleep_time > boost::chrono::microseconds(0))
+        {
+          // interruption point
+          boost::this_thread::sleep_for(sleep_time);
+        }
+        else
+        {
+          ROS_WARN_THROTTLE(1.0, "Calculation needs too much time to stay in the moving frequency!");
+        }
+      }
+    }
+  }
+  catch (const boost::thread_interrupted &ex)
+  {
+    // Controller thread interrupted; in most cases we have started a new plan
+    // Can also be that robot is oscillating or we have exceeded planner patience
+    ROS_DEBUG_STREAM("Controller thread interrupted!");
+    // publishZeroVelocity();  TODO comment this makes sense for continuous replanning
+    setState(STOPPED);
+    condition_.notify_all();
+    moving_ = false;
+  }
+  catch (...){
+    message_ = "Unknown error occurred: " + boost::current_exception_diagnostic_information();
+    ROS_FATAL_STREAM(message_);
+    setState(INTERNAL_ERROR);
+  }
 }
 
 std::vector<geometry_msgs::PoseStamped> CostmapControllerExecution::getTurningPoints()

@@ -13,14 +13,16 @@
 
   <node pkg="mbf_costmap_nav" type="mbf_costmap_nav" respawn="false" name="move_base_flex" output="screen">
   <!--node pkg="turtlebot_mbf_nav" type="turtlebot_mbf_nav" respawn="false" name="move_base_flex" output="screen"-->
-    <rosparam file="$(find turtlebot_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find turtlebot_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />   
-    <rosparam file="$(find turtlebot_navigation)/param/local_costmap_params.yaml" command="load" />   
-    <rosparam file="$(find turtlebot_navigation)/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find turtlebot_navigation)/param/global_planner_params.yaml" command="load" />
-    <rosparam file="$(find turtlebot_navigation)/param/navfn_global_planner_params.yaml" command="load" />
-    <rosparam file="$(find turtlebot_mbf_nav)/params/planners.yaml" command="load" />   
-    <rosparam file="$(find turtlebot_mbf_nav)/params/controllers.yaml" command="load" />   
+    <param name="tf_timeout" value="1.5"/>
+    <param name="planner_max_retries" value="3"/>
+    <rosparam file="$(find turtlebot_mbf_nav)/params/planners.yaml" command="load" />
+    <rosparam file="$(find turtlebot_mbf_nav)/params/controllers.yaml" command="load" />
+    <rosparam file="$(find turtlebot_mbf_nav)/params/planners.yaml" command="load" />
+    <rosparam file="$(find turtlebot_mbf_nav)/params/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find turtlebot_mbf_nav)/params/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(find turtlebot_mbf_nav)/params/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot_mbf_nav)/params/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot_mbf_nav)/params/recovery_behaviors.yaml" command="load" />    
     <rosparam file="$(find teb_local_planner)/param/teb_local_planner_params.yaml" command="load" />
     
     <!-- reset frame_id parameters using user input data -->

@@ -8,7 +8,7 @@
 namespace turtlebot_mbf_nav
 {
 
-class CostmapControllerExecution : private mbf_abstract_nav::AbstractControllerExecution
+class CostmapControllerExecution : public mbf_abstract_nav::AbstractControllerExecution
 {
 public:
 
@@ -42,12 +42,12 @@ protected:
       geometry_msgs::TwistStamped& vel_cmd,
       std::string& message);
 
+private:
+
   /**
    * @brief The main run method, a thread will execute this method. It contains the main controller execution loop.
    */
   virtual void run();
-
-private:
 
   std::vector<geometry_msgs::PoseStamped> getTurningPoints();
   
