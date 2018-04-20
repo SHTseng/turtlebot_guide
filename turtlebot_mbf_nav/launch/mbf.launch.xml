@@ -37,7 +37,7 @@
   </node>
 
   <!-- Move base legacy relay -->
-  <node pkg="turtlebot_mbf_nav" type="move_base_legacy_relay.py" name="move_base_legacy_relay">
-  </node>
+  <!--node pkg="turtlebot_mbf_nav" type="move_base_legacy_relay.py" name="move_base_legacy_relay" / -->
+  <node pkg="mbf_costmap_nav" type="move_base_legacy_relay.py" name="move_base_legacy_relay" />  
 
 </launch>

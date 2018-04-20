@@ -22,7 +22,6 @@
   <depend>nav_core</depend>
   <depend>nav_msgs</depend>
   <depend>geometry_msgs</depend>
-  <depend>rviz_visual_tools</depend>
 
   <buildtool_depend>catkin</buildtool_depend>
   

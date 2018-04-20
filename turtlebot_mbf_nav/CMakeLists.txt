@@ -17,7 +17,6 @@ find_package(catkin REQUIRED
   std_msgs
   std_srvs
   tf
-  rviz_visual_tools
 )
 
 find_package(Boost COMPONENTS thread chrono REQUIRED)
@@ -45,7 +44,6 @@ catkin_package(
   std_msgs
   std_srvs
   tf
-  rviz_visual_tools
   DEPENDS Boost
 )
 
@@ -55,24 +53,24 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
 )
 
-add_library(${TURTLEBOT_MBF_SERVER_LIB}
-  src/costmap_navigation_server.cpp
-  src/costmap_controller_execution.cpp
-)
-target_link_libraries(${TURTLEBOT_MBF_SERVER_LIB}
-  ${MBF_NAV_CORE_WRAPPER_LIB}
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-)
-add_dependencies(${TURTLEBOT_MBF_SERVER_LIB} ${catkin_EXPORTED_TARGETS})
+# add_library(${TURTLEBOT_MBF_SERVER_LIB}
+#   src/costmap_navigation_server.cpp
+#   src/costmap_controller_execution.cpp
+# )
+# target_link_libraries(${TURTLEBOT_MBF_SERVER_LIB}
+#   ${MBF_NAV_CORE_WRAPPER_LIB}
+#   ${catkin_LIBRARIES}
+#   ${Boost_LIBRARIES}
+# )
+# add_dependencies(${TURTLEBOT_MBF_SERVER_LIB} ${catkin_EXPORTED_TARGETS})
 
-add_executable(${TURTLEBOT_MBF_SERVER_NODE} src/move_base_server_node.cpp)
-add_dependencies(${TURTLEBOT_MBF_SERVER_NODE} ${TURTLEBOT_MBF_SERVER_LIB})
-target_link_libraries(${TURTLEBOT_MBF_SERVER_NODE}
-  ${TURTLEBOT_MBF_SERVER_LIB}
-  ${catkin_LIBRARIES}
-)
+# add_executable(${TURTLEBOT_MBF_SERVER_NODE} src/move_base_server_node.cpp)
+# add_dependencies(${TURTLEBOT_MBF_SERVER_NODE} ${TURTLEBOT_MBF_SERVER_LIB})
+# target_link_libraries(${TURTLEBOT_MBF_SERVER_NODE}
+#   ${TURTLEBOT_MBF_SERVER_LIB}
+#   ${catkin_LIBRARIES}
+# )
 
-install(PROGRAMS scripts/move_base_legacy_relay.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(PROGRAMS scripts/move_base_legacy_relay.py
+#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
