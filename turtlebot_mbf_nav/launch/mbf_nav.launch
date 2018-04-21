@@ -56,7 +56,7 @@
   </include>
   
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_mbf_nav)/rviz/mbf.rviz" if="$(arg rviz)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_mbf_nav)/params/mbf.rviz" if="$(arg rviz)"/>
   
     
  </launch>
