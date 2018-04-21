@@ -3,3 +3,4 @@ controllers:
     type: 'teb_local_planner/TebLocalPlannerROS'
 controller:
   holonomic_robot: false
+  controller_frequency: 5

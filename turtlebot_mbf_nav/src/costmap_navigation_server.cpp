@@ -132,8 +132,6 @@ void CostmapNavigationServer::reconfigure(mbf_costmap_nav::MoveBaseFlexConfig &c
 
   // fill the abstract configuration common to all MBF-based navigation
   mbf_abstract_nav::MoveBaseFlexConfig abstract_config;
-  abstract_config.global_planner = config.global_planner;
-  abstract_config.local_planner = config.local_planner;
   abstract_config.planner_frequency = config.planner_frequency;
   abstract_config.planner_patience = config.planner_patience;
   abstract_config.planner_max_retries = config.planner_max_retries;
@@ -141,6 +139,7 @@ void CostmapNavigationServer::reconfigure(mbf_costmap_nav::MoveBaseFlexConfig &c
   abstract_config.controller_patience = config.controller_patience;
   abstract_config.controller_max_retries = config.controller_max_retries;
   abstract_config.recovery_enabled = config.recovery_enabled;
+  abstract_config.recovery_patience = config.recovery_patience;
   abstract_config.oscillation_timeout = config.oscillation_timeout;
   abstract_config.oscillation_distance = config.oscillation_distance;
   abstract_config.restore_defaults = config.restore_defaults;
@@ -194,7 +193,7 @@ bool CostmapNavigationServer::callServiceCheckPoseCost(mbf_msgs::CheckPose::Requ
   geometry_msgs::PoseStamped pose;
   if (request.current_pose)
   {
-    if (! mbf_abstract_nav::getRobotPose(*tf_listener_ptr_, robot_frame_, costmap_frame, ros::Duration(0.5), pose))
+    if (! mbf_utility::getRobotPose(*tf_listener_ptr_, robot_frame_, costmap_frame, ros::Duration(0.5), pose))
     {
       ROS_ERROR_STREAM("Get robot pose on " << costmap_name << " frame '" << costmap_frame << "' failed");
       return false;
@@ -202,7 +201,7 @@ bool CostmapNavigationServer::callServiceCheckPoseCost(mbf_msgs::CheckPose::Requ
   }
   else
   {
-    if (! mbf_abstract_nav::transformPose(*tf_listener_ptr_, costmap_frame, request.pose.header.stamp,
+    if (! mbf_utility::transformPose(*tf_listener_ptr_, costmap_frame, request.pose.header.stamp,
                                           ros::Duration(0.5), request.pose, global_frame_, pose))
     {
       ROS_ERROR_STREAM("Transform target pose to " << costmap_name << " frame '" << costmap_frame << "' failed");
@@ -367,8 +366,6 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   ROS_DEBUG_STREAM_NAMED(name_action_move_base, "Start action "  << name_action_move_base);
 
   const geometry_msgs::PoseStamped target_pose = goal->target_pose;
-  const std::string local_planner = goal->local_planner;
-  const std::string global_planner = goal->global_planner;
 
   mbf_msgs::GetPathGoal get_path_goal;
   mbf_msgs::ExePathGoal exe_path_goal;
@@ -540,8 +537,8 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
               // copy result from get_path action
               move_base_result.outcome = get_path_result.outcome;
               move_base_result.message = get_path_result.message;
-              move_base_result.dist_to_goal = static_cast<float>(mbf_abstract_nav::distance(robot_pose_, target_pose));
-              move_base_result.angle_to_goal = static_cast<float>(mbf_abstract_nav::angle(robot_pose_, target_pose));
+              move_base_result.dist_to_goal = static_cast<float>(mbf_utility::distance(robot_pose_, target_pose));
+              move_base_result.angle_to_goal = static_cast<float>(mbf_utility::angle(robot_pose_, target_pose));
               move_base_result.final_pose = robot_pose_;
 
               if (!recovery_enabled_)
@@ -588,8 +585,8 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
               // copy result from get_path action
               move_base_result.outcome = get_path_result.outcome;
               move_base_result.message = get_path_result.message;
-              move_base_result.dist_to_goal = static_cast<float>(mbf_abstract_nav::distance(robot_pose_, target_pose));
-              move_base_result.angle_to_goal = static_cast<float>(mbf_abstract_nav::angle(robot_pose_, target_pose));
+              move_base_result.dist_to_goal = static_cast<float>(mbf_utility::distance(robot_pose_, target_pose));
+              move_base_result.angle_to_goal = static_cast<float>(mbf_utility::angle(robot_pose_, target_pose));
               move_base_result.final_pose = robot_pose_;
               run = false;
               action_server_move_base_ptr_->setPreempted(move_base_result, get_path_state.getText());
@@ -645,7 +642,7 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
           if (!oscillation_timeout_.isZero())
           {
             // check if oscillating
-            if (mbf_abstract_nav::distance(robot_pose_, oscillation_pose) >= oscillation_distance_)
+            if (mbf_utility::distance(robot_pose_, oscillation_pose) >= oscillation_distance_)
             {
               last_oscillation_reset = ros::Time::now();
               oscillation_pose = robot_pose_;

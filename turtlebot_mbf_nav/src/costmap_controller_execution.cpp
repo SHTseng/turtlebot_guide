@@ -54,29 +54,32 @@ mbf_abstract_core::AbstractController::Ptr CostmapControllerExecution::loadContr
   return controller_ptr;
 }
 
-void CostmapControllerExecution::initPlugin()
+bool CostmapControllerExecution::initPlugin(
+  const std::string& name, 
+  const mbf_abstract_core::AbstractController::Ptr& controller_ptr)
 {
-  ROS_INFO_STREAM("Initialize controller \"" << controller_name_ << "\".");
+  ROS_INFO_STREAM("Initialize controller \"" << name << "\".");
 
   if (!tf_listener_ptr)
   {
     ROS_ERROR_STREAM("The tf listener pointer has not been initialized!");
-    exit(1);
+    return false;
   }
 
   if (!costmap_ptr_)
   {
     ROS_ERROR_STREAM("The costmap pointer has not been initialized!");
-    exit(1);
+    return false;
   }
 
   ros::NodeHandle private_nh("~");
   private_nh.param("controller_lock_costmap", lock_costmap_, true);
 
-  mbf_costmap_core::CostmapController::Ptr controller_ptr
-      = boost::static_pointer_cast<mbf_costmap_core::CostmapController>(controller_);
-  controller_ptr->initialize(controller_name_, tf_listener_ptr.get(), costmap_ptr_.get());
-  ROS_INFO_STREAM("Controller plugin \"" << controller_name_ << "\" initialized.");
+  mbf_costmap_core::CostmapController::Ptr costmap_controller_ptr
+      = boost::static_pointer_cast<mbf_costmap_core::CostmapController>(controller_ptr);
+  costmap_controller_ptr->initialize(name, tf_listener_ptr.get(), costmap_ptr_.get());
+  ROS_INFO_STREAM("Controller plugin \"" << name << "\" initialized.");
+  return true;
 }
 
 void CostmapControllerExecution::run()
@@ -233,18 +236,18 @@ std::vector<geometry_msgs::PoseStamped> CostmapControllerExecution::getTurningPo
   return points;
 }
 
-uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
-                                                        const geometry_msgs::TwistStamped& robot_velocity,
-                                                        geometry_msgs::TwistStamped& vel_cmd,
-                                                        std::string& message)
-{
-  // Lock the costmap while planning, but following issue #4, we allow to move the responsibility to the planner itself
-  if (lock_costmap_)
-  {
-    boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_ptr_->getCostmap()->getMutex()));
-    return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
-  }
-  return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
-}
+// uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
+//                                                         const geometry_msgs::TwistStamped& robot_velocity,
+//                                                         geometry_msgs::TwistStamped& vel_cmd,
+//                                                         std::string& message)
+// {
+//   // Lock the costmap while planning, but following issue #4, we allow to move the responsibility to the planner itself
+//   if (lock_costmap_)
+//   {
+//     boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_ptr_->getCostmap()->getMutex()));
+//     return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
+//   }
+//   return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
+// }
 
 } /* namespace mbf_costmap_nav */

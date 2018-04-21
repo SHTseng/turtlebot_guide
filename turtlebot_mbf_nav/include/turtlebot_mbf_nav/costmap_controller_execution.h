@@ -36,11 +36,12 @@ protected:
    *        before calling the planner.
    * @param vel_cmd_stamped current velocity command
    */
-  virtual uint32_t computeVelocityCmd(
-      const geometry_msgs::PoseStamped& robot_pose,
-      const geometry_msgs::TwistStamped& robot_velocity,
-      geometry_msgs::TwistStamped& vel_cmd,
-      std::string& message);
+
+  // virtual uint32_t computeVelocityCmd(
+  //     const geometry_msgs::PoseStamped& robot_pose,
+  //     const geometry_msgs::TwistStamped& robot_velocity,
+  //     geometry_msgs::TwistStamped& vel_cmd,
+  //     std::string& message);
 
 private:
 
@@ -64,7 +65,7 @@ private:
    * @brief Initializes the local planner plugin with its name, a pointer to the TransformListener
    *        and pointer to the costmap
    */
-  virtual void initPlugin();
+  virtual bool initPlugin(const std::string& name, const mbf_abstract_core::AbstractController::Ptr& controller_ptr);
 
   //! costmap for 2d navigation planning
   CostmapPtr &costmap_ptr_;
