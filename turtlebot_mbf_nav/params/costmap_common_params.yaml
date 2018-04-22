@@ -20,4 +20,4 @@ obstacles_laser:
 
 inflation:
     cost_scaling_factor: 10.0 #It was 10.0 before
-    inflation_radius: 0.45 #Before 0.35
+    inflation_radius: 0.15 #Before 0.35 0.45
