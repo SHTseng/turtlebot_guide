@@ -343,7 +343,252 @@ void CostmapNavigationServer::deactivateCostmaps(const ros::TimerEvent &event)
 void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConstPtr &goal)
 {
   checkActivateCostmaps();
-  AbstractNavigationServer::callActionGetPath(goal);
+
+  // start of abstact get path action call
+  ROS_DEBUG_STREAM_NAMED(name_action_get_path, "Start action "  << name_action_get_path);
+
+  mbf_msgs::GetPathResult result;
+  geometry_msgs::PoseStamped start_pose, goal_pose;
+
+  result.path.header.seq = path_seq_count_++;
+  result.path.header.frame_id = global_frame_;
+  result.turning_points.header.seq = path_seq_count_++;
+  result.turning_points.header.frame_id = global_frame_;
+  goal_pose = goal->target_pose;
+  current_goal_pub_.publish(goal_pose);
+
+  double tolerance = goal->tolerance;
+  bool use_start_pose = goal->use_start_pose;
+
+  // Try to switch the planner if a special planner is specified in the action goal.
+  if(!goal->planner.empty()){
+
+    if(planning_ptr_->switchPlanner(goal->planner))
+    {
+      ROS_INFO_STREAM("Using the planner \"" << goal->planner << "\".");
+    }
+    else
+    {
+      result.outcome = mbf_msgs::GetPathResult::INVALID_PLUGIN;
+      result.message = "Could not switch to the planner \"" + goal->planner + "\"!";
+      action_server_get_path_ptr_->setAborted(result, result.message);
+      return;
+    }
+  }
+
+  active_planning_ = true;
+
+  if(use_start_pose)
+  {
+    start_pose = goal->start_pose;
+    geometry_msgs::Point p = start_pose.pose.position;
+    ROS_INFO_STREAM_NAMED(name_action_get_path, "Use the given start pose ("
+                          << p.x << ", " << p.y << ", " << p.z << ").");
+  }
+  else
+  {
+    // get the current robot pose
+    if (!getRobotPose(start_pose))
+    {
+      result.outcome = mbf_msgs::GetPathResult::TF_ERROR;
+      result.message = "Could not get the current robot pose!";
+      action_server_get_path_ptr_->setAborted(result, result.message);
+      ROS_ERROR_STREAM_NAMED(name_action_get_path, result.message << " Canceling the action call.");
+      return;
+    }
+    else
+    {
+      geometry_msgs::Point p = start_pose.pose.position;
+      ROS_DEBUG_STREAM_NAMED(name_action_get_path, "Got the current robot pose at ("
+                             << p.x << ", " << p.y << ", " << p.z << ").");
+    }
+  }
+
+  ROS_DEBUG_STREAM_NAMED(name_action_get_path, "Starting the planning thread.");
+  if (!planning_ptr_->startPlanning(start_pose, goal_pose, tolerance))
+  {
+    result.outcome = mbf_msgs::GetPathResult::INTERNAL_ERROR;
+    result.message = "Another thread is still planning!";
+    action_server_get_path_ptr_->setAborted(result, result.message);
+    ROS_ERROR_STREAM_NAMED(name_action_get_path, result.message << " Canceling the action call.");
+    return;
+  }
+
+  mbf_abstract_nav::AbstractPlannerExecution::PlanningState state_planning_input;
+
+  std::vector<geometry_msgs::PoseStamped> plan, global_plan;
+  std::vector<geometry_msgs::PoseStamped> turninng_points, global_turninng_points;
+  
+  double cost;
+
+  int feedback_cnt = 0;
+
+  while (active_planning_ && ros::ok())
+  {
+    // get the current state of the planning thread
+    state_planning_input = planning_ptr_->getState();
+
+    switch (state_planning_input)
+    {
+      case mbf_abstract_nav::AbstractPlannerExecution::INITIALIZED:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot_navigation state: initialized");
+        break;
+
+      case mbf_abstract_nav::AbstractPlannerExecution::STARTED:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot_navigation state: started");
+        break;
+
+      case mbf_abstract_nav::AbstractPlannerExecution::STOPPED:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot navigation state: stopped");
+        ROS_WARN_STREAM_NAMED(name_action_get_path, "Planning has been stopped rigorously!");
+        result.outcome = mbf_msgs::GetPathResult::STOPPED;
+        result.message = "Global planner has been stopped!";
+        action_server_get_path_ptr_->setAborted(result, result.message);
+        active_planning_ = false;
+        break;
+
+      case mbf_abstract_nav::AbstractPlannerExecution::CANCELED:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot navigation state: canceled");
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "Global planner has been canceled successfully");
+        result.path.header.stamp = ros::Time::now();
+        result.outcome = mbf_msgs::GetPathResult::CANCELED;
+        result.message = "Global planner has been preempted!";
+        action_server_get_path_ptr_->setPreempted(result, result.message);
+        active_planning_ = false;
+        break;
+
+        // in progress
+      case mbf_abstract_nav::AbstractPlannerExecution::PLANNING:
+        if (planning_ptr_->isPatienceExceeded())
+        {
+          ROS_INFO_STREAM_NAMED(name_action_get_path, "Global planner patience has been exceeded! "
+            << "Cancel planning...");
+          if (!planning_ptr_->cancel())
+          {
+            ROS_WARN_STREAM_THROTTLE_NAMED(2.0, name_action_get_path, "Cancel planning failed or is not supported; "
+              "must wait until current plan finish!");
+          }
+        }
+        else
+        {
+          ROS_DEBUG_THROTTLE_NAMED(2.0, name_action_get_path, "robot navigation state: planning");
+        }
+        break;
+
+        // found a new plan
+      case mbf_abstract_nav::AbstractPlannerExecution::FOUND_PLAN:
+        // set time stamp to now
+        result.path.header.stamp = ros::Time::now();
+        result.turning_points.header.stamp = ros::Time::now();
+        plan = planning_ptr_->getPlan();
+        publishPath(result.path.poses);
+
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot navigation state: found plan with cost: " << cost);
+
+        if (!transformPlanToGlobalFrame(plan, global_plan))
+        {
+          result.outcome = mbf_msgs::GetPathResult::TF_ERROR;
+          result.message = "Could not transform the plan to the global frame!";
+
+          ROS_ERROR_STREAM_NAMED(name_action_get_path, result.message << " Canceling the action call.");
+          action_server_get_path_ptr_->setAborted(result, result.message);
+          active_planning_ = false;
+          break;
+        }
+
+        if (global_plan.empty())
+        {
+          result.outcome = mbf_msgs::GetPathResult::EMPTY_PATH;
+          result.message = "Global planner returned an empty path!";
+
+          ROS_ERROR_STREAM_NAMED(name_action_get_path, result.message);
+          action_server_get_path_ptr_->setAborted(result, result.message);
+          active_planning_ = false;
+          break;
+        }
+
+        result.path.poses = global_plan;
+        result.cost = planning_ptr_->getCost();
+        result.outcome = planning_ptr_->getOutcome();
+        result.message = planning_ptr_->getMessage();
+        action_server_get_path_ptr_->setSucceeded(result, result.message);
+
+        active_planning_ = false;
+        break;
+
+        // no plan found
+      case mbf_abstract_nav::AbstractPlannerExecution::NO_PLAN_FOUND:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot navigation state: no plan found");
+        result.outcome = planning_ptr_->getOutcome();
+        result.message = planning_ptr_->getMessage();
+        action_server_get_path_ptr_->setAborted(result, result.message);
+        active_planning_ = false;
+        break;
+
+      case mbf_abstract_nav::AbstractPlannerExecution::MAX_RETRIES:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "Global planner reached the maximum number of retries");
+        result.outcome = planning_ptr_->getOutcome();
+        result.message = planning_ptr_->getMessage();
+        action_server_get_path_ptr_->setAborted(result, result.message);
+        active_planning_ = false;
+        break;
+
+      case mbf_abstract_nav::AbstractPlannerExecution::PAT_EXCEEDED:
+        ROS_DEBUG_STREAM_NAMED(name_action_get_path, "Global planner exceeded the patience time");
+        result.outcome = mbf_msgs::GetPathResult::PAT_EXCEEDED;
+        result.message = "Global planner exceeded the patience time";
+        action_server_get_path_ptr_->setAborted(result, result.message);
+        active_planning_ = false;
+        break;
+
+      case mbf_abstract_nav::AbstractPlannerExecution::INTERNAL_ERROR:
+        ROS_FATAL_STREAM_NAMED(name_action_get_path, "Internal error: Unknown error thrown by the plugin!"); // TODO getMessage from planning
+        active_recovery_ = false;
+        result.outcome = mbf_msgs::GetPathResult::INTERNAL_ERROR;
+        result.message = "Internal error: Unknown error thrown by the plugin!";
+        action_server_get_path_ptr_->setAborted(result, result.message);
+        break;
+
+      default:
+        result.outcome = mbf_msgs::GetPathResult::INTERNAL_ERROR;
+        result.message = "Internal error: Unknown state in a move base flex planner execution with the number: " + state_planning_input;
+        ROS_FATAL_STREAM_NAMED(name_action_get_path, result.message);
+        action_server_get_path_ptr_->setAborted(result, result.message);
+        active_planning_ = false;
+    }
+
+    // if preempt requested while we are planning
+    if (action_server_get_path_ptr_->isPreemptRequested()
+      && state_planning_input == mbf_abstract_nav::AbstractPlannerExecution::PLANNING)
+    {
+      if (!planning_ptr_->cancel())
+      {
+        ROS_WARN_STREAM_THROTTLE_NAMED(2.0, name_action_get_path, "Cancel planning failed or is not supported; "
+          << "Wait until the current plan finished");
+      }
+    }
+
+    if (active_planning_)
+    {
+      // try to sleep a bit
+      // normally this thread should be woken up from the planner execution thread
+      // in order to transfer the results to the controller.
+      boost::mutex mutex;
+      boost::unique_lock<boost::mutex> lock(mutex);
+      condition_.wait_for(lock, boost::chrono::milliseconds(500));
+    }
+  }  // while (active_planning_ && ros::ok())
+
+  if (!active_planning_)
+  {
+    ROS_DEBUG_STREAM_NAMED(name_action_get_path, "\"GetPath\" action ended properly.");
+  }
+  else
+  {
+    ROS_ERROR_STREAM_NAMED(name_action_get_path, "\"GetPath\" action has been stopped!");
+  }
+  // end of abstact get path action call
+
   checkDeactivateCostmaps();
 }
 

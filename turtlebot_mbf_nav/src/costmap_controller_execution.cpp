@@ -55,8 +55,8 @@ mbf_abstract_core::AbstractController::Ptr CostmapControllerExecution::loadContr
 }
 
 bool CostmapControllerExecution::initPlugin(
-  const std::string& name, 
-  const mbf_abstract_core::AbstractController::Ptr& controller_ptr)
+    const std::string& name, 
+    const mbf_abstract_core::AbstractController::Ptr& controller_ptr)
 {
   ROS_INFO_STREAM("Initialize controller \"" << name << "\".");
 
@@ -89,6 +89,7 @@ void CostmapControllerExecution::run()
   // init plan
   std::vector<geometry_msgs::PoseStamped> plan;
   std::vector<geometry_msgs::PoseStamped> turning_points;
+  int nearest_turning_pt_index = 0;
   if (!hasNewPlan())
   {
     setState(NO_PLAN);
@@ -123,6 +124,11 @@ void CostmapControllerExecution::run()
 
         // obtain turning point from global planner
         turning_points = getTurningPoints();
+        nearest_turning_pt_index = nearestTurningPoint(robot_pose_, turning_points);
+
+        if (nearest_turning_pt_index != -1){
+          ROS_INFO_STREAM("Close to the turning point " << nearest_turning_pt_index);
+        }
 
         // check if plan could be set
         if(!controller_->setPlan(plan))
@@ -230,10 +236,27 @@ void CostmapControllerExecution::run()
   }
 }
 
+int CostmapControllerExecution::nearestTurningPoint(
+    const geometry_msgs::PoseStamped& robot_pose, 
+    const std::vector<geometry_msgs::PoseStamped>& points)
+{
+  if (points.empty()){
+    return -1;
+  }
+
+  for (int i = 0; i < points.size(); i++){
+    if (hypot(robot_pose.pose.position.x-points[i].pose.position.x, 
+              robot_pose.pose.position.y-points[i].pose.position.y) < 0.2){
+      return i;
+    }
+  }
+  return -1;
+}
+
 std::vector<geometry_msgs::PoseStamped> CostmapControllerExecution::getTurningPoints()
 {
-  std::vector<geometry_msgs::PoseStamped> points;
-  return points;
+  boost::lock_guard<boost::mutex> guard(plan_mtx_);
+  return turning_points_;
 }
 
 // uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
