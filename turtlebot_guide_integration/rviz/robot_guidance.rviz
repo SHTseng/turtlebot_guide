@@ -9,9 +9,6 @@ Panels:
         - /Map1/Position1
         - /Map1/Orientation1
         - /Local Planning1/Costmap1
-        - /Local Planning1/Planner1
-        - /Global Planning1/Costmap1
-        - /Global Planning1/Planner1
         - /DetectedPersons1/Style1
       Splitter Ratio: 0.503144681
     Tree Height: 813
@@ -419,7 +416,7 @@ Visualization Manager:
           Head Diameter: 0.300000012
           Head Length: 0.200000003
           Length: 0.300000012
-          Line Style: Lines
+          Line Style: Billboards
           Line Width: 0.0299999993
           Name: Planner
           Offset:
@@ -431,7 +428,7 @@ Visualization Manager:
           Radius: 0.0299999993
           Shaft Diameter: 0.100000001
           Shaft Length: 0.100000001
-          Topic: /move_base_flex/TebLocalPlannerROS/local_plan
+          Topic: /move_base_flex/controller/local_plan
           Unreliable: false
           Value: true
         - Alpha: 0.5
@@ -528,7 +525,7 @@ Visualization Manager:
           Radius: 0.0299999993
           Shaft Diameter: 0.100000001
           Shaft Length: 0.100000001
-          Topic: /move_base_flex/SWGlobalPlanner/plan
+          Topic: /move_base_flex/controller/global_plan
           Unreliable: false
           Value: true
       Enabled: true
@@ -548,22 +545,6 @@ Visualization Manager:
       Topic: /move_base/current_goal
       Unreliable: false
       Value: true
-    - Alpha: 1
-      Arrow Length: 0.200000003
-      Axes Length: 0.300000012
-      Axes Radius: 0.00999999978
-      Class: rviz/PoseArray
-      Color: 0; 192; 0
-      Enabled: false
-      Head Length: 0.0700000003
-      Head Radius: 0.0299999993
-      Name: ParticleCloud
-      Shaft Length: 0.230000004
-      Shaft Radius: 0.00999999978
-      Shape: Arrow (Flat)
-      Topic: /particlecloud
-      Unreliable: false
-      Value: false
     - Alpha: 0.600000024
       Buffer Length: 1
       Class: rviz/Path
@@ -584,30 +565,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /turtlebot_mbf_nav/TebLocalPlannerROS/global_plan
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz/Path
-      Color: 255; 0; 0
-      Enabled: true
-      Head Diameter: 0.300000012
-      Head Length: 0.200000003
-      Length: 0.300000012
-      Line Style: Billboards
-      Line Width: 0.0599999987
-      Name: Path (local)
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 255; 85; 255
-      Pose Style: None
-      Radius: 0.0299999993
-      Shaft Diameter: 0.100000001
-      Shaft Length: 0.100000001
-      Topic: /turtlebot_mbf_nav/TebLocalPlannerROS/local_plan
+      Topic: /move_base_flex/controller/global_plan
       Unreliable: false
       Value: true
     - Angle Tolerance: 0.100000001
@@ -652,13 +610,6 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: true
-    - Class: rviz/Axes
-      Enabled: false
-      Length: 0.200000003
-      Name: Axes
-      Radius: 0.0199999996
-      Reference Frame: plate_top_link
-      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.100000001
@@ -791,21 +742,13 @@ Visualization Manager:
       normal length: 0.100000001
       only border: false
       show normal: false
-    - Alpha: 1
-      Arrow Length: 0.300000012
-      Axes Length: 0.300000012
-      Axes Radius: 0.00999999978
-      Class: rviz/PoseArray
-      Color: 255; 25; 0
+    - Class: rviz/MarkerArray
       Enabled: true
-      Head Length: 0.0700000003
-      Head Radius: 0.0299999993
-      Name: PoseArray
-      Shaft Length: 0.230000004
-      Shaft Radius: 0.00999999978
-      Shape: Arrow (Flat)
-      Topic: /turtlebot_mbf_nav/TebLocalPlannerROS/teb_poses
-      Unreliable: false
+      Marker Topic: /move_base_flex/planner/turning_points
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -828,7 +771,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 17.2994347
+      Distance: 10.3743896
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -843,10 +786,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.679796636
+      Pitch: 0.899796128
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 5.9850173
+      Yaw: 6.00501919
     Saved: ~
 Window Geometry:
   Displays:

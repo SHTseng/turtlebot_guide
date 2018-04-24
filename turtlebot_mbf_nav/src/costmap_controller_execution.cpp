@@ -259,6 +259,11 @@ std::vector<geometry_msgs::PoseStamped> CostmapControllerExecution::getTurningPo
   return turning_points_;
 }
 
+// void CostmapControllerExecution::setTurningPoints(const std::vector<geometry_msgs::PoseStamped>& points)
+// {
+//   turning_points_ = points;
+// }
+
 // uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
 //                                                         const geometry_msgs::TwistStamped& robot_velocity,
 //                                                         geometry_msgs::TwistStamped& vel_cmd,

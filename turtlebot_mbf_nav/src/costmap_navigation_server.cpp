@@ -352,7 +352,6 @@ void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConst
 
   result.path.header.seq = path_seq_count_++;
   result.path.header.frame_id = global_frame_;
-  result.turning_points.header.seq = path_seq_count_++;
   result.turning_points.header.frame_id = global_frame_;
   goal_pose = goal->target_pose;
   current_goal_pub_.publish(goal_pose);
@@ -417,7 +416,7 @@ void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConst
   mbf_abstract_nav::AbstractPlannerExecution::PlanningState state_planning_input;
 
   std::vector<geometry_msgs::PoseStamped> plan, global_plan;
-  std::vector<geometry_msgs::PoseStamped> turninng_points, global_turninng_points;
+  std::vector<geometry_msgs::PoseStamped> turning_points, global_turning_points;
   
   double cost;
 
@@ -481,6 +480,7 @@ void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConst
         result.path.header.stamp = ros::Time::now();
         result.turning_points.header.stamp = ros::Time::now();
         plan = planning_ptr_->getPlan();
+        turning_points = planning_ptr_->getTurningPoints();
         publishPath(result.path.poses);
 
         ROS_DEBUG_STREAM_NAMED(name_action_get_path, "robot navigation state: found plan with cost: " << cost);
@@ -489,6 +489,17 @@ void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConst
         {
           result.outcome = mbf_msgs::GetPathResult::TF_ERROR;
           result.message = "Could not transform the plan to the global frame!";
+
+          ROS_ERROR_STREAM_NAMED(name_action_get_path, result.message << " Canceling the action call.");
+          action_server_get_path_ptr_->setAborted(result, result.message);
+          active_planning_ = false;
+          break;
+        }
+
+        if (!transformPlanToGlobalFrame(turning_points, global_turning_points))
+        {
+          result.outcome = mbf_msgs::GetPathResult::TF_ERROR;
+          result.message = "Could not transform the turning points to the global frame!";
 
           ROS_ERROR_STREAM_NAMED(name_action_get_path, result.message << " Canceling the action call.");
           action_server_get_path_ptr_->setAborted(result, result.message);
@@ -508,6 +519,7 @@ void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConst
         }
 
         result.path.poses = global_plan;
+        result.turning_points.poses = global_turning_points;
         result.cost = planning_ptr_->getCost();
         result.outcome = planning_ptr_->getOutcome();
         result.message = planning_ptr_->getMessage();
@@ -595,7 +607,240 @@ void CostmapNavigationServer::callActionGetPath(const mbf_msgs::GetPathGoalConst
 void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConstPtr &goal)
 {
   checkActivateCostmaps();
-  AbstractNavigationServer::callActionExePath(goal);
+  
+  ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "Start action "  << name_action_exe_path);
+
+  mbf_msgs::ExePathResult result;
+  mbf_msgs::ExePathFeedback feedback;
+
+  typename mbf_abstract_nav::AbstractControllerExecution::ControllerState state_moving_input;
+
+  std::vector<geometry_msgs::PoseStamped> plan = goal->path.poses;
+  std::vector<geometry_msgs::PoseStamped> turning_pts = goal->turning_points.poses;
+  if (plan.empty())
+  {
+    result.outcome = mbf_msgs::ExePathResult::INVALID_PATH;
+    result.message = "Local planner started with an empty plan!";
+    action_server_exe_path_ptr_->setAborted(result, result.message);
+    ROS_ERROR_STREAM_NAMED(name_action_exe_path, result.message << " Canceling the action call.");
+    return;
+  }
+
+  // Try to switch the planner if a special planner is specified in the action goal.
+  if(!goal->controller.empty()){
+
+    if(moving_ptr_->switchController(goal->controller))
+    {
+      ROS_INFO_STREAM("Using the controller \"" << goal->controller << "\".");
+    }
+    else
+    {
+      result.outcome = mbf_msgs::ExePathResult::INVALID_PLUGIN;
+      result.message = "Could not switch to the controller \"" + goal->controller + "\"!";
+      action_server_exe_path_ptr_->setAborted(result, result.message);
+      return;
+    }
+  }
+
+  goal_pose_ = plan.back();
+  ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "Called action \""
+    << name_action_exe_path << "\" with plan:" << std::endl
+    << "frame: \"" << goal->path.header.frame_id << "\" " << std::endl
+    << "stamp: " << goal->path.header.stamp << std::endl
+    << "poses: " << goal->path.poses.size() << std::endl
+    << "goal: (" << goal_pose_.pose.position.x << ", "
+    << goal_pose_.pose.position.y << ", "
+    << goal_pose_.pose.position.z << ")");
+
+  moving_ptr_->setNewPlan(plan);
+  moving_ptr_->setTurningPoints(turning_pts);
+  moving_ptr_->startMoving();
+
+  active_moving_ = true;
+
+  geometry_msgs::PoseStamped oscillation_pose;
+  ros::Time last_oscillation_reset = ros::Time::now();
+
+  bool first_cycle = true;
+
+  while (active_moving_ && ros::ok())
+  {
+    if (!getRobotPose(robot_pose_))
+    {
+      active_moving_ = false;
+      result.outcome = mbf_msgs::ExePathResult::TF_ERROR;
+      result.message = "Could not get the robot pose!";
+      action_server_exe_path_ptr_->setAborted(result, result.message);
+      ROS_ERROR_STREAM_NAMED(name_action_exe_path, result.message << " Canceling the action call.");
+      break;
+    }
+
+    if (first_cycle)
+    {
+      // init oscillation pose
+      oscillation_pose = robot_pose_;
+    }
+
+    // check preempt requested
+    if (action_server_exe_path_ptr_->isPreemptRequested())
+    {
+      if (action_server_exe_path_ptr_->isNewGoalAvailable())
+      {
+        // This probably means that we are continuously replanning, so we don't stop navigation and log as DEBUG
+        ROS_DEBUG_STREAM("Action \"ExePath\" preempted with a new path; switching...");
+      }
+      else
+      {
+        moving_ptr_->stopMoving();
+        ROS_INFO_STREAM("Action \"ExePath\" preempted");
+      }
+
+      fillExePathResult(mbf_msgs::ExePathResult::CANCELED, "Local planner preempted", result);
+      action_server_exe_path_ptr_->setPreempted(result, result.message);
+      break;
+    }
+
+
+    state_moving_input = moving_ptr_->getState();
+
+    switch (state_moving_input)
+    {
+      case mbf_abstract_nav::AbstractControllerExecution::STOPPED:
+        // TODO when this realy happens?   not when continuously replanning, for sure
+        ROS_WARN_STREAM("The moving has been stopped!");
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::STARTED:
+        ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "The moving has been started!");
+        break;
+
+      // in progress
+      case mbf_abstract_nav::AbstractControllerExecution::PLANNING:
+        if (moving_ptr_->isPatienceExceeded())
+        {
+          ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "Local planner patience has been exceeded! Stopping controller...");
+          // TODO planner is stuck, but we don't have currently any way to cancel it!
+          // We will try to stop the thread, but does nothing with DWA or TR controllers
+          moving_ptr_->stopMoving();
+        }
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::MAX_RETRIES:
+        ROS_WARN_STREAM_NAMED(name_action_exe_path, "The local planner has been aborted after it exceeded the maximum number of retries!");
+        active_moving_ = false;
+        fillExePathResult(moving_ptr_->getOutcome(), moving_ptr_->getMessage(), result);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::PAT_EXCEEDED:
+        ROS_WARN_STREAM_NAMED(name_action_exe_path, "The local planner has been aborted after it exceeded the "
+          << "patience time ");
+        ROS_WARN("################################################################################");
+        ROS_WARN(" PAT_EXCEEDED!  how I manage to provoke this?");
+        ROS_WARN("################################################################################");
+
+        active_moving_ = false;
+        fillExePathResult(mbf_msgs::ExePathResult::PAT_EXCEEDED, "Local planner exceeded allocated time", result);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::NO_PLAN:
+        ROS_WARN_STREAM_NAMED(name_action_exe_path, "The local planner has been started without any plan!");
+        active_moving_ = false;
+        fillExePathResult(mbf_msgs::ExePathResult::INVALID_PATH, "Local planner started without a path", result);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::EMPTY_PLAN:
+        ROS_WARN_STREAM_NAMED(name_action_exe_path, "The local planner has received an empty plan");
+        active_moving_ = false;
+        fillExePathResult(mbf_msgs::ExePathResult::INVALID_PATH, "Local planner started with an empty plan", result);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::INVALID_PLAN:
+        ROS_WARN_STREAM_NAMED(name_action_exe_path, "The local planner has received an invalid plan");
+        active_moving_ = false;
+        fillExePathResult(mbf_msgs::ExePathResult::INVALID_PATH, "Local planner started with an invalid plan", result);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::NO_LOCAL_CMD:
+        ROS_WARN_STREAM_THROTTLE_NAMED(3, name_action_exe_path, "No velocity command received from local planner!");
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::GOT_LOCAL_CMD:
+        if (!oscillation_timeout_.isZero() && !active_move_base_)
+        {
+          // check if oscillating only if move_base action is not active, as it has his own wider-scope detector
+          if (mbf_utility::distance(robot_pose_, oscillation_pose) >= oscillation_distance_)
+          {
+            last_oscillation_reset = ros::Time::now();
+            oscillation_pose = robot_pose_;
+          }
+          else if (last_oscillation_reset + oscillation_timeout_ < ros::Time::now())
+          {
+            ROS_WARN_STREAM_NAMED(name_action_exe_path, "The local planner is oscillating for "
+              << (ros::Time::now() - last_oscillation_reset).toSec() << "s");
+            moving_ptr_->stopMoving();
+            active_moving_ = false;
+            fillExePathResult(mbf_msgs::ExePathResult::OSCILLATION, "Oscillation detected!", result);
+            action_server_exe_path_ptr_->setAborted(result, result.message);
+            break;
+          }
+        }
+        feedback.current_twist = moving_ptr_->getLastValidCmdVel();
+        feedback.current_pose = robot_pose_;
+        feedback.dist_to_goal = static_cast<float>(mbf_utility::distance(robot_pose_, goal_pose_));
+        feedback.angle_to_goal = static_cast<float>(mbf_utility::angle(robot_pose_, goal_pose_));
+        action_server_exe_path_ptr_->publishFeedback(feedback);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::ARRIVED_GOAL:
+        ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "Local planner succeeded; arrived to goal");
+        active_moving_ = false;
+        fillExePathResult(mbf_msgs::ExePathResult::SUCCESS, "Local planner succeeded; arrived to goal!", result);
+        action_server_exe_path_ptr_->setSucceeded(result, result.message);
+        break;
+
+      case mbf_abstract_nav::AbstractControllerExecution::INTERNAL_ERROR:
+        ROS_FATAL_STREAM_NAMED(name_action_exe_path, "Internal error: Unknown error thrown by the plugin!"); // TODO getMessage from controller
+        active_moving_ = false;
+        fillExePathResult(mbf_msgs::ExePathResult::INTERNAL_ERROR, "Internal error: Unknown error thrown by the plugin!", result);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        break;
+
+      default:
+        result.outcome = mbf_msgs::ExePathResult::INTERNAL_ERROR;
+        result.message = "Internal error: Unknown state in a move base flex controller execution with the number: " + state_moving_input;
+        ROS_FATAL_STREAM_NAMED(name_action_exe_path, result.message);
+        action_server_exe_path_ptr_->setAborted(result, result.message);
+        active_moving_ = false;
+    }
+
+    if (active_moving_)
+    {
+      // try to sleep a bit
+      // normally this thread should be woken up from the controller execution thread
+      // in order to transfer the results to the controller
+      boost::mutex mutex;
+      boost::unique_lock<boost::mutex> lock(mutex);
+      condition_.wait_for(lock, boost::chrono::milliseconds(500));
+    }
+
+    first_cycle = false;
+  }  // while (active_moving_ && ros::ok())
+
+  if (!active_moving_)
+  {
+    ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "\"ExePath\" action ended properly.");
+  }
+  else
+  {
+    // normal on continuous replanning
+    ROS_DEBUG_STREAM_NAMED(name_action_exe_path, "\"ExePath\" action has been stopped!");
+  }
+
   checkDeactivateCostmaps();
 }
 
@@ -757,6 +1002,7 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
 
               // Parse the turning point from global planner to local planner
               exe_path_goal.turning_points = get_path_result.turning_points;
+              ROS_INFO_STREAM("Receive " << exe_path_goal.turning_points.poses.size() << " points");
 
               if (recovery_trigger == GET_PATH)
               {
@@ -870,6 +1116,7 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         {
           ROS_DEBUG("Have new plan; restarting moving action");
           exe_path_goal.path = get_path_result.path;
+          exe_path_goal.turning_points = get_path_result.turning_points;
           action_client_exe_path_.sendGoal(
             exe_path_goal,
             ActionClientExePath::SimpleDoneCallback(),
