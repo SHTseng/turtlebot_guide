@@ -76,7 +76,7 @@
   <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
   
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/robot_guidance.rviz" if="$(arg rviz)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/guide_people.rviz" if="$(arg rviz)"/>
   
     
  </launch>
