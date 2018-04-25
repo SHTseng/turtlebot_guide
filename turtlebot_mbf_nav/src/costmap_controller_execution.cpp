@@ -152,8 +152,6 @@ void CostmapControllerExecution::run()
         // obtain turning point from global planner
         turning_points = getTurningPoints();
         nearest_turning_pt_index = nearestTurningPoint(robot_pose_, turning_points);
-        // if (nearest_turning_pt_index != -1) 
-        //   ROS_INFO_STREAM(nearest_turning_pt_index);
 
         // save time and call the plugin
         lct_mtx_.lock();
