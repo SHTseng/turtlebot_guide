@@ -649,7 +649,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: /move_base_flex/SWGlobalPlanner/turning_points
+      Marker Topic: /move_base_flex/planner/turning_points
       Name: MarkerArray
       Namespaces:
         {}
@@ -691,10 +691,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.1747967
+      Pitch: 1.03479683
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 5.75324249
+      Yaw: 0.280059099
     Saved: ~
 Window Geometry:
   Displays:
