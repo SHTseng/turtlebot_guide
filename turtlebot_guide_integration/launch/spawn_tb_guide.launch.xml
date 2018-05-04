@@ -1,25 +1,21 @@
 <launch>
-  <arg name="namespace" default="guidance" />
   <arg name="init_x" default="0" />
   <arg name="init_y" default="0" />
   <arg name="init_yaw" default="0" />
   
-  <param name="tf_prefix" value="$(arg namespace)"/>
-  
-  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/turtlebot_$(arg namespace).xacro'" />
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/tb_guide.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
   <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-      args="-x $(arg init_x) -y $(arg init_y) -Y $(arg init_yaw) -urdf -param robot_description -model turtlebot_$(arg namespace)"
+      args="-x $(arg init_x) -y $(arg init_y) -Y $(arg init_yaw) -urdf -param robot_description -model tb_guide"
       respawn="false"/>
   
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0"/>
-    <param name="tf_prefix" type="string" value="$(arg namespace)" />
   </node>
   
   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
-        args="$(arg init_x) $(arg init_y) 0 $(arg init_yaw) 0 0 /map /$(arg namespace)/odom 100" />
+        args="$(arg init_x) $(arg init_y) 0 $(arg init_yaw) 0 0 /map /odom 100" />
   
   <!-- Velocity muxer -->
   <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>

@@ -5,15 +5,11 @@
   <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/willow_v2.yaml"/>
   <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/willowgarage_people.world"/>
   
-  <arg name="initial_pose_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
-  <arg name="initial_pose_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
-  <arg name="initial_pose_a" default="3.14"/>
+  <arg name="origin_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="origin_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="origin_yaw" default="3.14"/>
   
   <arg name="depth_nodelet_name" value="depthimage_nodelet_manager"/>
-  
-  <param name="init_x" value="$(arg initial_pose_x)"/>
-  <param name="init_y" value="$(arg initial_pose_y)"/>
-  <param name="init_th" value="$(arg initial_pose_a)"/>
   <param name ="/use_sim_time" value="true"/>
   
   <!-- Gazebo simulation environment -->
@@ -23,12 +19,17 @@
     <arg name="gui" value="$(arg gui)"/>
   </include> 
   
-  <!-- Turtlebot robot model -->
-  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/turtlebot_guidance.xacro'" />
+  <!-- Spawn turtlebot guide model -->
+  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+    <arg name="init_x" value="$(arg origin_x)" />
+    <arg name="init_y" value="$(arg origin_y)" />
+    <arg name="init_yaw" value="$(arg origin_yaw)" />
+  </include> 
+  <!--<arg name="urdf_file" default="$(find xacro)/xacro  '$(find turtlebot_guide_integration)/robot/tb_guide.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
   <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-      args="-x $(arg initial_pose_x) -y $(arg initial_pose_y) -Y $(arg initial_pose_a) -urdf -param robot_description -model turtlebot_guidance"
+      args="-x $(arg origin_x) -y $(arg origin_y) -Y $(arg origin_yaw) -urdf -param robot_description -model tb_guide"
       respawn="false"/>
   
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
@@ -36,14 +37,14 @@
   </node>
   
   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
-        args="$(arg initial_pose_x) $(arg initial_pose_y) 0 $(arg initial_pose_a) 0 0 /map /odom 100" />
+        args="$(arg origin_x) $(arg origin_y) 0 $(arg origin_yaw) 0 0 /map /odom 100" />
 
   <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
   <node pkg="nodelet" type="nodelet" name="cmd_vel_mux"
         args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
     <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml" />
     <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
-  </node>
+  </node> -->
   
   <!-- People detection -->
   <node pkg="nodelet" type="nodelet" name="$(arg depth_nodelet_name)" args="manager"/>

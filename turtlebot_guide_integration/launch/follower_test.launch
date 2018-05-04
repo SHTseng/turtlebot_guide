@@ -2,17 +2,12 @@
   <arg name="gui" default="true"/>
   <arg name="rviz" default="true"/>
   
-  <arg name="initial_pose_x" default="0"/> 
-  <arg name="initial_pose_y" default="0"/>
-  <arg name="initial_pose_a" default="3.14"/>
+  <arg name="origin_x" default="0"/> 
+  <arg name="origin_y" default="0"/>
+  <arg name="origin_yaw" default="3.14"/>
   
   <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/willow_v2.yaml"/>
   <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/simple_actor.world"/>
-  <param name ="/use_sim_time" value="true"/>
-  
-  <param name="init_x" value="$(arg initial_pose_x)"/>
-  <param name="init_y" value="$(arg initial_pose_y)"/>
-  <param name="init_th" value="$(arg initial_pose_a)"/>
   
   <!-- Gazebo simulation environment -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -22,11 +17,11 @@
   </include> 
   
   <!-- Turtlebot robot model -->
-  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/turtlebot_guidance.xacro'" />
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/tb_guide.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
   <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-      args="-x $(arg initial_pose_x) -y $(arg initial_pose_y) -Y $(arg initial_pose_a) -urdf -param robot_description -model turtlebot_guidance"
+      args="-x $(arg origin_x) -y $(arg origin_y) -Y $(arg origin_yaw) -urdf -param robot_description -model tb_guide"
       respawn="false"/>
   
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
