@@ -25,27 +25,7 @@
     <arg name="init_y" value="$(arg origin_y)" />
     <arg name="init_yaw" value="$(arg origin_yaw)" />
   </include> 
-  <!--<arg name="urdf_file" default="$(find xacro)/xacro  '$(find turtlebot_guide_integration)/robot/tb_guide.xacro'" />
-  <param name="robot_description" command="$(arg urdf_file)" />
-  
-  <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-      args="-x $(arg origin_x) -y $(arg origin_y) -Y $(arg origin_yaw) -urdf -param robot_description -model tb_guide"
-      respawn="false"/>
-  
-  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="30.0"/>
-  </node>
-  
-  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" 
-        args="$(arg origin_x) $(arg origin_y) 0 $(arg origin_yaw) 0 0 /map /odom 100" />
 
-  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
-  <node pkg="nodelet" type="nodelet" name="cmd_vel_mux"
-        args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
-    <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml" />
-    <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
-  </node> -->
-  
   <!-- People detection -->
   <node pkg="nodelet" type="nodelet" name="$(arg depth_nodelet_name)" args="manager"/>
   <include file="$(find turtlebot_follower_tracker)/launch/people_detection_nodelet.launch">
@@ -62,7 +42,12 @@
     <arg name="static_map_filter" default="false"/>
   </include>
   
-  <!-- Visualization for the different regions -->
+  <!-- Follower state monitor -->
+  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor" output="screen">
+    <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
+  </node> 
+  
+  <!-- Visualization for the experiment data -->
   <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
   
   <!-- Map server -->

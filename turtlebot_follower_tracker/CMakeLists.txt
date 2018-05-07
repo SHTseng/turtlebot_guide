@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   eigen_conversions
   nodelet
   sensor_msgs
+  nav_msgs
   spencer_tracking_msgs
 )
 
@@ -30,6 +31,7 @@ catkin_package(
     eigen_conversions
     nodelet
     sensor_msgs
+    nav_msgs
     spencer_tracking_msgs
   DEPENDS
     Boost
@@ -53,3 +55,6 @@ target_link_libraries(pcl_people_detection_ros ${catkin_LIBRARIES} ${PCL_LIBRARI
 
 add_library(follower_tracker_nodelet src/follower_tracker_nodelet.cpp)
 target_link_libraries(follower_tracker_nodelet pcl_people_detection_ros ${catkin_LIBRARIES})
+
+add_executable(follower_state_monitor src/follower_state_monitor.cpp)
+target_link_libraries(follower_state_monitor ${catkin_LIBRARIES})

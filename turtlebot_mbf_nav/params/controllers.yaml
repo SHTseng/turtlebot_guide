@@ -89,12 +89,12 @@ controller:
   # min_follower_dist: 1.5
   # max_follower_dist: 2.0
   #!! Optimization params for follower
-  # weight_follower_pose_x: 0.5
-  # weight_follower_pose_y: 1
+  # weight_follower_pose_x: 0
+  # weight_follower_pose_y: 0
   weight_follower_vel_x: 1
   weight_follower_vel_theta: 0.1
   weight_proxemics: 1
-  enable_guide: false                                                                                                          
+  enable_guide: true                                                                                                          
   
   # Homotopy Class Planner
   enable_homotopy_class_planning: false # true
