@@ -64,15 +64,8 @@ private:
 
   void trackCB(const spencer_tracking_msgs::TrackedPersons::ConstPtr _msg)
   {
-    if (_msg->tracks.size() == 0)
-    {
-      return;
-    }
-
     boost::recursive_mutex::scoped_lock lock(monitor_mutex_);
-    // Currently get the only track out
-    follower_pose_ = _msg->tracks.front().pose.pose;
-    follower_vel_ = _msg->tracks.front().twist.twist;
+    tracked_people_ = *_msg;
 
     wait_for_wake_ = false;
     monitor_cond_.notify_one();
@@ -81,15 +74,33 @@ private:
   void monitorThread()
   {
     ros::NodeHandle n;
-    boost::unique_lock<boost::recursive_mutex> lock(monitor_mutex_);
     while(n.ok())
     {
+      boost::unique_lock<boost::recursive_mutex> lock(monitor_mutex_);
       while(wait_for_wake_)
       {
         monitor_cond_.wait(lock);
       }
 
-      FollowerState follower_state = checkFollowerState();
+      FollowerState follower_state;
+      if (tracked_people_.tracks.empty())
+      {
+        follower_state = UNKNOWN;
+      }
+      else
+      {
+        // Currently get the only track out
+        follower_pose_ = tracked_people_.tracks.front().pose.pose;
+        follower_vel_ = tracked_people_.tracks.front().twist.twist;
+
+        // Check the follower is following or not
+        follower_state = checkFollowerState();
+      }
+
+      // Record the follower pose for next run and unlock the mutex
+      prev_follower_pose_ = follower_pose_;
+      wait_for_wake_ = true;
+
       switch(follower_state)
       {
         case FOLLOWING:
@@ -112,13 +123,9 @@ private:
           ROS_INFO("Unknown");
           break;
         }
+      } // end switch
 
-      }
-
-      // Record the follower pose for next run
-      prev_follower_pose_ = follower_pose_;
-      wait_for_wake_ = true;
-    }
+    } // end while
   }
 
   FollowerState checkFollowerState()
@@ -127,7 +134,7 @@ private:
     double d = distance(follower_pose_, prev_follower_pose_);
     if(d < 0.001) return STOPPED;
 
-    // Coordinate transform of the following range
+    // Coordinate transformation of the following range
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
     return insidePolygon(following_polygon_, transformed_pose) ? FOLLOWING : NOT_FOLLOWING;
   }
@@ -172,12 +179,12 @@ private:
   ros::Subscriber track_sub_;
 
   nav_msgs::Odometry odom_;
+  spencer_tracking_msgs::TrackedPersons tracked_people_;
 
   geometry_msgs::Pose follower_pose_;
   geometry_msgs::Pose prev_follower_pose_;
   geometry_msgs::Twist follower_vel_;
 
-  FollowerState follower_state_;
   std::vector<geometry_msgs::Point> following_polygon_;
   std::vector<geometry_msgs::Point> camera_polygon_;
 
