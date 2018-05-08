@@ -1,6 +1,5 @@
 #include <ros/ros.h>
 #include <nav_msgs/Odometry.h>
-#include <geometry_msgs/Point32.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
 #include <spencer_tracking_msgs/TrackedPersons.h>
@@ -15,7 +14,8 @@ enum FollowerState
 {
   FOLLOWING,
   NOT_FOLLOWING,
-  STOP
+  STOPPED,
+  UNKNOWN
 };
 
 class FollowerStateMonitor
@@ -31,9 +31,9 @@ public:
     std::vector<double> following_range;
     private_nh.param("following_range", following_range, std::vector<double>());
 
-    for(int i = 0; i < following_range.size(); i+=2)
+    for(std::size_t i = 0; i < following_range.size(); i+=2)
     {
-      geometry_msgs::Point32 p;
+      geometry_msgs::Point p;
       p.x = following_range[i];
       p.y = following_range[i+1];
       following_polygon_.push_back(p);
@@ -70,6 +70,7 @@ private:
     }
 
     boost::recursive_mutex::scoped_lock lock(monitor_mutex_);
+    // Currently get the only track out
     follower_pose_ = _msg->tracks.front().pose.pose;
     follower_vel_ = _msg->tracks.front().twist.twist;
 
@@ -80,7 +81,6 @@ private:
   void monitorThread()
   {
     ros::NodeHandle n;
-//    boost::mutex::scoped_lock lock(monitor_mutex_);
     boost::unique_lock<boost::recursive_mutex> lock(monitor_mutex_);
     while(n.ok())
     {
@@ -89,47 +89,76 @@ private:
         monitor_cond_.wait(lock);
       }
 
-      double d = distance(odom_.pose.pose, follower_pose_);
-      FollowerState state = checkFollowerState();
+      FollowerState follower_state = checkFollowerState();
+      switch(follower_state)
+      {
+        case FOLLOWING:
+        {
+          ROS_INFO("Follwoing");
+          break;
+        }
+        case NOT_FOLLOWING:
+        {
+          ROS_INFO("Not follwoing");
+          break;
+        }
+        case STOPPED:
+        {
+          ROS_INFO("Stopped");
+          break;
+        }
+        case UNKNOWN:
+        {
+          ROS_INFO("Unknown");
+          break;
+        }
 
+      }
+
+      // Record the follower pose for next run
+      prev_follower_pose_ = follower_pose_;
       wait_for_wake_ = true;
     }
   }
 
   FollowerState checkFollowerState()
   {
-//    boost::recursive_mutex::scoped_lock lock(monitor_mutex_);
-    geometry_msgs::Point32 follower_p;
-    follower_p.x = follower_pose_.position.x;
-    follower_p.y = follower_pose_.position.y;
-    ROS_INFO_STREAM(follower_p.x << " " << follower_p.y);
+    // Check the follower is moving
+    double d = distance(follower_pose_, prev_follower_pose_);
+    if(d < 0.001) return STOPPED;
 
     // Coordinate transform of the following range
-
-    if(insidePolygon(following_polygon_, follower_p))
-      return FOLLOWING;
-    else
-      return NOT_FOLLOWING;
+    geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
+    return insidePolygon(following_polygon_, transformed_pose) ? FOLLOWING : NOT_FOLLOWING;
   }
 
-  bool insidePolygon(const std::vector<geometry_msgs::Point32> &polygon, const geometry_msgs::Point32 &p)
+  bool insidePolygon(const std::vector<geometry_msgs::Point> &polygon, const geometry_msgs::Point &p)
   {
     // Calculate each segment of polyong counter clockwise and check the point lies in the left side of the line
     bool left_side = true;
-    int area;
-    for (int i = 0; i < polygon.size()-1; i++)
+    double area;
+    for (std::size_t i = 0; i < polygon.size()-1; i++)
     {
-      // outer product to calculate area
+      // outer product to calculate area surrounded by point and two adjent vertices
       area = (polygon[i].x-p.x)*(polygon[i+1].y-p.y)-(polygon[i+1].x-p.x)*(polygon[i].y-p.y);
       // if the value with different sign indicates the point lies in the right side
-      if(area < 0) left_side = false;
+      if(area < 0.0) left_side = false;
     }
 
     // Calculate the last point and first point
     area = (polygon.back().x-p.x)*(polygon.front().y-p.y)-(polygon.front().x-p.x)*(polygon.back().y-p.y);
-    if(area < 0) left_side = false;
+    if(area < 0.0) left_side = false;
 
     return left_side;
+  }
+
+  geometry_msgs::Point transformToLocalFrame(const geometry_msgs::Point &p)
+  {
+    geometry_msgs::Point transformed_p;
+    // hacks to transform the frame to odom, TODO: use tf
+    transformed_p.x = p.x - odom_.pose.pose.position.x;
+    transformed_p.y = p.y - odom_.pose.pose.position.y;
+    return transformed_p;
   }
 
   double distance(const geometry_msgs::Pose &p1, const geometry_msgs::Pose &p2)
@@ -145,11 +174,12 @@ private:
   nav_msgs::Odometry odom_;
 
   geometry_msgs::Pose follower_pose_;
+  geometry_msgs::Pose prev_follower_pose_;
   geometry_msgs::Twist follower_vel_;
 
   FollowerState follower_state_;
-  std::vector<geometry_msgs::Point32> following_polygon_;
-  std::vector<geometry_msgs::Point32> camera_polygon_;
+  std::vector<geometry_msgs::Point> following_polygon_;
+  std::vector<geometry_msgs::Point> camera_polygon_;
 
   boost::thread *monitor_thread_;
   boost::recursive_mutex monitor_mutex_;

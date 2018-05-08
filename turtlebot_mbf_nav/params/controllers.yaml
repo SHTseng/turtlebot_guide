@@ -94,7 +94,7 @@ controller:
   weight_follower_vel_x: 1
   weight_follower_vel_theta: 0.1
   weight_proxemics: 1
-  enable_guide: true                                                                                                          
+  enable_guide: false                                                                                                          
   
   # Homotopy Class Planner
   enable_homotopy_class_planning: false # true
