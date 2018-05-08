@@ -3,7 +3,7 @@
 namespace turtlebot_guide
 {
 
-PCLPeopleDetection::PCLPeopleDetection(const double &camera_height):
+PCLPeopleDetection::PCLPeopleDetection(const float &camera_height):
   camera_height_(camera_height),
   voxel_size_(0.06),
   min_confidence_(-1.5)
@@ -66,14 +66,14 @@ bool PCLPeopleDetection::compute()
   // Apply minimum confidence level constraint
   P_Clusters clustersWithinConfidenceBounds;
   for (P_Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
-    double confidence = it->getPersonConfidence();
+    float confidence = it->getPersonConfidence();
     if (confidence > min_confidence_){             // draw only people with confidence above a threshold
       clustersWithinConfidenceBounds.push_back(*it);
     }
   }
 
   if(!clustersWithinConfidenceBounds.empty()){
-    double angle = clustersWithinConfidenceBounds.front().getAngle();
+    float angle = clustersWithinConfidenceBounds.front().getAngle();
     people_pose_.translation() = clustersWithinConfidenceBounds.front().getCenter();
     people_pose_.rotate(Eigen::AngleAxisf(angle, Eigen::Vector3f::UnitZ()));
     return true;
@@ -96,8 +96,7 @@ Eigen::Hyperplane<float, 3> PCLPeopleDetection::getGroundPlane()
   original_ground_coeffs.push_back(0);
   original_ground_coeffs.push_back(0);
   original_ground_coeffs.push_back(1);
-  original_ground_coeffs.push_back(0.8870);
-//  original_ground_coeffs.push_back(0.8870); // 89cm
+  original_ground_coeffs.push_back(camera_height_);
 
   return Eigen::Hyperplane<float, 3>(
           Eigen::Vector3f(original_ground_coeffs[0], original_ground_coeffs[1], original_ground_coeffs[2]),

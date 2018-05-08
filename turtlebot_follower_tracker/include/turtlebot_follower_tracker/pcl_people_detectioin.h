@@ -31,7 +31,7 @@ class PCLPeopleDetection
 {
 public:
 
-  PCLPeopleDetection(const double &camera_height);
+  PCLPeopleDetection(const float &camera_height);
 
   ~PCLPeopleDetection();
 
@@ -53,9 +53,9 @@ private:
   std::string svm_filename_;
   pcl::people::GroundBasedPeopleDetectionApp<PointT> people_detector_;
 
-  double camera_height_;
+  float camera_height_;
   double voxel_size_;
-  double min_confidence_;
+  float min_confidence_;
 
   Eigen::Affine3f people_pose_;
 
