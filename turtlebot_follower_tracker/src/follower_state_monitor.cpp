@@ -97,10 +97,6 @@ private:
         follower_state = checkFollowerState();
       }
 
-      // Record the follower pose for next run and unlock the mutex
-      prev_follower_pose_ = follower_pose_;
-      wait_for_wake_ = true;
-
       switch(follower_state)
       {
         case FOLLOWING:
@@ -124,6 +120,10 @@ private:
           break;
         }
       } // end switch
+
+      // Record the follower pose for next run and unlock the mutex
+      prev_follower_pose_ = follower_pose_;
+      wait_for_wake_ = true;
 
     } // end while
   }

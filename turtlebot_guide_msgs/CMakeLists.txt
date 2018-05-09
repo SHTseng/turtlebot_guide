@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(turtlebot_guide_msgs)
 
-
 find_package(catkin REQUIRED
   COMPONENTS
     actionlib_msgs
@@ -13,10 +12,13 @@ find_package(catkin REQUIRED
     std_msgs
 )
 
+add_message_files(
+  DIRECTORY msg
+  FILES
+  FollowerState.msg)
 
 add_action_files(
-  DIRECTORY
-    action
+  DIRECTORY action
   FILES
     GetPath.action
     ExePath.action
