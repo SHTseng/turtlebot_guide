@@ -7,7 +7,6 @@ find_package(Eigen3 REQUIRED)
 find_package(PCL REQUIRED COMPONENTS core filters io segmentation)
 
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
   pcl_conversions
   pcl_ros
   tf
@@ -16,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   nav_msgs
   spencer_tracking_msgs
+  turtlebot_guide_msgs
 )
 
 catkin_package(
@@ -24,7 +24,6 @@ catkin_package(
   LIBRARIES
     ${PROJECT_NAME}
   CATKIN_DEPENDS
-    roscpp
     pcl_conversions
     pcl_ros
     tf
@@ -33,6 +32,7 @@ catkin_package(
     sensor_msgs
     nav_msgs
     spencer_tracking_msgs
+    turtlebot_guide_msgs
   DEPENDS
     Boost
     PCL

@@ -3,6 +3,7 @@
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
 #include <spencer_tracking_msgs/TrackedPersons.h>
+#include <turtlebot_guide_msgs/FollowerState.h>
 
 #include <boost/thread.hpp>
 #include <memory>
@@ -44,6 +45,8 @@ public:
     odom_sub_ = nh_.subscribe("odom", 10, &FollowerStateMonitor::odomCB, this);
 
     track_sub_ = nh_.subscribe("spencer/perception/tracked_persons", 10, &FollowerStateMonitor::trackCB, this);
+
+    state_pub_ = nh_.advertise<turtlebot_guide_msgs::FollowerState>("follower_state", 1000);
   }
 
   ~FollowerStateMonitor()
@@ -58,13 +61,13 @@ private:
 
   void odomCB(const nav_msgs::Odometry::ConstPtr _msg)
   {
-    boost::recursive_mutex::scoped_lock lock(monitor_mutex_);
+    boost::mutex::scoped_lock lock(monitor_mutex_);
     odom_ = *_msg;
   }
 
   void trackCB(const spencer_tracking_msgs::TrackedPersons::ConstPtr _msg)
   {
-    boost::recursive_mutex::scoped_lock lock(monitor_mutex_);
+    boost::mutex::scoped_lock lock(monitor_mutex_);
     tracked_people_ = *_msg;
 
     wait_for_wake_ = false;
@@ -76,7 +79,7 @@ private:
     ros::NodeHandle n;
     while(n.ok())
     {
-      boost::unique_lock<boost::recursive_mutex> lock(monitor_mutex_);
+      boost::unique_lock<boost::mutex> lock(monitor_mutex_);
       while(wait_for_wake_)
       {
         monitor_cond_.wait(lock);
@@ -97,29 +100,33 @@ private:
         follower_state = checkFollowerState();
       }
 
-      switch(follower_state)
-      {
-        case FOLLOWING:
-        {
-          ROS_INFO("Follwoing");
-          break;
-        }
-        case NOT_FOLLOWING:
-        {
-          ROS_INFO("Not follwoing");
-          break;
-        }
-        case STOPPED:
-        {
-          ROS_INFO("Stopped");
-          break;
-        }
-        case UNKNOWN:
-        {
-          ROS_INFO("Unknown");
-          break;
-        }
-      } // end switch
+      turtlebot_guide_msgs::FollowerState state_msg;
+      state_msg.state = follower_state;
+      state_pub_.publish(state_msg);
+
+//      switch(follower_state)
+//      {
+//        case FOLLOWING:
+//        {
+//          ROS_INFO("Follwoing");
+//          break;
+//        }
+//        case NOT_FOLLOWING:
+//        {
+//          ROS_INFO("Not follwoing");
+//          break;
+//        }
+//        case STOPPED:
+//        {
+//          ROS_INFO("Stopped");
+//          break;
+//        }
+//        case UNKNOWN:
+//        {
+//          ROS_INFO("Unknown");
+//          break;
+//        }
+//      } // end switch
 
       // Record the follower pose for next run and unlock the mutex
       prev_follower_pose_ = follower_pose_;
@@ -178,6 +185,8 @@ private:
   ros::Subscriber odom_sub_;
   ros::Subscriber track_sub_;
 
+  ros::Publisher state_pub_;
+
   nav_msgs::Odometry odom_;
   spencer_tracking_msgs::TrackedPersons tracked_people_;
 
@@ -189,7 +198,7 @@ private:
   std::vector<geometry_msgs::Point> camera_polygon_;
 
   boost::thread *monitor_thread_;
-  boost::recursive_mutex monitor_mutex_;
+  boost::mutex monitor_mutex_;
   boost::condition_variable_any monitor_cond_;
 
   bool wait_for_wake_;

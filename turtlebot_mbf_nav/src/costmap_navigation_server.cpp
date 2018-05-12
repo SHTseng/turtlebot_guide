@@ -98,8 +98,9 @@ CostmapNavigationServer::CostmapNavigationServer(const boost::shared_ptr<tf::Tra
 
   current_goal_pub_ = private_nh_.advertise<geometry_msgs::PoseStamped>("current_goal", 0);
 
+  // subscribe to the follower
   ros::NodeHandle nh;
-  actor_pub_ = nh.advertise<std_msgs::String>("actor_state", 1);
+  monitor_sub_ = nh.subscribe("follower_state", 1000, &CostmapNavigationServer::stateCB, this);
 
   // dynamic reconfigure server for mbf_costmap_nav configuration; also include abstract server parameters
   dsrv_costmap_ = boost::make_shared<dynamic_reconfigure::Server<mbf_costmap_nav::MoveBaseFlexConfig> >(private_nh_);
@@ -853,6 +854,7 @@ void CostmapNavigationServer::callActionRecovery(const mbf_msgs::RecoveryGoalCon
 
 void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalConstPtr &goal)
 {
+  ROS_INFO("start move base action");
   ROS_DEBUG_STREAM_NAMED(name_action_move_base, "Start action "  << name_action_move_base);
 
   const geometry_msgs::PoseStamped target_pose = goal->target_pose;
@@ -880,7 +882,6 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
       return;
     }
   }
-
 
   get_path_goal.target_pose = target_pose;
   get_path_goal.use_start_pose = false; // use the robot pose
@@ -960,16 +961,26 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   ros::Time last_oscillation_reset = ros::Time::now();
 
   std::string type; // recovery behavior type
-  std_msgs::String state_msg;
   while (ros::ok() && run)
   {
     bool try_recovery = false;
+
+    /// make reaction based on the follower state
+    switch(follower_state_.state)
+    {
+      case turtlebot_guide_msgs::FollowerState::FOLLOWING:
+        break;
+      case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
+        break;
+      case turtlebot_guide_msgs::FollowerState::STOPPED:
+        break;
+      case turtlebot_guide_msgs::FollowerState::UNKNOWN:
+        break;
+    }
+
     switch (state)
     {
       case GET_PATH:
-        // To make the actor stop moving except exe_path state
-        state_msg.data = "false";
-        actor_pub_.publish(state_msg);
 
         if (!action_client_get_path_.waitForResult(wait))
         { // no result -> action server is still running
@@ -1107,10 +1118,6 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         break;
 
       case EXE_PATH:
-
-        // Control the state of the follower
-        state_msg.data = "active";
-        actor_pub_.publish(state_msg);
 
         if (has_new_plan)
         {
@@ -1295,10 +1302,6 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
 
       case RECOVERY:
 
-        // To make the actor stop moving except exe_path state
-        state_msg.data = "false";
-        actor_pub_.publish(state_msg);
-
         if (!action_client_recovery_.waitForResult(wait))
         {
           if (action_server_move_base_ptr_->isPreemptRequested() && !preempted)
@@ -1414,6 +1417,11 @@ void CostmapNavigationServer::plannerThread(boost::condition_variable &cond, boo
       has_new_plan = true;
     rate.sleep();
   }
+}
+
+void CostmapNavigationServer::stateCB(const turtlebot_guide_msgs::FollowerStateConstPtr &_msg)
+{
+  follower_state_ = *_msg;
 }
 
 } /* namespace mbf_costmap_nav */

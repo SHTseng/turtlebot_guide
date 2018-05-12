@@ -51,7 +51,7 @@
 #include <std_srvs/Empty.h>
 #include <mbf_msgs/CheckPose.h>
 
-#include <std_msgs/String.h>
+#include <turtlebot_guide_msgs/FollowerState.h>
 
 namespace turtlebot_mbf_nav
 {
@@ -193,12 +193,7 @@ private:
    */
   void reconfigure(mbf_costmap_nav::MoveBaseFlexConfig &config, uint32_t level);
 
-  /**
-   * @brief Obtain follower region according to the frustum of the camera
-   * @param config Configuration parameters. See the MoveBaseFlexConfig definition.
-   */
-  std::vector<geometry_msgs::Point> getFollowingRegion();
-  std::vector<geometry_msgs::Point> getNotFollowingRegion();
+  void stateCB(const turtlebot_guide_msgs::FollowerStateConstPtr &_msg);
 
   //! Dynamic reconfigure server for the mbf_costmap2d_specific part
   DynamicReconfigureServerCostmapNav dsrv_costmap_;
@@ -237,6 +232,10 @@ private:
 
   //! Stop publisher for handling the state of the actor
   ros::Publisher actor_pub_;
+
+  //! Subscribe to the follower state monitor
+  ros::Subscriber monitor_sub_;
+  turtlebot_guide_msgs::FollowerState follower_state_;
 };
 
 } /* namespace mbf_costmap_nav */
