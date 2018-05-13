@@ -10,7 +10,7 @@
     </include>
     
     <actor name="follower">
-      <pose>2.0 0 0.98 1.57 0 -1.57</pose> <!-- 1.57 0 -1.57 -->
+      <pose>-2.0 0 0.98 1.57 0 1.57</pose> <!-- 1.57 0 -1.57 -->
       <skin>
         <filename>walk.dae</filename>
         <scale>1.0</scale>

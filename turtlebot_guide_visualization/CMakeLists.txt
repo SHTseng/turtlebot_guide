@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   geometry_msgs
   jsk_recognition_msgs
+  turtlebot_guide_msgs
 )
 
 catkin_package(
@@ -16,6 +17,7 @@ catkin_package(
     roscpp
     geometry_msgs
     jsk_recognition_msgs
+    turtlebot_guide_msgs
 )
 
 include_directories(

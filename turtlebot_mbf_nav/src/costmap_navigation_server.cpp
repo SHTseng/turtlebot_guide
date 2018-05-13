@@ -969,12 +969,16 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
     switch(follower_state_.state)
     {
       case turtlebot_guide_msgs::FollowerState::FOLLOWING:
+        // keep adapting to the follower
         break;
       case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
+        // follower goes deviate from path, the robot need to start to follow
         break;
       case turtlebot_guide_msgs::FollowerState::STOPPED:
+        // robot stop
         break;
       case turtlebot_guide_msgs::FollowerState::UNKNOWN:
+        // the robot needs to find out where the follower is
         break;
     }
 

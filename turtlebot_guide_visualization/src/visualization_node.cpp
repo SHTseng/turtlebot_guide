@@ -1,9 +1,15 @@
 #include <ros/ros.h>
 
 #include <geometry_msgs/Point32.h>
+#include <visualization_msgs/Marker.h>
 #include <jsk_recognition_msgs/PolygonArray.h>
+#include <turtlebot_guide_msgs/FollowerState.h>
 
 #include <vector>
+
+visualization_msgs::Marker getTextMarker(turtlebot_guide_msgs::FollowerState state);
+
+void stateCB(const turtlebot_guide_msgs::FollowerStateConstPtr &_msg);
 
 std::vector<geometry_msgs::Point32> getFollowingPoints();
 
@@ -15,11 +21,16 @@ std::vector<geometry_msgs::Point32> getSocialSpacePoints();
 
 std::vector<geometry_msgs::Point32> getCirclePoints(const float &radius, const float &orig_x, const float &orig_y);
 
+const std::string base_link_ = "base_footprint";
+turtlebot_guide_msgs::FollowerState m_state;
+
 int main(int argc, char *argv[]){
   ros::init(argc, argv, "visualization_node");
   ros::NodeHandle nh;
 
   ros::Publisher polygon_pub = nh.advertise<jsk_recognition_msgs::PolygonArray>("turtlebot_guide/visualization", 10);
+  ros::Publisher text_pub = nh.advertise<visualization_msgs::Marker>("follower_state_marker", 1);
+  ros::Subscriber monitor_sub = nh.subscribe("follower_state", 10, stateCB);
 
   geometry_msgs::PolygonStamped polygon_following;
   polygon_following.header.frame_id = "base_footprint";
@@ -31,7 +42,7 @@ int main(int argc, char *argv[]){
   polygon_nonfollowing.header.stamp = ros::Time::now();
   polygon_nonfollowing.polygon.points = getNonFollowingPoints();
 
-  int label = 0;
+  unsigned int label = 0;
   jsk_recognition_msgs::PolygonArray polygon_array;
   polygon_array.header.frame_id = "base_footprint";
   polygon_array.header.stamp = ros::Time::now();
@@ -65,17 +76,55 @@ int main(int argc, char *argv[]){
 //  polygon_array.labels.push_back(label);
 //  label += 10;
 
-  while(polygon_pub.getNumSubscribers() == 0){
+  while(polygon_pub.getNumSubscribers() == 0 || text_pub.getNumSubscribers() == 0){
     ros::Duration(0.05).sleep();
   }
 
   ros::Rate r(100);
   while(ros::ok()){
+    visualization_msgs::Marker text_marker_msg = getTextMarker(m_state);
+    text_pub.publish(text_marker_msg);
+
     polygon_pub.publish(polygon_array);
     ros::spinOnce();
     r.sleep();
   }
+
   return 0;
+} // end main
+
+visualization_msgs::Marker getTextMarker(turtlebot_guide_msgs::FollowerState state)
+{
+  visualization_msgs::Marker text_marker;
+  text_marker.header.frame_id = base_link_;
+  text_marker.header.stamp = ros::Time::now();
+  text_marker.id = 100;
+  text_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+  text_marker.action = visualization_msgs::Marker::ADD;
+  text_marker.scale.z = 0.5;
+
+  switch (state.state)
+  {
+    case turtlebot_guide_msgs::FollowerState::FOLLOWING:
+      text_marker.text = "Following";
+      break;
+    case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
+      text_marker.text = "Not_Following";
+      break;
+    case turtlebot_guide_msgs::FollowerState::STOPPED:
+      text_marker.text = "Stopped";
+      break;
+    case turtlebot_guide_msgs::FollowerState::UNKNOWN:
+      text_marker.text = "Unknown";
+      break;
+  }
+
+  return text_marker;
+}
+
+void stateCB(const turtlebot_guide_msgs::FollowerStateConstPtr &_msg)
+{
+  m_state = *_msg;
 }
 
 std::vector<geometry_msgs::Point32> getFollowingPoints()

@@ -1,4 +1,6 @@
 #include <ros/ros.h>
+#include <tf/transform_datatypes.h>
+
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
@@ -100,50 +102,52 @@ private:
         follower_state = checkFollowerState();
       }
 
+      // fill in the msg data
       turtlebot_guide_msgs::FollowerState state_msg;
+      state_msg.header.frame_id = "base_footprint";
+      state_msg.header.stamp = ros::Time::now();
       state_msg.state = follower_state;
-      state_pub_.publish(state_msg);
+      state_msg.pose.x = follower_pose_.position.x;
+      state_msg.pose.y = follower_pose_.position.y;
 
-//      switch(follower_state)
-//      {
-//        case FOLLOWING:
-//        {
-//          ROS_INFO("Follwoing");
-//          break;
-//        }
-//        case NOT_FOLLOWING:
-//        {
-//          ROS_INFO("Not follwoing");
-//          break;
-//        }
-//        case STOPPED:
-//        {
-//          ROS_INFO("Stopped");
-//          break;
-//        }
-//        case UNKNOWN:
-//        {
-//          ROS_INFO("Unknown");
-//          break;
-//        }
-//      } // end switch
+      tf::Quaternion q(follower_pose_.orientation.x, follower_pose_.orientation.y,
+                       follower_pose_.orientation.z, follower_pose_.orientation.w);
+      tf::Matrix3x3 m(q);
+      double roll, pitch, yaw;
+      m.getRPY(roll, pitch, yaw);
+      state_msg.pose.theta = yaw;
+
+      state_msg.vel.x = follower_vel_.linear.x;
+      state_msg.vel.y = follower_vel_.linear.y;
+      state_msg.vel.theta = follower_vel_.angular.z;
+
+      state_pub_.publish(state_msg);
 
       // Record the follower pose for next run and unlock the mutex
       prev_follower_pose_ = follower_pose_;
       wait_for_wake_ = true;
-
     } // end while
   }
 
   FollowerState checkFollowerState()
   {
     // Check the follower is moving
-    double d = distance(follower_pose_, prev_follower_pose_);
-    if(d < 0.001) return STOPPED;
+    if (!isMoving())
+      return STOPPED;
 
-    // Coordinate transformation of the following range
+    return isFollowing() ? FOLLOWING : NOT_FOLLOWING;
+  }
+
+  bool isFollowing()
+  {
+    // coordinate transformation of the following range
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
-    return insidePolygon(following_polygon_, transformed_pose) ? FOLLOWING : NOT_FOLLOWING;
+
+    // make sure the follower is inside the polygon and the direction of vel is point to the robot
+    if (insidePolygon(following_polygon_, transformed_pose))
+      return true;
+    else
+      return false;
   }
 
   bool insidePolygon(const std::vector<geometry_msgs::Point> &polygon, const geometry_msgs::Point &p)
@@ -175,6 +179,13 @@ private:
     return transformed_p;
   }
 
+  bool isMoving()
+  {
+    double d = distance(follower_pose_, prev_follower_pose_);
+    double vel_norm = hypot(follower_vel_.linear.x, follower_vel_.linear.y);
+    return (d < 0.01 && vel_norm < 0.01) ? false : true;
+  }
+
   double distance(const geometry_msgs::Pose &p1, const geometry_msgs::Pose &p2)
   {
     return hypot(p1.position.x-p2.position.x, p1.position.y-p2.position.y);
@@ -204,7 +215,6 @@ private:
   bool wait_for_wake_;
 
 };
-
 
 } // end namespace
 

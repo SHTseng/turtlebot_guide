@@ -679,7 +679,7 @@ Visualization Manager:
       Style:
         Line width: 0.0299999993
         Scaling factor: 1
-        Value: Person meshes
+        Value: Bounding boxes
       Text spacing: 1
       Topic: /turtlebot_people_detection/detected_persons
       Unreliable: false
@@ -750,6 +750,14 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /follower_state_marker
+      Name: Marker
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -771,25 +779,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 6.38727283
+      Distance: 11.6936665
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.424800277
-        Y: -0.0512378104
-        Z: 2.86856341
+        X: 0.457438529
+        Y: 0.619186759
+        Z: 1.06940651
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.2397958
+      Pitch: 0.609796166
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 6.23001909
+      Yaw: 4.25319815
     Saved: ~
 Window Geometry:
   Displays:

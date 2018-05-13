@@ -1,0 +1,65 @@
+<launch>  
+  <arg name="gui" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="visual" default="true"/>
+  <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/willow_v2.yaml"/>
+  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/simple_actor.world"/>
+  
+  <arg name="origin_x" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="origin_y" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="origin_yaw" default="0.0"/>
+  
+  <arg name="depth_nodelet_name" value="depthimage_nodelet_manager"/>
+  <param name ="/use_sim_time" value="true"/>
+  
+  <!-- Gazebo simulation environment -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/> 
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include> 
+  
+  <!-- Spawn turtlebot guide model -->
+  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+    <arg name="init_x" value="$(arg origin_x)" />
+    <arg name="init_y" value="$(arg origin_y)" />
+    <arg name="init_yaw" value="$(arg origin_yaw)" />
+  </include> 
+
+  <!-- People detection -->
+  <node pkg="nodelet" type="nodelet" name="$(arg depth_nodelet_name)" args="manager"/>
+  <include file="$(find turtlebot_follower_tracker)/launch/people_detection_nodelet.launch">
+    <arg name="input" value="/camera/depth/points" />
+    <arg name="output" value="/turtlebot_people_detection/detected_persons" />
+    <arg name="nodelet_manager" value="$(arg depth_nodelet_name)" />
+  </include>
+  
+  <!-- People tracking -->
+  <include file="$(find spencer_people_tracking_launch)/launch/tracking/freiburg_people_tracking.launch">
+    <arg name="rgbd" default="true"/>
+    <arg name="laser_low_confidence_detections" default="false"/>
+    <arg name="fuse_detections" default="false"/>
+    <arg name="static_map_filter" default="false"/>
+  </include>
+  
+  <!-- Follower state monitor -->
+  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor" output="screen">
+    <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
+  </node> 
+  
+  <!-- Visualization for the experiment data -->
+  <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
+  
+  <!-- Map server -->
+  
+  <!-- Localization for navigation -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
+    
+  <!-- Move base flex server -->
+  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
+  
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/guide_people.rviz" if="$(arg rviz)"/>
+  
+    
+ </launch>

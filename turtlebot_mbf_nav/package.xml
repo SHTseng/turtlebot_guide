@@ -21,6 +21,7 @@
   <depend>mbf_msgs</depend>
   <depend>nav_core</depend>
   <depend>nav_msgs</depend>
+
   <depend>geometry_msgs</depend>
 
   <buildtool_depend>catkin</buildtool_depend>
