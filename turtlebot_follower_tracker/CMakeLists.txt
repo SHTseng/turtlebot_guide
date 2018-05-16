@@ -58,3 +58,4 @@ target_link_libraries(follower_tracker_nodelet pcl_people_detection_ros ${catkin
 
 add_executable(follower_state_monitor src/follower_state_monitor.cpp)
 target_link_libraries(follower_state_monitor ${catkin_LIBRARIES})
+add_dependencies(follower_state_monitor turtlebot_guide_msgs_generate_messages_cpp)

@@ -20,7 +20,8 @@
         <scale>1.000000</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
-      <plugin name="actor_plugin" filename="libgazebo_ros_actor.so">
+      <!-- libgazebo_ros_robot_follow_actor -->
+      <plugin name="actor_plugin" filename="libgazebo_ros_temporary_stop_actor.so">
         <vel_topic>/cmd_vel_mux/input/navi</vel_topic>
         <velocity>0.4</velocity>
         <oscillation_enable>false</oscillation_enable>

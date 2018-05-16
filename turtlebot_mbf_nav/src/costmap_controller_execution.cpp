@@ -90,6 +90,7 @@ void CostmapControllerExecution::run()
   std::vector<geometry_msgs::PoseStamped> plan;
   std::vector<geometry_msgs::PoseStamped> turning_points;
   int nearest_turning_pt_index = 0;
+
   if (!hasNewPlan())
   {
     setState(NO_PLAN);
@@ -99,6 +100,7 @@ void CostmapControllerExecution::run()
 
   int retries = 0;
   int seq = 0;
+  follower_state_ = 0;
 
   try
   {
@@ -160,7 +162,12 @@ void CostmapControllerExecution::run()
 
         // call plugin to compute the next velocity command
         geometry_msgs::TwistStamped cmd_vel_stamped;
-        outcome_ = computeVelocityCmd(cmd_vel_stamped, message_);
+        geometry_msgs::TwistStamped robot_velocity;   // TODO pass current velocity to the plugin!
+        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+
+        // call plugin to compute the next velocity command
+//        geometry_msgs::TwistStamped cmd_vel_stamped;
+//        outcome_ = computeVelocityCmd(cmd_vel_stamped, message_);
 
         if (outcome_ < 10)
         {
@@ -168,7 +175,16 @@ void CostmapControllerExecution::run()
           cmd_vel_stamped.header.seq = seq++;
           setVelocityCmd(cmd_vel_stamped);
           setState(GOT_LOCAL_CMD);
-          vel_pub_.publish(cmd_vel_stamped.twist);
+
+//          vel_pub_.publish(cmd_vel_stamped.twist);+
+
+          //! TODO: need to revise
+          if (follower_state_ == 2)
+            publishZeroVelocity();
+          else
+            vel_pub_.publish(cmd_vel_stamped.twist);
+          //! TODO: need to revise
+
           condition_.notify_all();
           retries = 0;
         }
@@ -260,18 +276,18 @@ std::vector<geometry_msgs::PoseStamped> CostmapControllerExecution::getTurningPo
 //   turning_points_ = points;
 // }
 
-// uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
-//                                                         const geometry_msgs::TwistStamped& robot_velocity,
-//                                                         geometry_msgs::TwistStamped& vel_cmd,
-//                                                         std::string& message)
-// {
-//   // Lock the costmap while planning, but following issue #4, we allow to move the responsibility to the planner itself
-//   if (lock_costmap_)
-//   {
-//     boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_ptr_->getCostmap()->getMutex()));
-//     return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
-//   }
-//   return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
-// }
+uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
+                                                        const geometry_msgs::TwistStamped& robot_velocity,
+                                                        geometry_msgs::TwistStamped& vel_cmd,
+                                                        std::string& message)
+{
+  // Lock the costmap while planning, but following issue #4, we allow to move the responsibility to the planner itself
+  if (lock_costmap_)
+  {
+    boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_ptr_->getCostmap()->getMutex()));
+    return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
+  }
+  return controller_->computeVelocityCommands(robot_pose, robot_velocity, vel_cmd, message);
+}
 
 } /* namespace mbf_costmap_nav */

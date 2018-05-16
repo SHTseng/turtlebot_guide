@@ -31,3 +31,4 @@ link_directories(
 
 add_executable(visualization_node src/visualization_node.cpp)
 target_link_libraries(visualization_node ${catkin_LIBRARIES})
+add_dependencies(visualization_node turtlebot_guide_msgs_generate_messages_cpp)

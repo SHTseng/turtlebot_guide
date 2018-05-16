@@ -160,7 +160,7 @@ private:
       // outer product to calculate area surrounded by point and two adjent vertices
       area = (polygon[i].x-p.x)*(polygon[i+1].y-p.y)-(polygon[i+1].x-p.x)*(polygon[i].y-p.y);
       // if the value with different sign indicates the point lies in the right side
-      if(area < 0.0) left_side = false;
+      if(area < 0.0) return false;
     }
 
     // Calculate the last point and first point
@@ -183,7 +183,7 @@ private:
   {
     double d = distance(follower_pose_, prev_follower_pose_);
     double vel_norm = hypot(follower_vel_.linear.x, follower_vel_.linear.y);
-    return (d < 0.01 && vel_norm < 0.01) ? false : true;
+    return (d < 0.1 && vel_norm < 0.08) ? false : true;
   }
 
   double distance(const geometry_msgs::Pose &p1, const geometry_msgs::Pose &p2)

@@ -31,7 +31,7 @@
     <arg name="nodelet_manager" value="depthimage_nodelet_manager" />
   </include>
   
-  <arg name="config_file" default="tb.yaml"/>
+  <arg name="config_file" default="spencer2.yaml"/>
   <arg name="detection_id_increment" default="20"/>
   <arg name="detection_id_offset_front" default="1"/>
   <arg name="detection_id_offset_rear" default="2"/>
@@ -46,17 +46,6 @@
         <arg name="config_file" value="$(arg config_file)"/>
     </include>
   </group>
-  
-  <!-- Map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
-    <param name="frame_id" value="/map"/>
-  </node>
-  
-  <!-- Localization for navigation -->
-  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
-    
-  <!-- Move base flex server -->
-  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
   
   <!-- RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/guide_people.rviz" if="$(arg rviz)"/>

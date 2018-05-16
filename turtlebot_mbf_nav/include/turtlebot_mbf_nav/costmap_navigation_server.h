@@ -230,9 +230,6 @@ private:
   ros::Timer shutdown_costmaps_timer_;    //!< delayed shutdown timer
   ros::Duration shutdown_costmaps_delay_; //!< delayed shutdown delay
 
-  //! Stop publisher for handling the state of the actor
-  ros::Publisher actor_pub_;
-
   //! Subscribe to the follower state monitor
   ros::Subscriber monitor_sub_;
   turtlebot_guide_msgs::FollowerState follower_state_;

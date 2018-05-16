@@ -662,7 +662,8 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
   geometry_msgs::PoseStamped oscillation_pose;
   ros::Time last_oscillation_reset = ros::Time::now();
 
-  bool first_cycle = true;
+//  bool first_cycle = true;
+  oscillation_pose = robot_pose_;
 
   while (active_moving_ && ros::ok())
   {
@@ -676,11 +677,14 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
       break;
     }
 
-    if (first_cycle)
-    {
-      // init oscillation pose
-      oscillation_pose = robot_pose_;
-    }
+    //! TODO: need to revise
+    moving_ptr_->setFollowerState(follower_state_.state);
+
+//    if (first_cycle)
+//    {
+//      // init oscillation pose
+//      oscillation_pose = robot_pose_;
+//    }
 
     // check preempt requested
     if (action_server_exe_path_ptr_->isPreemptRequested())
@@ -829,7 +833,7 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
       condition_.wait_for(lock, boost::chrono::milliseconds(500));
     }
 
-    first_cycle = false;
+//    first_cycle = false;
   }  // while (active_moving_ && ros::ok())
 
   if (!active_moving_)
@@ -876,7 +880,7 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
       std::stringstream ss;
       ss << "No recovery behavior with the name \"" << *iter << "\" loaded! ";
       ROS_ERROR_STREAM_NAMED(name_action_move_base, ss.str() << " Please load the behaviors before using them!");
-      move_base_result.outcome = mbf_msgs::MoveBaseResult::INVALID_PLUGIN;
+      move_base_result.outcome = mbf_msgs::RecoveryResult::INVALID_NAME;
       move_base_result.message = ss.str();
       action_server_move_base_ptr_->setAborted(move_base_result, ss.str());
       return;
@@ -965,22 +969,28 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   {
     bool try_recovery = false;
 
+//    ROS_INFO_STREAM("pose: " <<follower_state_.pose.x << " " << follower_state_.pose.y << " " << follower_state_.pose.theta);
+//    ROS_INFO_STREAM("vel: " << follower_state_.vel.x << " " << follower_state_.vel.y << " " << follower_state_.vel.theta);
+
     /// make reaction based on the follower state
-    switch(follower_state_.state)
-    {
-      case turtlebot_guide_msgs::FollowerState::FOLLOWING:
-        // keep adapting to the follower
-        break;
-      case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
-        // follower goes deviate from path, the robot need to start to follow
-        break;
-      case turtlebot_guide_msgs::FollowerState::STOPPED:
-        // robot stop
-        break;
-      case turtlebot_guide_msgs::FollowerState::UNKNOWN:
-        // the robot needs to find out where the follower is
-        break;
-    }
+//    switch(follower_state_.state)
+//    {
+//      case turtlebot_guide_msgs::FollowerState::FOLLOWING:
+//        // keep adapting to the follower
+//        ROS_INFO("following");
+//        break;
+//      case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
+//        // follower goes deviate from path, the robot need to start to follow3
+//        ROS_INFO("not following");
+//        break;
+//      case turtlebot_guide_msgs::FollowerState::STOPPED:
+//        // robot stops, publish zero velocity until the follower start to move again
+//        ROS_INFO("stop detected");
+//        break;
+//      case turtlebot_guide_msgs::FollowerState::UNKNOWN:
+//        // the robot needs to find out where the follower is
+//        break;
+//    }
 
     switch (state)
     {
