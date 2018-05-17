@@ -18,7 +18,7 @@
 namespace turtlebot_guide
 {
 
-const double AVERAGE_POSITION_VARIANCE = pow(0.17 /* stddev in meters */, 2);
+const double AVERAGE_POSITION_VARIANCE = 0.05; //pow(0.17 /* stddev in meters */, 2)
 const double INFINITE_VARIANCE = std::numeric_limits<double>::infinity();
 
 class PCLPeopleDetectionROS

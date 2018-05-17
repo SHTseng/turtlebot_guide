@@ -1,0 +1,19 @@
+<!-- Fuses front and rear laser by simple aggregation. -->
+<launch>
+    <group ns="/spencer/perception_internal/detected_person_association">
+        <!-- Fuse result with groundHOG, which has unreliable depth estimates, thus we should fuse in polar space -->
+        <node name="fuse_lasers_ground_hog" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/PolarNNFuserNodelet detected_person_association_nodelet_manager" output="screen">
+            <param name="detection_id_increment" value="20"/>
+            <param name="detection_id_offset" value="12"/>
+            <param name="fused_radial_weight_for_topic1" value="0.3"/>
+            <param name="fused_radial_weight_for_topic2" value="0.7"/> <!-- 0.05 0.95 -->
+            <rosparam param="input_topics">
+                - composite/lasers_aggregated
+                - composite/rgbd_ground_hog_aggregated
+            </rosparam>
+            <remap from="output" to="composite/lasers_ground_hog_fused"/>
+        </node>
+
+    </group>
+
+</launch>

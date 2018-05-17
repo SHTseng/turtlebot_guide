@@ -1,0 +1,21 @@
+<launch>
+    <!-- Launch file arguments -->
+    <arg name="rgbd" default="false"/>
+
+    <!-- Aggregate detections from all detectors -->
+    <include file="$(find turtlebot_follower_tracker)/launch/aggregate_all.launch">
+        <arg name="rgbd" value="$(arg rgbd)"/>
+    </include>
+
+    <!-- If RGB-D is enabled, fuse lasers and RGB-D -->
+    <include file="$(find turtlebot_follower_tracker)/launch/fuse_lasers_and_rgbd.launch" if="$(arg rgbd)"/>
+    
+    <!-- Re-publish final composite detections as normal detections, for processing by the tracker-->
+    <group ns="/spencer/perception_internal/detected_person_association">
+        <!-- Final primary detection composites will be on this topic -->
+        <arg name="final_composite_topic" value="composite/lasers_ground_hog_fused" if="$(arg rgbd)"/>
+        <!-- Primary detections -->
+        <node name="relay_final_composite_detections" type="relay" pkg="topic_tools" args="$(arg final_composite_topic) /spencer/perception/detected_persons_composite"/>
+        <node name="convert_final_composite_detections_to_detections" type="composite_detections_to_detections.py" pkg="spencer_detected_person_association"/>
+    </group>
+</launch>
