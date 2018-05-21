@@ -20,11 +20,14 @@
         <scale>1.000000</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
-      <!-- libgazebo_ros_robot_follow_actor -->
-      <plugin name="actor_plugin" filename="libgazebo_ros_temporary_stop_actor.so">
+      <!-- libgazebo_ros_robot_follow_actor libgazebo_ros_temporary_stop_actor -->
+      <plugin name="actor_plugin" filename="libgazebo_ros_deviate_path_actor.so">
         <vel_topic>/cmd_vel_mux/input/navi</vel_topic>
         <velocity>0.4</velocity>
         <oscillation_enable>false</oscillation_enable>
+        <time_of_deviation>8.0</time_of_deviation>
+        <deviation_duration>4.0</deviation_duration>
+        <deviate_angle>1.57</deviate_angle>
       </plugin>
     </actor>
      

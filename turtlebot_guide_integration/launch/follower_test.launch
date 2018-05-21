@@ -7,7 +7,7 @@
   <arg name="origin_yaw" default="0"/>
   
   <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
-  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/script_actor.world"/>
+  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/simple_actor.world"/>
   
   <!-- Gazebo simulation environment -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -22,30 +22,6 @@
     <arg name="init_y" value="$(arg origin_y)" />
     <arg name="init_yaw" value="$(arg origin_yaw)" />
   </include>
-  
-  <!-- People detection -->
-  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager"/>
-  <include file="$(find turtlebot_follower_tracker)/launch/people_detection_nodelet.launch">
-    <arg name="input" value="/camera/depth/points" />
-    <arg name="output" value="/turtlebot_people_detection/detected_persons" />
-    <arg name="nodelet_manager" value="depthimage_nodelet_manager" />
-  </include>
-  
-  <arg name="config_file" default="tb.yaml"/>
-  <arg name="detection_id_increment" default="20"/>
-  <arg name="detection_id_offset_front" default="1"/>
-  <arg name="detection_id_offset_rear" default="2"/>
-  <arg name="node_prefix" default="laser"/>
-  <group ns="/spencer/perception_internal/people_detection">
-    <include file="$(find spencer_leg_detector_wrapper)/launch/leg_detector.launch">
-        <arg name="scan" value="/scan"/>
-        <arg name="node_prefix" value="$(arg node_prefix)_front"/>
-        <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/$(arg node_prefix)_front"/>
-        <arg name="detection_id_increment" value="$(arg detection_id_increment)"/>
-        <arg name="detection_id_offset" value="$(arg detection_id_offset_front)"/>
-        <arg name="config_file" value="$(arg config_file)"/>
-    </include>
-  </group>
   
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">

@@ -660,7 +660,7 @@ Visualization Manager:
       Color: 130; 130; 130
       Color map offset: 0
       Color transform: Vintage
-      Enabled: true
+      Enabled: false
       Excluded person IDs: ""
       Font color: 0; 0; 0
       Font color style: Constant color
@@ -681,7 +681,39 @@ Visualization Manager:
         Scaling factor: 1
         Value: Bounding boxes
       Text spacing: 1
-      Topic: /turtlebot_people_detection/detected_persons
+      Topic: /spencer/perception_internal/detected_persons/rgbd/hog
+      Unreliable: false
+      Value: false
+      Z offset:
+        Use Z position from message: false
+        Value: 0
+    - Alpha: 1
+      Class: spencer_tracking_rviz_plugin/DetectedPersons
+      Color: 130; 130; 130
+      Color map offset: 0
+      Color transform: Rainbow + B/W
+      Enabled: true
+      Excluded person IDs: ""
+      Font color: 255; 255; 255
+      Font color style: Same color
+      Font scale: 2
+      Included person IDs: ""
+      Low-confidence alpha: 0.5
+      Low-confidence threshold: 0.5
+      Name: DetectedPersons
+      Render confidences: false
+      Render covariances:
+        Line width: 0.100000001
+        Value: true
+      Render detection IDs: true
+      Render modality text: false
+      Render orientation arrows: true
+      Style:
+        Line width: 0.0500000007
+        Scaling factor: 1
+        Value: Bounding boxes
+      Text spacing: 1
+      Topic: /spencer/perception/detected_persons
       Unreliable: false
       Value: true
       Z offset:
@@ -693,7 +725,7 @@ Visualization Manager:
       Color map offset: 0
       Color transform: Constant color
       Delete after no. cycles: 100
-      Enabled: false
+      Enabled: true
       Excluded person IDs: ""
       Font color: 255; 255; 255
       Font color style: Same color
@@ -726,7 +758,7 @@ Visualization Manager:
         Value: Bounding boxes
       Topic: /spencer/perception/tracked_persons
       Unreliable: false
-      Value: false
+      Value: true
       Z offset:
         Use Z position from message: false
         Value: 0
@@ -755,7 +787,7 @@ Visualization Manager:
       Marker Topic: /follower_state_marker
       Name: Marker
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -779,25 +811,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.6936665
+      Distance: 12.4377422
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.606921375
-        Y: 0.0175318271
-        Z: 1.90423238
+        X: 0.211112425
+        Y: 0.259450793
+        Z: 0.606569767
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.684796035
+      Pitch: 0.599796176
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 3.93819928
+      Yaw: 5.96821642
     Saved: ~
 Window Geometry:
   Displays:

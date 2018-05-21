@@ -33,6 +33,7 @@ public:
 
     std::vector<double> following_range;
     private_nh.param("following_range", following_range, std::vector<double>());
+    private_nh.param("foward_prediction_time", foward_prediction_time_, 1.0);
 
     for(std::size_t i = 0; i < following_range.size(); i+=2)
     {
@@ -144,10 +145,27 @@ private:
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
 
     // make sure the follower is inside the polygon and the direction of vel is point to the robot
-    if (insidePolygon(following_polygon_, transformed_pose))
+    if (insidePolygon(following_polygon_, transformed_pose) && predictInsidePolygon(following_polygon_, transformed_pose, 1.0))
+    {
       return true;
+    }
     else
       return false;
+  }
+
+  //! TODO: check the correct frame transform
+  bool predictInsidePolygon(std::vector<geometry_msgs::Point> polygon, geometry_msgs::Point p, const double prediection_time)
+  {
+    for (auto vertices : polygon)
+    {
+      vertices.x += odom_.twist.twist.linear.x*prediection_time;
+      vertices.y += odom_.twist.twist.linear.x*prediection_time;
+    }
+
+    p.x += follower_vel_.linear.x*prediection_time;
+    p.y += follower_vel_.linear.y*prediection_time;
+
+    return insidePolygon(polygon, p);
   }
 
   bool insidePolygon(const std::vector<geometry_msgs::Point> &polygon, const geometry_msgs::Point &p)
@@ -204,6 +222,8 @@ private:
   geometry_msgs::Pose follower_pose_;
   geometry_msgs::Pose prev_follower_pose_;
   geometry_msgs::Twist follower_vel_;
+
+  double foward_prediction_time_;
 
   std::vector<geometry_msgs::Point> following_polygon_;
   std::vector<geometry_msgs::Point> camera_polygon_;

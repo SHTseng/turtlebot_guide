@@ -163,11 +163,24 @@ void CostmapControllerExecution::run()
         // call plugin to compute the next velocity command
         geometry_msgs::TwistStamped cmd_vel_stamped;
         geometry_msgs::TwistStamped robot_velocity;   // TODO pass current velocity to the plugin!
-        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+        switch (follower_state_)
+        {
+          case 0:
+            // Follower is following, than call local planner
+            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+            break;
+          case 1:
+            // Follower not following, switch to robot follow follower
+            break;
+          case 2:
+            // Follower stops, publish zero velocity'
+            publishZeroVelocity();
+            break;
+          case 3:
+            // Does not know the state of the follower, no idea
+            break;
 
-        // call plugin to compute the next velocity command
-//        geometry_msgs::TwistStamped cmd_vel_stamped;
-//        outcome_ = computeVelocityCmd(cmd_vel_stamped, message_);
+        }
 
         if (outcome_ < 10)
         {
@@ -175,8 +188,6 @@ void CostmapControllerExecution::run()
           cmd_vel_stamped.header.seq = seq++;
           setVelocityCmd(cmd_vel_stamped);
           setState(GOT_LOCAL_CMD);
-
-//          vel_pub_.publish(cmd_vel_stamped.twist);+
 
           //! TODO: need to revise
           if (follower_state_ == 2)
