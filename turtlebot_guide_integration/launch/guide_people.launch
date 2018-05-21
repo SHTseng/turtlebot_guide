@@ -2,8 +2,9 @@
   <arg name="gui" default="false"/>
   <arg name="rviz" default="true"/>
   <arg name="visual" default="false"/>
+  <arg name="actor_mode" default="2"/>
   <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/willow_v2.yaml"/>
-  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/willowgarage_people.world"/>
+  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/actor$(arg actor_mode).world"/>
   
   <arg name="origin_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="origin_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->
@@ -34,25 +35,18 @@
     <arg name="nodelet_manager" value="depthimage_nodelet_manager" />
   </include>
   
-  <arg name="config_file" default="tb.yaml"/>
-  <arg name="detection_id_increment" default="20"/>
-  <arg name="detection_id_offset_front" default="1"/>
-  <arg name="node_prefix" default="laser"/>
-  <group ns="/spencer/perception_internal/people_detection">
-    <include file="$(find spencer_leg_detector_wrapper)/launch/leg_detector.launch">
-        <arg name="scan" value="/scan"/>
-        <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/laser"/>
-        <arg name="detection_id_increment" value="$(arg detection_id_increment)"/>
-        <arg name="detection_id_offset" value="$(arg detection_id_offset_front)"/>
-        <arg name="config_file" value="$(arg config_file)"/>
-    </include>
-  </group>
-  
   <!-- People tracking -->
-  <include file="$(find turtlebot_follower_tracker)/launch/freiburg_people_tracking.launch">
+  <!-- <include file="$(find turtlebot_follower_tracker)/launch/freiburg_people_tracking.launch">
     <arg name="rgbd" default="true"/>
     <arg name="laser_low_confidence_detections" default="false"/>
-    <arg name="fuse_detections" default="true"/>
+    <arg name="fuse_detections" default="false"/>
+    <arg name="static_map_filter" default="false"/>
+  </include> -->
+  
+  <include file="$(find spencer_people_tracking_launch)/launch/tracking/freiburg_people_tracking.launch">
+    <arg name="rgbd" default="true"/>
+    <arg name="laser_low_confidence_detections" default="false"/>
+    <arg name="fuse_detections" default="false"/>
     <arg name="static_map_filter" default="false"/>
   </include>
   

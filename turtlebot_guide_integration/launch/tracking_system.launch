@@ -30,7 +30,7 @@
     <arg name="nodelet_manager" value="depthimage_nodelet_manager" />
   </include>
   
-  <arg name="config_file" default="tb.yaml"/>
+  <arg name="config_file" default="spencer2.yaml"/>
   <arg name="detection_id_increment" default="20"/>
   <arg name="detection_id_offset_front" default="1"/>
   <arg name="node_prefix" default="laser"/>

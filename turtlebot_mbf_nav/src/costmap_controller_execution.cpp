@@ -175,6 +175,13 @@ void CostmapControllerExecution::run()
           case 2:
             // Follower stops, publish zero velocity'
             publishZeroVelocity();
+            cmd_vel_stamped.twist.linear.x = 0;
+            cmd_vel_stamped.twist.linear.y = 0;
+            cmd_vel_stamped.twist.linear.z = 0;
+            cmd_vel_stamped.twist.angular.x = 0;
+            cmd_vel_stamped.twist.angular.y = 0;
+            cmd_vel_stamped.twist.angular.z = 0;
+            outcome_ = 0;
             break;
           case 3:
             // Does not know the state of the follower, no idea
@@ -188,14 +195,7 @@ void CostmapControllerExecution::run()
           cmd_vel_stamped.header.seq = seq++;
           setVelocityCmd(cmd_vel_stamped);
           setState(GOT_LOCAL_CMD);
-
-          //! TODO: need to revise
-          if (follower_state_ == 2)
-            publishZeroVelocity();
-          else
-            vel_pub_.publish(cmd_vel_stamped.twist);
-          //! TODO: need to revise
-
+          vel_pub_.publish(cmd_vel_stamped.twist);
           condition_.notify_all();
           retries = 0;
         }

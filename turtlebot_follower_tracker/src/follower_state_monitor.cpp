@@ -145,6 +145,7 @@ private:
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
 
     // make sure the follower is inside the polygon and the direction of vel is point to the robot
+//    if (insidePolygon(following_polygon_, transformed_pose))
     if (insidePolygon(following_polygon_, transformed_pose) && predictInsidePolygon(following_polygon_, transformed_pose, 1.0))
     {
       return true;

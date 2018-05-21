@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://willowgarage</uri>
+    </include>
+    
+    <light type="point" name="point">
+      <pose>22 17 3 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>.1 .1 .1 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.2</linear>
+        <constant>0.8</constant>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    
+    <actor name="follower">
+      <pose>24 17.0 0.98 1.57 0 -1.57</pose> <!-- 1.57 0 -1.57 -->
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <plugin name="actor_path_follow_plugin" filename="libgazebo_ros_temporary_stop_actor.so">
+        <vel_topic>/cmd_vel_mux/input/navi</vel_topic>
+        <velocity>0.4</velocity>
+        <oscillation_enable>false</oscillation_enable>
+        <time_of_stop>8.0</time_of_stop>
+        <stop_duration>5.0</stop_duration>
+      </plugin>
+    </actor>
+     
+  </world>
+</sdf>

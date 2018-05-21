@@ -637,7 +637,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -654,13 +654,13 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Class: spencer_tracking_rviz_plugin/DetectedPersons
       Color: 130; 130; 130
       Color map offset: 0
       Color transform: Vintage
-      Enabled: false
+      Enabled: true
       Excluded person IDs: ""
       Font color: 0; 0; 0
       Font color style: Constant color
@@ -683,7 +683,7 @@ Visualization Manager:
       Text spacing: 1
       Topic: /spencer/perception_internal/detected_persons/rgbd/hog
       Unreliable: false
-      Value: false
+      Value: true
       Z offset:
         Use Z position from message: false
         Value: 0
@@ -692,7 +692,7 @@ Visualization Manager:
       Color: 130; 130; 130
       Color map offset: 0
       Color transform: Rainbow + B/W
-      Enabled: true
+      Enabled: false
       Excluded person IDs: ""
       Font color: 255; 255; 255
       Font color style: Same color
@@ -713,9 +713,9 @@ Visualization Manager:
         Scaling factor: 1
         Value: Bounding boxes
       Text spacing: 1
-      Topic: /spencer/perception/detected_persons
+      Topic: /spencer/perception_internal/detected_persons/rgbd/hog
       Unreliable: false
-      Value: true
+      Value: false
       Z offset:
         Use Z position from message: false
         Value: 0
@@ -779,7 +779,7 @@ Visualization Manager:
       Marker Topic: /move_base_flex/planner/turning_points
       Name: MarkerArray
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -787,7 +787,7 @@ Visualization Manager:
       Marker Topic: /follower_state_marker
       Name: Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
   Enabled: true
@@ -811,7 +811,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 12.4377422
+      Distance: 15.6019039
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -826,10 +826,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.599796176
+      Pitch: 0.80479598
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 5.96821642
+      Yaw: 3.57821298
     Saved: ~
 Window Geometry:
   Displays:
