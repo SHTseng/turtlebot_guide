@@ -53,8 +53,6 @@ private:
   std::vector<geometry_msgs::PoseStamped> getTurningPoints();
   
   int nearestTurningPoint(const geometry_msgs::PoseStamped& robot_pose, const std::vector<geometry_msgs::PoseStamped>& points);
-
-  // std::vector<geometry_msgs::PoseStamped> turning_points_;
   
   /**
    * @brief Loads the plugin associated with the given controller type parameter

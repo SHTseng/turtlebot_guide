@@ -678,7 +678,7 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
     }
 
     //! TODO: need to revise
-    moving_ptr_->setFollowerState(follower_state_.state);
+    moving_ptr_->setFollowerState(follower_state_.state, follower_state_.pose);
 
 //    if (first_cycle)
 //    {
@@ -973,24 +973,24 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
 //    ROS_INFO_STREAM("vel: " << follower_state_.vel.x << " " << follower_state_.vel.y << " " << follower_state_.vel.theta);
 
     /// make reaction based on the follower state
-    switch(follower_state_.state)
-    {
-      case turtlebot_guide_msgs::FollowerState::FOLLOWING:
-        // keep adapting to the follower
-        ROS_INFO("following");
-        break;
-      case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
-        // follower goes deviate from path, the robot need to start to follow3
-        ROS_INFO("not following");
-        break;
-      case turtlebot_guide_msgs::FollowerState::STOPPED:
-        // robot stops, publish zero velocity until the follower start to move again
-        ROS_INFO("stop detected");
-        break;
-      case turtlebot_guide_msgs::FollowerState::UNKNOWN:
-        // the robot needs to find out where the follower is
-        break;
-    }
+//    switch(follower_state_.state)
+//    {
+//      case turtlebot_guide_msgs::FollowerState::FOLLOWING:
+//        // keep adapting to the follower
+//        ROS_INFO("following");
+//        break;
+//      case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
+//        // follower goes deviate from path, the robot need to start to follow3
+//        ROS_INFO("not following");
+//        break;
+//      case turtlebot_guide_msgs::FollowerState::STOPPED:
+//        // robot stops, publish zero velocity until the follower start to move again
+//        ROS_INFO("stop detected");
+//        break;
+//      case turtlebot_guide_msgs::FollowerState::UNKNOWN:
+//        // the robot needs to find out where the follower is
+//        break;
+//    }
 
     switch (state)
     {

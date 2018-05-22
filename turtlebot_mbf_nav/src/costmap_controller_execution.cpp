@@ -98,6 +98,9 @@ void CostmapControllerExecution::run()
     ROS_ERROR("robot navigation moving has no plan!");
   }
 
+  // obtain turning point from global planner
+  turning_points = getTurningPoints();
+
   int retries = 0;
   int seq = 0;
   follower_state_ = 0;
@@ -151,9 +154,8 @@ void CostmapControllerExecution::run()
       {
         setState(PLANNING);
         
-        // obtain turning point from global planner
-        turning_points = getTurningPoints();
-        nearest_turning_pt_index = nearestTurningPoint(robot_pose_, turning_points);
+        // check
+//        nearest_turning_pt_index = nearestTurningPoint(robot_pose_, turning_points);
 
         // save time and call the plugin
         lct_mtx_.lock();
@@ -170,10 +172,21 @@ void CostmapControllerExecution::run()
             outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
             break;
           case 1:
+          {
             // Follower not following, switch to robot follow follower
+            // find the direction vector pointing to the follower
+            // (follower_p - robot_p).Normalize()
+            double dx = follower_pose_.x - robot_pose_.pose.position.x;
+            double dy = follower_pose_.y - robot_pose_.pose.position.y;
+            double norm = std::hypot(dx, dy);
+
+            cmd_vel_stamped.twist.linear.x = 0;
+            cmd_vel_stamped.twist.angular.z = 0;
+            outcome_ = 0;
             break;
+          }
           case 2:
-            // Follower stops, publish zero velocity'
+            // Follower stops, publish zero velocity
             publishZeroVelocity();
             cmd_vel_stamped.twist.linear.x = 0;
             cmd_vel_stamped.twist.linear.y = 0;
@@ -281,11 +294,6 @@ std::vector<geometry_msgs::PoseStamped> CostmapControllerExecution::getTurningPo
   boost::lock_guard<boost::mutex> guard(plan_mtx_);
   return turning_points_;
 }
-
-// void CostmapControllerExecution::setTurningPoints(const std::vector<geometry_msgs::PoseStamped>& points)
-// {
-//   turning_points_ = points;
-// }
 
 uint32_t CostmapControllerExecution::computeVelocityCmd(const geometry_msgs::PoseStamped& robot_pose,
                                                         const geometry_msgs::TwistStamped& robot_velocity,
