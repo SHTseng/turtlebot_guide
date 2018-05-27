@@ -80,12 +80,12 @@ void PCLPeopleDetectionROS::depthCB(const sensor_msgs::PointCloud2ConstPtr& dept
 void PCLPeopleDetectionROS::connectCB(const ros::SingleSubscriberPublisher &pub)
 {
   boost::mutex::scoped_lock lock(connect_mutex_);
-  try{
+  /*try{
       tf_listener_.waitForTransform("base_link", "camera_depth_frame", ros::Time(0), ros::Duration(10.0));
   }
   catch(tf::TransformException ex){
       ROS_ERROR("%s",ex.what());
-  }
+  }*/
 
   if (!sub_ && person_pub_.getNumSubscribers() > 0)
   {

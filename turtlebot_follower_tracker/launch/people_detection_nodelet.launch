@@ -7,5 +7,6 @@
         args="load turtlebot_guide/FollowerTrackerNodelet $(arg nodelet_manager)">
     <remap from="input" to="$(arg input)" />
     <remap from="output" to="$(arg output)" />
+    <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
   </node>
 </launch>

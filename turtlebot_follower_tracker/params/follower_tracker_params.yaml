@@ -1,2 +1,2 @@
-camera_height: 0.887
+camera_height: 0.8152 #0.805 0.887 for rosbag file
 following_range: [-0.7414, 0.2944, -3.64, 1.994, -3.61, -2.084, -0.7414, -0.3044]

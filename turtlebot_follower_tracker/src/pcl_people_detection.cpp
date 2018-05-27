@@ -29,7 +29,8 @@ void PCLPeopleDetection::initialize()
   people_detector_.setSamplingFactor(1);
 
   Eigen::Matrix3f rgb_intrinsics_matrix;
-  rgb_intrinsics_matrix << 525, 0.0, 319.5, 0.0, 525, 239.5, 0.0, 0.0, 1.0;
+  //rgb_intrinsics_matrix << 525, 0.0, 319.5, 0.0, 525, 239.5, 0.0, 0.0, 1.0;
+  rgb_intrinsics_matrix << 526.60717328, 0.00000000, 318.52510740, 0.00000000, 526.60717328, 241.18145973, 0.00000000, 0.00000000, 1.00000000;
   people_detector_.setIntrinsics(rgb_intrinsics_matrix);
 
   // Get ground plane from parameters
@@ -67,6 +68,7 @@ bool PCLPeopleDetection::compute()
   P_Clusters clustersWithinConfidenceBounds;
   for (P_Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
     float confidence = it->getPersonConfidence();
+    ROS_INFO_STREAM(confidence);
     if (confidence > min_confidence_){             // draw only people with confidence above a threshold
       clustersWithinConfidenceBounds.push_back(*it);
     }
@@ -79,7 +81,7 @@ bool PCLPeopleDetection::compute()
     return true;
   }
   else{
-//    ROS_INFO("Does not detect people in the scene");
+    //ROS_INFO("Does not detect people in the scene");
     return false;
   }
 }
