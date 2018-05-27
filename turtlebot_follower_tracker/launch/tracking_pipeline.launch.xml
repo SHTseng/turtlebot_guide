@@ -1,0 +1,84 @@
+<launch>
+  <arg name="subscriber_queue_size" default="5"/>
+  <arg name="static_map_filter" default="false" />
+  <arg name="occlusion_geodesics" default="false"/>
+  <arg name="laser_low_confidence_detections" default="true"/>
+
+  <!-- Aggregate  -->
+  <!-- Nodelet manager for all detected person association-related nodelets -->
+  <group ns="/spencer/perception_internal/detected_person_association">
+      <node name="detected_person_association_nodelet_manager" pkg="nodelet" type="nodelet" args="manager" output="screen" required="true"/>
+  </group>
+  
+  <arg name="common_frame_id" default="base_footprint"/>
+  <group ns="/spencer/perception_internal/detected_person_association">
+      <!-- Convert DetectedPersons topics into CompositeDetectedPersons, and transform poses into common coordinate frame -->
+      <node name="convert_to_composite_laser" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/ConvertToCompositeDetectionsNodelet detected_person_association_nodelet_manager">
+          <remap from="input" to="/spencer/perception_internal/detected_persons/laser"/>
+          <remap from="output" to="composite/lasers_aggregated"/>
+          <param name="common_frame_id" value="$(arg common_frame_id)"/>
+      </node>
+  </group>
+  
+  <group ns="/spencer/perception_internal/detected_person_association">
+    <!-- Convert DetectedPersons topics into CompositeDetectedPersons, and transform poses into common coordinate frame -->
+    <node name="convert_to_composite_rgbd_upper_body" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/ConvertToCompositeDetectionsNodelet detected_person_association_nodelet_manager">
+        <remap from="input" to="/spencer/perception_internal/detected_persons/upper_body"/>
+        <remap from="output" to="composite/rgbd_upper_body_aggregated"/>
+        <param name="common_frame_id" value="$(arg common_frame_id)"/>
+    </node>
+</group>
+  
+  <!-- Detector data fusion -->
+  <group ns="/spencer/perception_internal/detected_person_association">
+    <!-- Fuse result with groundHOG, which has unreliable depth estimates, thus we should fuse in polar space -->
+    <node name="fuse_lasers_upper_body" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/EuclideanNNFuserNodelet detected_person_association_nodelet_manager">
+      <param name="detection_id_increment" value="20"/>
+      <param name="detection_id_offset" value="12"/>
+      <!--<param name="fused_radial_weight_for_topic1" value="0.1"/>
+      <param name="fused_radial_weight_for_topic2" value="0.9"/> --> <!-- 0.05 0.95 -->
+      <rosparam param="input_topics">
+          - composite/lasers_aggregated
+          - composite/rgbd_upper_body_aggregated
+      </rosparam>
+      <remap from="output" to="composite/lasers_upper_body_fused"/>
+    </node>
+  </group>
+  
+  <!-- Re-publish final composite detections as normal detections, for processing by the tracker-->
+  <group ns="/spencer/perception_internal/detected_person_association">
+      <!-- Final primary detection composites will be on this topic -->
+      <arg name="final_composite_topic" value="composite/lasers_upper_body_fused"/>
+      <!-- Primary detections -->
+      <node name="relay_final_composite_detections" type="relay" pkg="topic_tools" args="$(arg final_composite_topic) /spencer/perception/detected_persons_composite"/>
+      <node name="convert_final_composite_detections_to_detections" type="composite_detections_to_detections.py" pkg="spencer_detected_person_association"/>
+  </group>
+
+  <!-- Filter detections by static map -->
+  <group ns="/spencer/perception_internal/people_detection" if="$(arg static_map_filter)">
+    <!-- Normal detections -->
+    <node name="filter_detections_by_static_map" pkg="spencer_tracking_utils" type="filter_detections_by_static_map" output="screen">
+      <remap from="input_detections" to="/spencer/perception/detected_persons_unfiltered"/>
+      <remap from="output_detections" to="/spencer/perception/detected_persons"/>
+      <rosparam param="modalities_to_always_passthrough">[rgbd]</rosparam>  <!-- only filter out laser and monocular vision, as RGB-D does not have many false positives -->
+    </node>
+  </group>
+  
+  <!-- People tracker -->
+  <group ns="/spencer/perception_internal/people_tracking">
+    <include file="$(find srl_nearest_neighbor_tracker)/launch/nnt.launch">
+      <arg name="subscriber_queue_size" value="$(arg subscriber_queue_size)"/>
+      <arg name="use_imm" value="true"/>
+      <arg name="occlusion_param_file" value="occlusion_geodesics_manager_dynamic.yaml" if="$(arg occlusion_geodesics)"/> <!-- NOTE: Only uses front laser!!! -->
+      <arg name="use_laser_shade_occlusion_manager" value="true" if="$(arg occlusion_geodesics)"/>
+      <!--!!!!!!!!!!!!!!!!!!!!-->
+      <!--<remap from="/spencer/perception/detected_persons" to="/spencer/perception_internal/detected_person_association/composite/lasers_upper_body_fused" /> -->
+    </include>
+
+    <rosparam param="srl_nearest_neighbor_tracker/additional_low_confidence_detections" if="$(arg laser_low_confidence_detections)">/spencer/perception_internal/detected_person_association/lasers_high_recall_aggregated</rosparam>
+    <rosparam param="srl_nearest_neighbor_tracker/additional_low_confidence_detections" unless="$(arg laser_low_confidence_detections)"></rosparam>
+  </group>
+
+  <!-- Filter tracks that are output by people tracker (e.g. visually confirmed tracks, moving tracks etc. on separate topics) -->
+  <!--<include file="$(find turtlebot_follower_tracker)/launch/filter_tracks.launch"/> -->
+</launch>

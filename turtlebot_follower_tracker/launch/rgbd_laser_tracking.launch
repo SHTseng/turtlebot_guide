@@ -1,0 +1,35 @@
+<launch>
+  <arg name="ground_plane" default="/spencer/sensors/rgbd_front_top/ground_plane"/>
+  
+  <group ns="/spencer/perception_internal/people_detection">
+    <!-- RWTH tf based groundplane -->
+    <node pkg="rwth_ground_plane" type="ground_plane_tf_based_fixed" name="ground_plane_front_top" output="screen">
+      <param name="base_footprint" value="base_footprint" type="string"/>
+      <param name="camera_frame" value="camera_depth_optical_frame" type="string"/>
+      <param name="ground_plane" value="$(arg ground_plane)" type="string"/>
+      <param name="rate" value="30.0"/>
+    </node>
+  </group>
+  
+  <!-- RGBD upper body detector -->
+  <include file="$(find turtlebot_follower_tracker)/launch/upper_body_detector.launch.xml">
+    <arg name="camera_namespace" default="/camera" />
+    <arg name="depth_image" value="/depth/image_raw" />
+    <arg name="rgb_image" value="/rgb/image_raw" />
+    <arg name="camera_info_depth" value="/depth/camera_info" />
+    <arg name="ground_plane" value="$(arg ground_plane)" />
+    <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/upper_body" />
+  </include>
+  
+  <!-- Laser scan leg detector -->
+  <include file="$(find turtlebot_follower_tracker)/launch/laser_leg_detector.launch.xml">
+    <arg name="topic_scan" default="/depth/scan" />
+    <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/laser" />
+  </include>
+  
+  <!-- Data fusioon and tracking pipeline -->
+  <include file="$(find turtlebot_follower_tracker)/launch/tracking_pipeline.launch.xml">
+  
+  </include>
+  
+</launch>

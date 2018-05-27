@@ -1,0 +1,32 @@
+<launch>  
+  <arg name="gui" value="false"/>
+  
+  <arg name="origin_x" value="0"/> 
+  <arg name="origin_y" value="0"/>
+  <arg name="origin_yaw" value="0"/>
+  
+  <arg name="map_file" value="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
+  <arg name="world_name" value="$(find turtlebot_guide_integration)/worlds/script_actor.world"/>
+  
+  <!-- Gazebo simulation environment -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/> 
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include> 
+
+  <!-- Spawn turtlebot guide model -->
+  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+    <arg name="init_x" value="$(arg origin_x)" />
+    <arg name="init_y" value="$(arg origin_y)" />
+    <arg name="init_yaw" value="$(arg origin_yaw)" />
+  </include>
+ 
+  <!-- Tracking system --> 
+  <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
+  </include>
+  
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/tracking_system.rviz"/>
+    
+ </launch>

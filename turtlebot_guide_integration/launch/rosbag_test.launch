@@ -1,0 +1,51 @@
+<launch>
+
+  <arg name="origin_x" default="0"/> 
+  <arg name="origin_y" default="0"/>
+  <arg name="origin_yaw" default="0"/>.
+  
+  <param name="use_sim_time" value="true"/>
+ 
+  <!-- Spawn turtlebot guide model -->
+  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+    <arg name="init_x" value="$(arg origin_x)" />
+    <arg name="init_y" value="$(arg origin_y)" />
+    <arg name="init_yaw" value="$(arg origin_yaw)" />
+  </include>
+  
+  <!-- People detection -->
+  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager" output="screen"/>
+  <include file="$(find turtlebot_follower_tracker)/launch/people_detection_nodelet.launch">
+    <arg name="input" value="/voxel_grid/output" />
+    <arg name="output" value="/spencer/perception_internal/detected_persons/rgbd/hog" />
+    <arg name="nodelet_manager" value="depthimage_nodelet_manager" />
+  </include>
+  
+  <!--<arg name="config_file" default="spencer2.yaml"/>
+  <arg name="detection_id_increment" default="20"/>
+  <arg name="detection_id_offset_front" default="1"/>
+  <arg name="node_prefix" default="laser"/>
+  <group ns="/spencer/perception_internal/people_detection">
+    <include file="$(find spencer_leg_detector_wrapper)/launch/leg_detector.launch">
+        <arg name="scan" value="/scan"/>
+        <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/laser"/>
+        <arg name="detection_id_increment" value="$(arg detection_id_increment)"/>
+        <arg name="detection_id_offset" value="$(arg detection_id_offset_front)"/>
+        <arg name="config_file" value="$(arg config_file)"/>
+    </include>
+  </group> -->
+  
+  <!-- People tracking -->
+  <!-- <include file="$(find turtlebot_follower_tracker)/launch/freiburg_people_tracking.launch">
+    <arg name="rgbd" default="true"/>
+    <arg name="laser_low_confidence_detections" default="false"/>
+    <arg name="fuse_detections" default="true"/>
+    <arg name="static_map_filter" default="false"/>
+  </include> -->
+  
+  <node pkg="rosbag" type="play" name="player" output="screen" args="--clock --pause -l /home/shtseng/Videos/two_people.bag"/>
+  
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/tracking_system.rviz"/>
+    
+ </launch>

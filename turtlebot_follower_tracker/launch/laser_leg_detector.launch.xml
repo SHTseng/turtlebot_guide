@@ -1,0 +1,28 @@
+<launch>
+  <arg name="topic_image" default="/camera/depth/image_raw"/>
+  <arg name="topic_scan" default="/scan" />
+  <arg name="config_file" default="spencer2.yaml"/>
+  <arg name="detection_id_increment" default="1"/>
+  <arg name="detection_id_offset" default="1"/>
+  <arg name="node_prefix" default="laser"/>
+  <arg name="detected_persons" default="/detected_persons"/>
+  
+  <!-- use the point cloud generated scan instead -->
+  <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" > 
+    <remap from="image" to="/camera/depth/image_raw"/>
+    <remap from="scan" to="$(arg topic_scan)"/>
+    <param name="scan_height" value="1"/>
+    <param name="range_max" value="3.5"/>
+  </node>
+
+  <group ns="/spencer/perception_internal/people_detection">
+    <include file="$(find spencer_leg_detector_wrapper)/launch/leg_detector.launch">
+      <arg name="scan" value="$(arg topic_scan)"/>
+      <arg name="detected_persons" value="$(arg detected_persons)"/>
+      <arg name="detection_id_increment" value="$(arg detection_id_increment)"/>
+      <arg name="detection_id_offset" value="$(arg detection_id_offset)"/>
+      <arg name="config_file" value="$(arg config_file)"/>
+    </include>
+  </group> 
+  
+</launch>
