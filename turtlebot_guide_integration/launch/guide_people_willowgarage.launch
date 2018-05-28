@@ -51,7 +51,7 @@
   </include>
   
   <!-- Follower state monitor -->
-  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor" output="screen">
+  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor">
     <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
   </node> 
   

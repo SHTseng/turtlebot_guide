@@ -450,96 +450,6 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 285
-      Min Color: 0; 0; 0
-      Min Intensity: 2
-      Name: LaserScan (ir sensors)
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.0500000007
-      Style: Flat Squares
-      Topic: /ir_scan
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: LaserScan (virtual sensor)
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.0199999996
-      Style: Flat Squares
-      Topic: /virtual_sensor_scan
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: false
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: PointCloud (bumpers)
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.0399999991
-      Style: Flat Squares
-      Topic: /mobile_base/sensors/bumper_pointcloud
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: false
     - Alpha: 0.699999988
       Class: rviz/Map
       Color Scheme: map
@@ -739,7 +649,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: false
-      Enabled: true
+      Enabled: false
       Keep: 5
       Name: Odometry
       Position Tolerance: 0.100000001
@@ -755,21 +665,21 @@ Visualization Manager:
         Value: Arrow
       Topic: /guidance/odom
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /move_base/EBandPlannerROS/eband_visualization_array
       Name: EBand boubles
       Namespaces:
         {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.100000001
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.300000012
       Head Radius: 0.100000001
       Name: Pose
@@ -778,7 +688,7 @@ Visualization Manager:
       Shape: Arrow
       Topic: /move_base/current_goals
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -791,7 +701,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -808,13 +718,13 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Class: spencer_tracking_rviz_plugin/DetectedPersons
       Color: 130; 130; 130
       Color map offset: 0
       Color transform: Vintage
-      Enabled: true
+      Enabled: false
       Excluded person IDs: ""
       Font color: 0; 0; 0
       Font color style: Constant color
@@ -837,7 +747,7 @@ Visualization Manager:
       Text spacing: 1
       Topic: /spencer/perception_internal/detected_persons/rgbd/hog
       Unreliable: false
-      Value: true
+      Value: false
       Z offset:
         Use Z position from message: false
         Value: 0
@@ -919,31 +829,31 @@ Visualization Manager:
     - Alpha: 0.5
       Class: jsk_rviz_plugin/PolygonArray
       Color: 25; 255; 0
-      Enabled: true
+      Enabled: false
       Name: PolygonArray
       Topic: /turtlebot_guide/visualization
       Unreliable: false
-      Value: true
+      Value: false
       coloring: Label
       normal length: 0.100000001
       only border: false
       show normal: false
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /move_base_flex/planner/turning_points
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: /follower_state_marker
       Name: Marker
       Namespaces:
         {}
       Queue Size: 100
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -965,7 +875,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10.6322603
+      Distance: 9.33107948
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -980,10 +890,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.764795601
+      Pitch: 0.789795578
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 4.64321899
+      Yaw: 4.69322014
     Saved: ~
 Window Geometry:
   Displays:

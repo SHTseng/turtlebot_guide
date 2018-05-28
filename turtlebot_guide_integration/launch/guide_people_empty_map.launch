@@ -1,0 +1,55 @@
+<launch>  
+  <arg name="gui" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="visual" default="false"/>
+  <arg name="actor_mode" default="2"/>
+  <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
+  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/robot_following_actor.world"/>
+  
+  <arg name="origin_x" value="1.0"/>
+  <arg name="origin_y" value="0.0"/>
+  <arg name="origin_yaw" value="0.0"/>
+
+  <param name ="/use_sim_time" value="true"/>
+  
+  <!-- Gazebo simulation environment -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/> 
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include> 
+  
+  <!-- Spawn turtlebot guide model -->
+  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+    <arg name="init_x" value="$(arg origin_x)" />
+    <arg name="init_y" value="$(arg origin_y)" />
+    <arg name="init_yaw" value="$(arg origin_yaw)" />
+  </include> 
+
+  <!-- Tracking system --> 
+  <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
+  </include>
+  
+  <!-- Follower state monitor -->
+  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor" respawn="true" output="screen">
+    <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
+  </node> 
+  
+  <!-- Visualization for the experiment data -->
+  <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
+  
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+    <param name="frame_id" value="/map"/>
+  </node>
+  
+  <!-- Localization for navigation -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
+    
+  <!-- Move base flex server -->
+  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
+  
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/guide_people.rviz" if="$(arg rviz)"/>
+    
+ </launch>

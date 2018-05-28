@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
 
 #include <nav_msgs/Odometry.h>
@@ -31,10 +32,12 @@ public:
   {
     ros::NodeHandle private_nh("~");
 
-    std::vector<double> following_range;
-    private_nh.param("following_range", following_range, std::vector<double>());
+    private_nh.param<std::string>("root_link_name", root_link_name_, "base_footprint");
+    private_nh.param<std::string>("odom_name", odom_name_, "odom");
     private_nh.param("foward_prediction_time", foward_prediction_time_, 1.0);
 
+    std::vector<double> following_range;
+    private_nh.param("following_range", following_range, std::vector<double>());
     for(std::size_t i = 0; i < following_range.size(); i+=2)
     {
       geometry_msgs::Point p;
@@ -43,9 +46,20 @@ public:
       following_polygon_.push_back(p);
     }
 
+    // waiting for the odom root tf start broadcast
+    try
+    {
+      tf_listener_.waitForTransform(odom_name_, root_link_name_,  ros::Time::now(), ros::Duration(2.0));
+      ROS_INFO_STREAM("Wait for the " << odom_name_ << " and " << root_link_name_ << " start to broadcast");
+    }
+    catch (tf::TransformException ex)
+    {
+      ROS_ERROR("%s",ex.what());
+    }
+
     monitor_thread_ = new boost::thread(boost::bind(&FollowerStateMonitor::monitorThread, this));
 
-    odom_sub_ = nh_.subscribe("odom", 10, &FollowerStateMonitor::odomCB, this);
+    odom_sub_ = nh_.subscribe(odom_name_, 10, &FollowerStateMonitor::odomCB, this);
 
     track_sub_ = nh_.subscribe("spencer/perception/tracked_persons", 10, &FollowerStateMonitor::trackCB, this);
 
@@ -141,12 +155,14 @@ private:
 
   bool isFollowing()
   {
+    ROS_INFO_STREAM(follower_pose_.position.x << " " << follower_pose_.position.y);
     // coordinate transformation of the following range
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
 
+//    ROS_INFO_STREAM(insidePolygon(following_polygon_, follower_pose_.position));
     // make sure the follower is inside the polygon and the direction of vel is point to the robot
-//    if (insidePolygon(following_polygon_, transformed_pose))
-    if (insidePolygon(following_polygon_, transformed_pose) && predictInsidePolygon(following_polygon_, transformed_pose, 1.0))
+    if (insidePolygon(following_polygon_, transformed_pose) &&
+        predictInsidePolygon(following_polygon_, transformed_pose, 1.0))
     {
       return true;
     }
@@ -191,10 +207,24 @@ private:
 
   geometry_msgs::Point transformToLocalFrame(const geometry_msgs::Point &p)
   {
+    tf::StampedTransform transform;
+    try
+    {
+      // look up the tf in 0.01 before to prevent extrapolation into the future error
+      tf_listener_.lookupTransform("odom", "base_footprint", ros::Time::now()-ros::Duration(0.01), transform);
+    }
+    catch(tf::TransformException ex)
+    {
+      ROS_ERROR("%s",ex.what());
+    }
+    tf::Transform t = transform.inverse();
+
+    // Homogeneous transform, TODO: verify the tf
     geometry_msgs::Point transformed_p;
-    // hacks to transform the frame to odom, TODO: use tf
-    transformed_p.x = p.x - odom_.pose.pose.position.x;
-    transformed_p.y = p.y - odom_.pose.pose.position.y;
+    transformed_p.x = t.getBasis()[0][0]*p.x + t.getBasis()[0][1]*p.y + t.getOrigin().x();
+    transformed_p.y = t.getBasis()[1][0]*p.x + t.getBasis()[1][1]*p.y + t.getOrigin().y();
+    ROS_INFO_STREAM("transformed pose: " << transformed_p.x << " " << transformed_p.y);
+
     return transformed_p;
   }
 
@@ -220,6 +250,11 @@ private:
   nav_msgs::Odometry odom_;
   spencer_tracking_msgs::TrackedPersons tracked_people_;
 
+  std::string root_link_name_;
+  std::string odom_name_;
+  tf::TransformListener tf_listener_;
+
+  // follower pose and velocity in local frame
   geometry_msgs::Pose follower_pose_;
   geometry_msgs::Pose prev_follower_pose_;
   geometry_msgs::Twist follower_vel_;

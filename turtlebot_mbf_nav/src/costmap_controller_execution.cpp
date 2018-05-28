@@ -165,42 +165,44 @@ void CostmapControllerExecution::run()
         // call plugin to compute the next velocity command
         geometry_msgs::TwistStamped cmd_vel_stamped;
         geometry_msgs::TwistStamped robot_velocity;   // TODO pass current velocity to the plugin!
-        switch (follower_state_)
-        {
-          case 0:
-            // Follower is following, than call local planner
-            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
-            break;
-          case 1:
-          {
-            // Follower not following, switch to robot follow follower
-            // find the direction vector pointing to the follower
-            // (follower_p - robot_p).Normalize()
-            double dx = follower_pose_.x - robot_pose_.pose.position.x;
-            double dy = follower_pose_.y - robot_pose_.pose.position.y;
-            double norm = std::hypot(dx, dy);
 
-            cmd_vel_stamped.twist.linear.x = 0;
-            cmd_vel_stamped.twist.angular.z = 0;
-            outcome_ = 0;
-            break;
-          }
-          case 2:
-            // Follower stops, publish zero velocity
-            publishZeroVelocity();
-            cmd_vel_stamped.twist.linear.x = 0;
-            cmd_vel_stamped.twist.linear.y = 0;
-            cmd_vel_stamped.twist.linear.z = 0;
-            cmd_vel_stamped.twist.angular.x = 0;
-            cmd_vel_stamped.twist.angular.y = 0;
-            cmd_vel_stamped.twist.angular.z = 0;
-            outcome_ = 0;
-            break;
-          case 3:
-            // Does not know the state of the follower, no idea
-            break;
+        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+//        switch (follower_state_)
+//        {
+//          case 0:
+//            // Follower is following, than call local planner
+//            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+//            break;
+//          case 1:
+//          {
+//            // Follower not following, switch to robot follow follower
+//            // find the direction vector pointing to the follower
+//            // (follower_p - robot_p).Normalize()
+//            double dx = follower_pose_.x - robot_pose_.pose.position.x;
+//            double dy = follower_pose_.y - robot_pose_.pose.position.y;
+//            double norm = std::hypot(dx, dy);
 
-        }
+//            cmd_vel_stamped.twist.linear.x = 0;
+//            cmd_vel_stamped.twist.angular.z = 0;
+//            outcome_ = 0;
+//            break;
+//          }
+//          case 2:
+//            // Follower stops, publish zero velocity
+//            publishZeroVelocity();
+//            cmd_vel_stamped.twist.linear.x = 0;
+//            cmd_vel_stamped.twist.linear.y = 0;
+//            cmd_vel_stamped.twist.linear.z = 0;
+//            cmd_vel_stamped.twist.angular.x = 0;
+//            cmd_vel_stamped.twist.angular.y = 0;
+//            cmd_vel_stamped.twist.angular.z = 0;
+//            outcome_ = 0;
+//            break;
+//          case 3:
+//            // Does not know the state of the follower, no idea
+//            break;
+
+//        }
 
         if (outcome_ < 10)
         {

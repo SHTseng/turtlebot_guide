@@ -71,8 +71,6 @@
       <arg name="use_imm" value="true"/>
       <arg name="occlusion_param_file" value="occlusion_geodesics_manager_dynamic.yaml" if="$(arg occlusion_geodesics)"/> <!-- NOTE: Only uses front laser!!! -->
       <arg name="use_laser_shade_occlusion_manager" value="true" if="$(arg occlusion_geodesics)"/>
-      <!--!!!!!!!!!!!!!!!!!!!!-->
-      <!--<remap from="/spencer/perception/detected_persons" to="/spencer/perception_internal/detected_person_association/composite/lasers_upper_body_fused" /> -->
     </include>
 
     <rosparam param="srl_nearest_neighbor_tracker/additional_low_confidence_detections" if="$(arg laser_low_confidence_detections)">/spencer/perception_internal/detected_person_association/lasers_high_recall_aggregated</rosparam>

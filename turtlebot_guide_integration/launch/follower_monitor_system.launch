@@ -1,8 +1,9 @@
 <launch>  
-  <arg name="gui" value="false"/>
+  <arg name="gui" default="false"/>
+  <arg name="visual" default="true"/>
   
-  <arg name="origin_x" value="5.0"/> 
-  <arg name="origin_y" value="5.0"/>
+  <arg name="origin_x" value="5"/> 
+  <arg name="origin_y" value="5"/>
   <arg name="origin_yaw" value="0"/>
   
   <arg name="map_file" value="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
@@ -25,6 +26,19 @@
   <!-- Tracking system --> 
   <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
   </include>
+  
+  <!-- Follower state monitor -->
+  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor" output="screen">
+    <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
+  </node>
+  
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+    <param name="frame_id" value="/map"/>
+  </node>
+  
+  <!-- Visualization for the experiment data -->
+  <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
   
   <!-- RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/tracking_system.rviz"/>
