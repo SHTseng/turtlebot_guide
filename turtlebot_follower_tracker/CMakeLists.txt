@@ -60,23 +60,19 @@ link_directories(
   ${catkin_LIBRARY_DIRS}
 )
 
-file(GLOB UPPER_BODY_DETECTOR_SOURCES src/upper_body_detector/*.cpp)
-
 add_library(pcl_people_detection_ros src/pcl_people_detection_ros.cpp src/pcl_people_detection.cpp)
 target_link_libraries(pcl_people_detection_ros ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${Eigen3_LIBRARIES})
 
 add_library(follower_tracker_nodelet src/follower_tracker_nodelet.cpp)
 target_link_libraries(follower_tracker_nodelet pcl_people_detection_ros ${catkin_LIBRARIES})
 
-add_executable(upper_body_detector ${UPPER_BODY_DETECTOR_SOURCES}) 
-add_dependencies(upper_body_detector ${catkin_EXPORTED_TARGETS})
-target_link_libraries(upper_body_detector 
-  ${Boost_LIBRARIES}
-  ${QT_LIBRARIES}
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIBRARY} 
-  ${catkin_LIBRARIES}
-)
+add_executable(upper_body_detector src/upper_body_detector.cpp
+  src/upper_body_detector/Camera.cpp src/upper_body_detector/ConfigFile.cpp src/upper_body_detector/Globals.cpp
+  src/upper_body_detector/KConnectedComponentLabeler.cpp
+  src/upper_body_detector/Math.cpp src/upper_body_detector/pointcloud.cpp src/upper_body_detector/ROI.cpp
+  src/upper_body_detector/detector.cpp src/upper_body_detector/AncillaryMethods.cpp
+  src/upper_body_detector/Hypo.cpp src/upper_body_detector/FrameInlier.cpp)
+target_link_libraries(upper_body_detector ${catkin_LIBRARIES})
  
 add_executable(follower_state_monitor src/follower_state_monitor.cpp)
 target_link_libraries(follower_state_monitor ${catkin_LIBRARIES})

@@ -230,9 +230,8 @@ Visualization Manager:
             wheel_right_link:
               {}
         map:
-          {}
-        odom:
-          {}
+          odom:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -300,7 +299,7 @@ Visualization Manager:
       Color: 130; 130; 130
       Color map offset: 0
       Color transform: Rainbow
-      Enabled: true
+      Enabled: false
       Excluded person IDs: ""
       Font color: 0; 0; 0
       Font color style: Constant color
@@ -323,7 +322,7 @@ Visualization Manager:
       Text spacing: 1
       Topic: /spencer/perception_internal/detected_persons/upper_body
       Unreliable: false
-      Value: true
+      Value: false
       Z offset:
         Use Z position from message: false
         Value: 0
@@ -365,7 +364,7 @@ Visualization Manager:
       Color map offset: 0
       Color transform: Constant color
       Delete after no. cycles: 100
-      Enabled: false
+      Enabled: true
       Excluded person IDs: ""
       Font color: 255; 255; 255
       Font color style: Same color
@@ -398,10 +397,22 @@ Visualization Manager:
         Value: Bounding boxes
       Topic: /spencer/perception/tracked_persons
       Unreliable: false
-      Value: false
+      Value: true
       Z offset:
         Use Z position from message: false
         Value: 0
+    - Alpha: 1
+      Class: jsk_rviz_plugin/PolygonArray
+      Color: 25; 255; 0
+      Enabled: true
+      Name: PolygonArray
+      Topic: /turtlebot_guide/visualization
+      Unreliable: false
+      Value: true
+      coloring: Auto
+      normal length: 0.100000001
+      only border: true
+      show normal: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -423,7 +434,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 13.0876303
+      Distance: 3.76157379
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -438,10 +449,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.959796906
+      Pitch: 0.704796672
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 4.68003988
+      Yaw: 4.26004314
     Saved: ~
 Window Geometry:
   Displays:

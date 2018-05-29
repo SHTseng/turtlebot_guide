@@ -13,7 +13,6 @@
   <arg name="ground_plane" default="/spencer/sensors/rgbd_front_top/ground_plane"/>
   
   <group ns="/spencer/perception_internal/people_detection">
-    <!-- Front RGB-D upper body -->
     <node pkg="turtlebot_follower_tracker" type="upper_body_detector" name="upper_body_detector" output="screen" respawn="true">
       <param name="config_file" value="$(arg config_file)" type="string"/>
       <param name="template_file" value="$(arg template_file)" type="string"/>

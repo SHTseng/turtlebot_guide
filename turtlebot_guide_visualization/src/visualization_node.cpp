@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
 //  polygon_array.labels.push_back(label);
 //  label += 10;
 
-  while(polygon_pub.getNumSubscribers() == 0 || text_pub.getNumSubscribers() == 0){
+  while(polygon_pub.getNumSubscribers() == 0 && text_pub.getNumSubscribers() == 0){
     ros::Duration(0.05).sleep();
   }
 

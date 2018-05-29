@@ -44,6 +44,7 @@ double Globals::evaluation_greedy_NMS_threshold;
 ////////////////////////////////////////
 double  Globals::WORLD_SCALE;
 
+double Globals::DEPTH_SCALE;
 ////////////////////////////////////////
 // height and width for precomputed Segmentations
 ////////////////////////////////////////

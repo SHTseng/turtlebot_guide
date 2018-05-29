@@ -70,8 +70,11 @@ public:
   {
     monitor_thread_->interrupt();
     monitor_thread_->join();
-
     delete monitor_thread_;
+
+    odom_sub_.shutdown();
+    track_sub_.shutdown();
+    state_pub_.shutdown();
   }
 
 private:
@@ -125,12 +128,11 @@ private:
       state_msg.pose.x = follower_pose_.position.x;
       state_msg.pose.y = follower_pose_.position.y;
 
-      tf::Quaternion q(follower_pose_.orientation.x, follower_pose_.orientation.y,
-                       follower_pose_.orientation.z, follower_pose_.orientation.w);
-      tf::Matrix3x3 m(q);
-      double roll, pitch, yaw;
-      m.getRPY(roll, pitch, yaw);
+      double yaw = tf::getYaw(follower_pose_.orientation);
       state_msg.pose.theta = yaw;
+
+      state_msg.predict_pose.x = follower_pose_.position.x + follower_vel_.linear.x*foward_prediction_time_;
+      state_msg.predict_pose.y = follower_pose_.position.y + follower_vel_.linear.y*foward_prediction_time_;
 
       state_msg.vel.x = follower_vel_.linear.x;
       state_msg.vel.y = follower_vel_.linear.y;
@@ -155,22 +157,16 @@ private:
 
   bool isFollowing()
   {
-    ROS_INFO_STREAM(follower_pose_.position.x << " " << follower_pose_.position.y);
     // coordinate transformation of the following range
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
 
-//    ROS_INFO_STREAM(insidePolygon(following_polygon_, follower_pose_.position));
-    // make sure the follower is inside the polygon and the direction of vel is point to the robot
-    if (insidePolygon(following_polygon_, transformed_pose) &&
-        predictInsidePolygon(following_polygon_, transformed_pose, 1.0))
-    {
-      return true;
-    }
-    else
-      return false;
+    bool inside = insidePolygon(following_polygon_, transformed_pose);
+    bool predict_inside = predictInsidePolygon(following_polygon_, transformed_pose, foward_prediction_time_);
+    ROS_INFO_STREAM(inside << " " << predict_inside);
+
+    return (inside && predict_inside) ? true : false;
   }
 
-  //! TODO: check the correct frame transform
   bool predictInsidePolygon(std::vector<geometry_msgs::Point> polygon, geometry_msgs::Point p, const double prediection_time)
   {
     for (auto vertices : polygon)
@@ -211,7 +207,7 @@ private:
     try
     {
       // look up the tf in 0.01 before to prevent extrapolation into the future error
-      tf_listener_.lookupTransform("odom", "base_footprint", ros::Time::now()-ros::Duration(0.01), transform);
+      tf_listener_.lookupTransform("odom", "base_footprint", ros::Time::now()-ros::Duration(0.02), transform);
     }
     catch(tf::TransformException ex)
     {
@@ -223,7 +219,6 @@ private:
     geometry_msgs::Point transformed_p;
     transformed_p.x = t.getBasis()[0][0]*p.x + t.getBasis()[0][1]*p.y + t.getOrigin().x();
     transformed_p.y = t.getBasis()[1][0]*p.x + t.getBasis()[1][1]*p.y + t.getOrigin().y();
-    ROS_INFO_STREAM("transformed pose: " << transformed_p.x << " " << transformed_p.y);
 
     return transformed_p;
   }

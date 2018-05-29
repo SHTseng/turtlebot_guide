@@ -2,15 +2,15 @@
   <arg name="subscriber_queue_size" default="5"/>
   <arg name="static_map_filter" default="false" />
   <arg name="occlusion_geodesics" default="false"/>
-  <arg name="laser_low_confidence_detections" default="true"/>
+  <arg name="laser_low_confidence_detections" default="false"/>
+  <arg name="common_frame_id" default="base_footprint"/>
 
   <!-- Aggregate  -->
   <!-- Nodelet manager for all detected person association-related nodelets -->
   <group ns="/spencer/perception_internal/detected_person_association">
       <node name="detected_person_association_nodelet_manager" pkg="nodelet" type="nodelet" args="manager" output="screen" required="true"/>
   </group>
-  
-  <arg name="common_frame_id" default="base_footprint"/>
+
   <group ns="/spencer/perception_internal/detected_person_association">
       <!-- Convert DetectedPersons topics into CompositeDetectedPersons, and transform poses into common coordinate frame -->
       <node name="convert_to_composite_laser" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/ConvertToCompositeDetectionsNodelet detected_person_association_nodelet_manager">

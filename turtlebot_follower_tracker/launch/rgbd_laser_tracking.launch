@@ -3,7 +3,7 @@
   
   <group ns="/spencer/perception_internal/people_detection">
     <!-- RWTH tf based groundplane -->
-    <node pkg="rwth_ground_plane" type="ground_plane_tf_based_fixed" name="ground_plane_front_top" output="screen">
+    <node pkg="rwth_ground_plane" type="ground_plane_tf_based_fixed" name="ground_plane" output="screen">
       <param name="base_footprint" value="base_footprint" type="string"/>
       <param name="camera_frame" value="camera_depth_optical_frame" type="string"/>
       <param name="ground_plane" value="$(arg ground_plane)" type="string"/>
