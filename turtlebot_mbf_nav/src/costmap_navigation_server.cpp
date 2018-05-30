@@ -677,14 +677,8 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
       break;
     }
 
-    //! TODO: need to revise
+    //! Parse the follower information to the local controller, TODO: need to revise
     moving_ptr_->setFollowerState(follower_state_.state, follower_state_.pose);
-
-//    if (first_cycle)
-//    {
-//      // init oscillation pose
-//      oscillation_pose = robot_pose_;
-//    }
 
     // check preempt requested
     if (action_server_exe_path_ptr_->isPreemptRequested())

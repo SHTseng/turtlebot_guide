@@ -201,7 +201,6 @@ void CostmapControllerExecution::run()
 //          case 3:
 //            // Does not know the state of the follower, no idea
 //            break;
-
 //        }
 
         if (outcome_ < 10)

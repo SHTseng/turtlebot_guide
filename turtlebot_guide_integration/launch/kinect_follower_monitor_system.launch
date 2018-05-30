@@ -42,6 +42,6 @@
   <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
   
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/tracking_system.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/kinect_track.rviz"/>
     
  </launch>

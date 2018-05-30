@@ -105,9 +105,11 @@ private:
         monitor_cond_.wait(lock);
       }
 
+      turtlebot_guide_msgs::FollowerState state_msg;
       FollowerState follower_state;
       if (tracked_people_.tracks.empty())
       {
+        // if no follower in the track, then publish unknown and skip this loop
         follower_state = UNKNOWN;
       }
       else
@@ -121,22 +123,25 @@ private:
       }
 
       // fill in the msg data
-      turtlebot_guide_msgs::FollowerState state_msg;
       state_msg.header.frame_id = "base_footprint";
       state_msg.header.stamp = ros::Time::now();
       state_msg.state = follower_state;
-      state_msg.pose.x = follower_pose_.position.x;
-      state_msg.pose.y = follower_pose_.position.y;
 
-      double yaw = tf::getYaw(follower_pose_.orientation);
-      state_msg.pose.theta = yaw;
+      if (!tracked_people_.tracks.empty())
+      {
+        state_msg.pose.x = follower_pose_.position.x;
+        state_msg.pose.y = follower_pose_.position.y;
 
-      state_msg.predict_pose.x = follower_pose_.position.x + follower_vel_.linear.x*foward_prediction_time_;
-      state_msg.predict_pose.y = follower_pose_.position.y + follower_vel_.linear.y*foward_prediction_time_;
+        double yaw = tf::getYaw(follower_pose_.orientation);
+        state_msg.pose.theta = yaw;
 
-      state_msg.vel.x = follower_vel_.linear.x;
-      state_msg.vel.y = follower_vel_.linear.y;
-      state_msg.vel.theta = follower_vel_.angular.z;
+        state_msg.predict_pose.x = follower_pose_.position.x + follower_vel_.linear.x*foward_prediction_time_;
+        state_msg.predict_pose.y = follower_pose_.position.y + follower_vel_.linear.y*foward_prediction_time_;
+
+        state_msg.vel.x = follower_vel_.linear.x;
+        state_msg.vel.y = follower_vel_.linear.y;
+        state_msg.vel.theta = follower_vel_.angular.z;
+      }
 
       state_pub_.publish(state_msg);
 
@@ -162,7 +167,6 @@ private:
 
     bool inside = insidePolygon(following_polygon_, transformed_pose);
     bool predict_inside = predictInsidePolygon(following_polygon_, transformed_pose, foward_prediction_time_);
-//    ROS_INFO_STREAM(inside << " " << predict_inside);
 
     return (inside && predict_inside) ? true : false;
   }
