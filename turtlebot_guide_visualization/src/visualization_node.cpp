@@ -9,6 +9,8 @@
 
 visualization_msgs::Marker getTextMarker(turtlebot_guide_msgs::FollowerState state);
 
+visualization_msgs::Marker getPoseMarker(const geometry_msgs::Pose2D &state);
+
 void stateCB(const turtlebot_guide_msgs::FollowerStateConstPtr &_msg);
 
 std::vector<geometry_msgs::Point32> getFollowingPoints();
@@ -29,6 +31,8 @@ int main(int argc, char *argv[]){
   ros::NodeHandle nh;
 
   ros::Publisher polygon_pub = nh.advertise<jsk_recognition_msgs::PolygonArray>("turtlebot_guide/visualization", 10);
+  ros::Publisher pose_marker_pub = nh.advertise<visualization_msgs::Marker>("current_pose", 10);
+  ros::Publisher predict_pose_marker_pub = nh.advertise<visualization_msgs::Marker>("predict_pose", 10);
   ros::Publisher text_pub = nh.advertise<visualization_msgs::Marker>("follower_state_marker", 1);
   ros::Subscriber monitor_sub = nh.subscribe("follower_state", 10, stateCB);
 
@@ -85,6 +89,11 @@ int main(int argc, char *argv[]){
     visualization_msgs::Marker text_marker_msg = getTextMarker(m_state);
     text_pub.publish(text_marker_msg);
 
+//    visualization_msgs::Marker pose_marker_msgs = getPoseMarker(m_state.pose);
+//    pose_marker_pub.publish(pose_marker_msgs);
+    visualization_msgs::Marker predict_pose_marker_msgs = getPoseMarker(m_state.predict_pose);
+    predict_pose_marker_pub.publish(predict_pose_marker_msgs);
+
     polygon_pub.publish(polygon_array);
     ros::spinOnce();
     r.sleep();
@@ -93,14 +102,45 @@ int main(int argc, char *argv[]){
   return 0;
 } // end main
 
+visualization_msgs::Marker getPoseMarker(const geometry_msgs::Pose2D &state)
+{
+  visualization_msgs::Marker marker_msg;
+  marker_msg.header.frame_id = base_link_;
+  marker_msg.header.stamp = ros::Time::now();
+  marker_msg.id = 0;
+  marker_msg.type = visualization_msgs::Marker::SPHERE;
+  marker_msg.action = visualization_msgs::Marker::ADD;
+  marker_msg.pose.position.x = state.x;
+  marker_msg.pose.position.y = state.y;
+  marker_msg.pose.position.z = 0;
+  marker_msg.color.a = 1.0;
+  marker_msg.color.r = 0.3;
+  marker_msg.color.g = 1.0;
+  marker_msg.color.b = 0.5;
+  marker_msg.scale.x = 0.1;
+  marker_msg.scale.y = 0.1;
+  marker_msg.scale.z = 0.1;
+
+  return marker_msg;
+}
+
 visualization_msgs::Marker getTextMarker(turtlebot_guide_msgs::FollowerState state)
 {
   visualization_msgs::Marker text_marker;
   text_marker.header.frame_id = base_link_;
   text_marker.header.stamp = ros::Time::now();
-  text_marker.id = 100;
+  text_marker.id = 0;
   text_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
   text_marker.action = visualization_msgs::Marker::ADD;
+  text_marker.pose.position.x = 2.0;
+  text_marker.pose.position.y = 0.0;
+  text_marker.pose.position.z = 0.0;
+  text_marker.color.a = 1.0;
+  text_marker.color.r = 1.0;
+  text_marker.color.g = 1.0;
+  text_marker.color.b = 1.0;
+  text_marker.scale.x = 0.5;
+  text_marker.scale.y = 0.5;
   text_marker.scale.z = 0.5;
 
   switch (state.state)
@@ -127,7 +167,7 @@ void stateCB(const turtlebot_guide_msgs::FollowerStateConstPtr &_msg)
   m_state = *_msg;
 }
 
-std::vector<geometry_msgs::Point32> getFollowingPoints()
+std::vector<geometry_msgs::Point32> getNonFollowingPoints()
 {
   std::vector<geometry_msgs::Point32> points;
   geometry_msgs::Point32 origin;
@@ -147,21 +187,21 @@ std::vector<geometry_msgs::Point32> getFollowingPoints()
   return points;
 }
 
-std::vector<geometry_msgs::Point32> getNonFollowingPoints()
+std::vector<geometry_msgs::Point32> getFollowingPoints()
 {
   std::vector<geometry_msgs::Point32> points;
   geometry_msgs::Point32 origin;
-  origin.x = -0.7314-0.11; origin.y = 0.2944; origin.z = 0.0;
+  origin.x = -0.8414; origin.y = 0.2944; origin.z = 0.0;
   points.push_back(origin);
 
   geometry_msgs::Point32 via1, via2, via3;
-  via1.x = -2.8; via1.y = 1.3-0.09; via1.z = 0.0;
+  via1.x = -2.8; via1.y = 1.21; via1.z = 0.0;
   points.push_back(via1);
 
   via2.x = -2.8; via2.y = -1.3; via2.z = 0.0;
   points.push_back(via2);
 
-  via3.x = -0.7314-0.11; via3.y = -0.2944-0.1; via3.z = 0.0;
+  via3.x = -0.8414; via3.y = -0.3944; via3.z = 0.0;
   points.push_back(via3);
   points.push_back(origin);
   return points;

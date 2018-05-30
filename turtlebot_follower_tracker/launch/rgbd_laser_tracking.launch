@@ -1,5 +1,10 @@
 <launch>
   <arg name="ground_plane" default="/spencer/sensors/rgbd_front_top/ground_plane"/>
+  <arg name="camera_ns" default="/camera"/>
+  <arg name="depth_image_topic" default="/depth/image_raw"/>
+  <arg name="rgb_image_topic" default="/rgb/image_raw"/>
+  <arg name="camera_info_topic" default="/depth/camera_info"/>
+  <arg name="scan_topic" default="/depth/scan"/>
   
   <group ns="/spencer/perception_internal/people_detection">
     <!-- RWTH tf based groundplane -->
@@ -13,17 +18,17 @@
   
   <!-- RGBD upper body detector -->
   <include file="$(find turtlebot_follower_tracker)/launch/upper_body_detector.launch.xml">
-    <arg name="camera_namespace" default="/camera" />
-    <arg name="depth_image" value="/depth/image_raw" />
-    <arg name="rgb_image" value="/rgb/image_raw" />
-    <arg name="camera_info_depth" value="/depth/camera_info" />
+    <arg name="camera_namespace" value="$(arg camera_ns)" />
+    <arg name="depth_image" value="$(arg depth_image_topic)" />
+    <arg name="rgb_image" value="$(arg rgb_image_topic)" />
+    <arg name="camera_info_depth" value="$(arg camera_info_topic)" />
     <arg name="ground_plane" value="$(arg ground_plane)" />
     <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/upper_body" />
   </include>
   
   <!-- Laser scan leg detector -->
   <include file="$(find turtlebot_follower_tracker)/launch/laser_leg_detector.launch.xml">
-    <arg name="topic_scan" default="/depth/scan" />
+    <arg name="topic_scan" value="$(arg scan_topic)" />
     <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/laser" />
   </include>
   

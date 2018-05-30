@@ -34,7 +34,7 @@ public:
 
     private_nh.param<std::string>("root_link_name", root_link_name_, "base_footprint");
     private_nh.param<std::string>("odom_name", odom_name_, "odom");
-    private_nh.param("foward_prediction_time", foward_prediction_time_, 1.0);
+    private_nh.param("foward_prediction_time", foward_prediction_time_, 0.5);
 
     std::vector<double> following_range;
     private_nh.param("following_range", following_range, std::vector<double>());
@@ -162,7 +162,7 @@ private:
 
     bool inside = insidePolygon(following_polygon_, transformed_pose);
     bool predict_inside = predictInsidePolygon(following_polygon_, transformed_pose, foward_prediction_time_);
-    ROS_INFO_STREAM(inside << " " << predict_inside);
+//    ROS_INFO_STREAM(inside << " " << predict_inside);
 
     return (inside && predict_inside) ? true : false;
   }

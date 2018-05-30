@@ -1,0 +1,47 @@
+<launch>
+  <arg name="visual" default="true"/>
+  
+  <arg name="origin_x" value="5"/> 
+  <arg name="origin_y" value="5"/>
+  <arg name="origin_yaw" value="0"/>
+  
+  <arg name="map_file" value="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
+  <arg name="world_name" value="$(find turtlebot_guide_integration)/worlds/script_actor.world"/>
+  
+  <!-- Gazebo simulation environment -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="false"/>
+    <arg name="gui" value="false"/>
+  </include> 
+  
+  <!-- Spawn turtlebot guide model -->
+  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+    <arg name="init_x" value="$(arg origin_x)" />
+    <arg name="init_y" value="$(arg origin_y)" />
+    <arg name="init_yaw" value="$(arg origin_yaw)" />
+  </include>
+ 
+  <!-- Tracking system --> 
+  <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
+    <arg name="depth_image_topic" value="/depth/image_raw"/>
+    <arg name="rgb_image_topic" value="/rgb/image_raw"/>
+    <arg name="camera_info_topic" value="/depth/camera_info"/>
+  </include>
+  
+  <!-- Follower state monitor -->
+  <node pkg="turtlebot_follower_tracker" type="follower_state_monitor" name="follower_state_monitor">
+    <rosparam file="$(find turtlebot_follower_tracker)/params/follower_tracker_params.yaml" command="load" />
+  </node>
+  
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+    <param name="frame_id" value="/map"/>
+  </node>
+  
+  <!-- Visualization for the experiment data -->
+  <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
+  
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/tracking_system.rviz"/>
+    
+ </launch>
