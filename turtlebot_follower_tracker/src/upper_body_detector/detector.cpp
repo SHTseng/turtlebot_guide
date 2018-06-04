@@ -1,5 +1,6 @@
 #include "detector.h"
 #include "KConnectedComponentLabeler.h"
+#include <chrono>
 
 
 Detector::Detector()
@@ -9,6 +10,8 @@ Detector::Detector()
 void Detector::ProcessFrame(const Camera &camera_origin, const Matrix<double> &depth_map, const PointCloud &point_cloud,
                             const Matrix<double> &upper_body_template, Vector<Vector<double> > &detected_bounding_boxes)
 {
+    auto start = std::chrono::high_resolution_clock::now();
+
     int width = depth_map.x_size();
     int height = depth_map.y_size();
 
@@ -19,11 +22,17 @@ void Detector::ProcessFrame(const Camera &camera_origin, const Matrix<double> &d
     // Compute 2D_positions, and occ_Map matrices
     ComputeFreespace(camera_origin, labeledROIs, mat_2D_pos_x, mat_2D_pos_y, point_cloud);
 
+    auto compute_free_space_time = std::chrono::high_resolution_clock::now();
+
     Vector<ROI> all_ROIs;
     PreprocessROIs(labeledROIs, all_ROIs);
 
+    auto preprocess_roi_time = std::chrono::high_resolution_clock::now();
+
 //    Vector<Vector<Vector<double> > > points3D_in_ROIs(all_ROIs.getSize());
     ExtractPointsInROIs(/*points3D_in_ROIs*/all_ROIs, mat_2D_pos_x, mat_2D_pos_y, point_cloud, labeledROIs);
+
+    auto extract_point_time = std::chrono::high_resolution_clock::now();
 
     double scaleZ = Globals::freespace_scaleZ;
 
@@ -71,9 +80,24 @@ void Detector::ProcessFrame(const Camera &camera_origin, const Matrix<double> &d
         }
     }
 
-
+    auto pose_process_time = std::chrono::high_resolution_clock::now();
 
     detected_bounding_boxes = EvaluateTemplate(upper_body_template, depth_map, close_range_BBoxes, distances);
+
+    auto evaluate_time = std::chrono::high_resolution_clock::now();
+
+    auto compute_free_space_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(compute_free_space_time - start).count();
+    auto preprocess_roi_preprocess_roi_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(preprocess_roi_time - compute_free_space_time).count();
+    auto extract_point_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(extract_point_time - preprocess_roi_time).count();
+    auto pose_process_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(pose_process_time - extract_point_time).count();
+    auto evaluate_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(evaluate_time - pose_process_time).count();
+
+//    ROS_INFO_STREAM("\ncompute_free_space_time: " << compute_free_space_elapsed << "ms \n" <<
+//                    "preprocess_roi_time: " << preprocess_roi_preprocess_roi_elapsed << "ms \n" <<
+//                    "extract_point_time: " << extract_point_elapsed << "ms \n" <<
+//                    "pose_process_time: " << pose_process_elapsed << "ms \n" <<
+//                    "evaluate_time: " << evaluate_elapsed << "ms \n");
+//    ROS_INFO_STREAM("========================================");
 }
 
 void Detector::ComputeFreespace(const Camera& camera,

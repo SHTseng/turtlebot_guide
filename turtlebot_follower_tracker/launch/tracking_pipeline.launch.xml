@@ -12,20 +12,20 @@
   </group>
 
   <group ns="/spencer/perception_internal/detected_person_association">
-      <!-- Convert DetectedPersons topics into CompositeDetectedPersons, and transform poses into common coordinate frame -->
-      <node name="convert_to_composite_laser" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/ConvertToCompositeDetectionsNodelet detected_person_association_nodelet_manager">
-          <remap from="input" to="/spencer/perception_internal/detected_persons/laser"/>
-          <remap from="output" to="composite/lasers_aggregated"/>
-          <param name="common_frame_id" value="$(arg common_frame_id)"/>
-      </node>
+    <!-- Convert DetectedPersons topics into CompositeDetectedPersons, and transform poses into common coordinate frame -->
+    <node name="convert_to_composite_laser" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/ConvertToCompositeDetectionsNodelet detected_person_association_nodelet_manager">
+      <remap from="input" to="/spencer/perception_internal/detected_persons/laser"/>
+      <remap from="output" to="composite/lasers_aggregated"/>
+      <param name="common_frame_id" value="$(arg common_frame_id)"/>
+    </node>
   </group>
   
   <group ns="/spencer/perception_internal/detected_person_association">
     <!-- Convert DetectedPersons topics into CompositeDetectedPersons, and transform poses into common coordinate frame -->
     <node name="convert_to_composite_rgbd_upper_body" pkg="nodelet" type="nodelet" args="load spencer_detected_person_association/ConvertToCompositeDetectionsNodelet detected_person_association_nodelet_manager">
-        <remap from="input" to="/spencer/perception_internal/detected_persons/upper_body"/>
-        <remap from="output" to="composite/rgbd_upper_body_aggregated"/>
-        <param name="common_frame_id" value="$(arg common_frame_id)"/>
+      <remap from="input" to="/spencer/perception_internal/detected_persons/upper_body"/>
+      <remap from="output" to="composite/rgbd_upper_body_aggregated"/>
+      <param name="common_frame_id" value="$(arg common_frame_id)"/>
     </node>
 </group>
   
@@ -47,13 +47,17 @@
   
   <!-- Re-publish final composite detections as normal detections, for processing by the tracker-->
   <group ns="/spencer/perception_internal/detected_person_association">
-      <!-- Final primary detection composites will be on this topic -->
-      <arg name="final_composite_topic" value="composite/lasers_upper_body_fused"/>
-      <!-- Primary detections -->
-      <node name="relay_final_composite_detections" type="relay" pkg="topic_tools" args="$(arg final_composite_topic) /spencer/perception/detected_persons_composite"/>
-      <node name="convert_final_composite_detections_to_detections" type="composite_detections_to_detections.py" pkg="spencer_detected_person_association"/>
-  </group>
+    <!-- Parse the final detection result to static map filter -->
+    <remap from="/spencer/perception/detected_persons" to="/spencer/perception/detected_persons_unfiltered" if="$(arg static_map_filter)"/>
+    <remap from="/spencer/perception_internal/detected_person_association/lasers_high_recall_aggregated" to="/spencer/perception_internal/detected_person_association/lasers_high_recall_aggregated_unfiltered" if="$(arg static_map_filter)"/>
 
+    <!-- Final primary detection composites will be on this topic -->
+    <arg name="final_composite_topic" value="composite/lasers_upper_body_fused"/>
+    <!-- Primary detections -->
+    <node name="relay_final_composite_detections" type="relay" pkg="topic_tools" args="$(arg final_composite_topic) /spencer/perception/detected_persons_composite"/>
+    <node name="convert_final_composite_detections_to_detections" type="composite_detections_to_detections.py" pkg="spencer_detected_person_association"/>
+  </group>
+  
   <!-- Filter detections by static map -->
   <group ns="/spencer/perception_internal/people_detection" if="$(arg static_map_filter)">
     <!-- Normal detections -->
@@ -62,13 +66,20 @@
       <remap from="output_detections" to="/spencer/perception/detected_persons"/>
       <rosparam param="modalities_to_always_passthrough">[rgbd]</rosparam>  <!-- only filter out laser and monocular vision, as RGB-D does not have many false positives -->
     </node>
+    
+    <!-- High-recall detections -->
+    <node name="filter_low_confidence_detections_by_static_map" pkg="spencer_tracking_utils" type="filter_detections_by_static_map" output="screen">
+        <remap from="input_detections" to="/spencer/perception_internal/detected_person_association/lasers_high_recall_aggregated_unfiltered"/>
+        <remap from="output_detections" to="/spencer/perception_internal/detected_person_association/lasers_high_recall_aggregated"/>
+        <rosparam param="modalities_to_always_passthrough">[rgbd]</rosparam>  <!-- only filter out laser and monocular vision, as RGB-D does not have many false positives -->
+    </node>
   </group>
   
   <!-- People tracker -->
   <group ns="/spencer/perception_internal/people_tracking">
     <include file="$(find srl_nearest_neighbor_tracker)/launch/nnt.launch">
       <arg name="subscriber_queue_size" value="$(arg subscriber_queue_size)"/>
-      <arg name="use_imm" value="true"/>
+      <arg name="use_imm" value="false"/>
       <arg name="occlusion_param_file" value="occlusion_geodesics_manager_dynamic.yaml" if="$(arg occlusion_geodesics)"/> <!-- NOTE: Only uses front laser!!! -->
       <arg name="use_laser_shade_occlusion_manager" value="true" if="$(arg occlusion_geodesics)"/>
     </include>

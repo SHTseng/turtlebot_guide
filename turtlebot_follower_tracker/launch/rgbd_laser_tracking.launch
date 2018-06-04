@@ -5,6 +5,8 @@
   <arg name="rgb_image_topic" default="/rgb/image_raw"/>
   <arg name="camera_info_topic" default="/depth/camera_info"/>
   <arg name="scan_topic" default="/depth/scan"/>
+  <arg name="update_rate" default="30.0"/>
+  <arg name="static_map_filter" default="true" />
   
   <group ns="/spencer/perception_internal/people_detection">
     <!-- RWTH tf based groundplane -->
@@ -12,7 +14,7 @@
       <param name="base_footprint" value="base_footprint" type="string"/>
       <param name="camera_frame" value="camera_depth_optical_frame" type="string"/>
       <param name="ground_plane" value="$(arg ground_plane)" type="string"/>
-      <param name="rate" value="30.0"/>
+      <param name="rate" value="$(arg update_rate)"/>
     </node>
   </group>
   
@@ -34,7 +36,7 @@
   
   <!-- Data fusioon and tracking pipeline -->
   <include file="$(find turtlebot_follower_tracker)/launch/tracking_pipeline.launch.xml">
-  
+    <arg name="static_map_filter" default="$(arg static_map_filter)" />
   </include>
   
 </launch>

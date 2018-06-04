@@ -2,7 +2,7 @@
   <arg name="gui" default="false"/>
   <arg name="rviz" default="true"/>
   <arg name="visual" default="false"/>
-  <arg name="actor_mode" default="2"/>
+  <arg name="actor_mode" default="0"/>
   <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/willow_v2.yaml"/>
   <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/actor$(arg actor_mode).world"/>
   
@@ -27,27 +27,9 @@
     <arg name="init_yaw" value="$(arg origin_yaw)" />
   </include> 
 
-  <!-- People detection -->
-  <node pkg="nodelet" type="nodelet" name="depthimage_nodelet_manager" args="manager"/>
-  <include file="$(find turtlebot_follower_tracker)/launch/people_detection_nodelet.launch">
-    <arg name="input" value="/camera/depth/points" />
-    <arg name="output" value="/spencer/perception_internal/detected_persons/rgbd/hog" />
-    <arg name="nodelet_manager" value="depthimage_nodelet_manager" />
-  </include>
-  
-  <!-- People tracking -->
-  <!-- <include file="$(find turtlebot_follower_tracker)/launch/freiburg_people_tracking.launch">
-    <arg name="rgbd" default="true"/>
-    <arg name="laser_low_confidence_detections" default="false"/>
-    <arg name="fuse_detections" default="false"/>
-    <arg name="static_map_filter" default="false"/>
-  </include> -->
-  
-  <include file="$(find spencer_people_tracking_launch)/launch/tracking/freiburg_people_tracking.launch">
-    <arg name="rgbd" default="true"/>
-    <arg name="laser_low_confidence_detections" default="false"/>
-    <arg name="fuse_detections" default="false"/>
-    <arg name="static_map_filter" default="false"/>
+  <!-- Tracking system --> 
+  <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
+    <arg name="update_rate" default="20.0"/>
   </include>
   
   <!-- Follower state monitor -->

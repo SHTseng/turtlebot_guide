@@ -25,6 +25,8 @@
  
   <!-- Tracking system --> 
   <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
+    <arg name="update_rate" default="20.0"/>
+    <arg name="static_map_filter" default="false"/>
   </include>
   
   <!-- Follower state monitor -->
