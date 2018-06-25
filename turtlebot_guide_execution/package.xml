@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>turtlebot_guide_integration</name>
+  <name>turtlebot_guide_execution</name>
   <version>0.0.0</version>
   <description>The sub-package of turtlebot_guide </description>
   <maintainer email="q253upng@gmail.com">SHTseng</maintainer>

@@ -86,11 +86,11 @@ void Detector::ProcessFrame(const Camera &camera_origin, const Matrix<double> &d
 
     auto evaluate_time = std::chrono::high_resolution_clock::now();
 
-    auto compute_free_space_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(compute_free_space_time - start).count();
-    auto preprocess_roi_preprocess_roi_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(preprocess_roi_time - compute_free_space_time).count();
-    auto extract_point_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(extract_point_time - preprocess_roi_time).count();
-    auto pose_process_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(pose_process_time - extract_point_time).count();
-    auto evaluate_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(evaluate_time - pose_process_time).count();
+//    auto compute_free_space_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(compute_free_space_time - start).count();
+//    auto preprocess_roi_preprocess_roi_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(preprocess_roi_time - compute_free_space_time).count();
+//    auto extract_point_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(extract_point_time - preprocess_roi_time).count();
+//    auto pose_process_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(pose_process_time - extract_point_time).count();
+//    auto evaluate_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(evaluate_time - pose_process_time).count();
 
 //    ROS_INFO_STREAM("\ncompute_free_space_time: " << compute_free_space_elapsed << "ms \n" <<
 //                    "preprocess_roi_time: " << preprocess_roi_preprocess_roi_elapsed << "ms \n" <<

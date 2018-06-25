@@ -13,7 +13,8 @@
   <depend>pcl_ros</depend>
   <depend>tf</depend> 
   <depend>eigen_conversions</depend>
-  <depend>nodelet</depend>
+  <depend>nodelet</depend>std_msgs
+  <depend>std_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>nav_msgs</depend>
   <depend>spencer_tracking_msgs</depend>

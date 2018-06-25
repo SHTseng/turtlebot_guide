@@ -2,6 +2,7 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
 
+#include <std_msgs/Float64.h>
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
@@ -64,6 +65,9 @@ public:
     track_sub_ = nh_.subscribe("spencer/perception/tracked_persons", 10, &FollowerStateMonitor::trackCB, this);
 
     state_pub_ = nh_.advertise<turtlebot_guide_msgs::FollowerState>("follower_state", 1000);
+
+    dist_pub_ = nh_.advertise<std_msgs::Float64>("distance", 1);
+    dist_ref_pub_ = nh_.advertise<std_msgs::Float64>("distance_ref", 1);
   }
 
   ~FollowerStateMonitor()
@@ -144,6 +148,13 @@ private:
       }
 
       state_pub_.publish(state_msg);
+
+      geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
+      std_msgs::Float64 dist, dist_ref;
+      dist.data = hypot(transformed_pose.x, transformed_pose.y);
+      dist_ref.data = 1.8;
+      dist_pub_.publish(dist);
+      dist_ref_pub_.publish(dist_ref);
 
       // Record the follower pose for next run and unlock the mutex
       prev_follower_pose_ = follower_pose_;
@@ -245,6 +256,10 @@ private:
   ros::Subscriber track_sub_;
 
   ros::Publisher state_pub_;
+
+  // only for visualization
+  ros::Publisher dist_pub_;
+  ros::Publisher dist_ref_pub_;
 
   nav_msgs::Odometry odom_;
   spencer_tracking_msgs::TrackedPersons tracked_people_;

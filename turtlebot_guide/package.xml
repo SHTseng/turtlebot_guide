@@ -9,7 +9,7 @@
 
   <run_depend>turtlebot_follower_tracker</run_depend>
   <run_depend>turtlebot_mbf_nav</run_depend>
-  <run_depend>turtlebot_guide_integration</run_depend>
+  <run_depend>turtlebot_guide_execution</run_depend>
   <run_depend>turtlebot_guide_visualization</run_depend>
 
   <export>

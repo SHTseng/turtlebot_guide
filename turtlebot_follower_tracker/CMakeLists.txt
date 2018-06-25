@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   eigen_conversions
   nodelet
+  std_msgs
   sensor_msgs
   nav_msgs
   spencer_tracking_msgs
@@ -35,6 +36,7 @@ catkin_package(
     tf
     eigen_conversions
     nodelet
+    std_msgs
     sensor_msgs
     nav_msgs
     spencer_tracking_msgs

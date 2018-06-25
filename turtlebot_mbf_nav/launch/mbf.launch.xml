@@ -11,7 +11,6 @@
   <arg name="odom_topic" default="odom" />
   <arg name="laser_topic" default="scan" />
 
-  <rosparam file="$(find teb_local_planner)/param/teb_local_planner_params.yaml" command="load" />
   <node pkg="turtlebot_mbf_nav" type="turtlebot_mbf_nav" respawn="false" name="move_base_flex" output="screen">
     <param name="tf_timeout" value="1.5"/>
     <param name="planner_max_retries" value="3"/>

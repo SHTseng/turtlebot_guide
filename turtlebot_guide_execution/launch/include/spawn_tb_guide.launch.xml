@@ -3,7 +3,7 @@
   <arg name="init_y" default="0" />
   <arg name="init_yaw" default="0" />
   
-  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_integration)/robot/tb_guide.xacro'" />
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find turtlebot_guide_execution)/robot/tb_guide.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   
   <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"

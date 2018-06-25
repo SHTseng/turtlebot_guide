@@ -56,7 +56,7 @@ controller:
   legacy_obstacle_association: false
   obstacle_association_force_inclusion_factor: 1.5
   obstacle_association_cutoff_factor: 5
-  costmap_converter_plugin: ""   
+  costmap_converter_plugin: "costmap_converter::CostmapToPolygonsDBSMCCH"   
   #"" costmap_converter::CostmapToLinesDBSMCCH
   costmap_converter_spin_thread: true
   costmap_converter_rate: 5
@@ -67,7 +67,7 @@ controller:
   optimization_activate: true
   optimization_verbose: false
   penalty_epsilon: 0.1
-  weight_max_vel_x: 1 #1
+  weight_max_vel_x: 0.5 #1
   weight_max_vel_y: 1
   weight_max_vel_theta: 1
   weight_acc_lim_x: 0
@@ -91,10 +91,10 @@ controller:
   #!! Optimization params for follower
   # weight_follower_pose_x: 0
   # weight_follower_pose_y: 0
-  weight_follower_vel_x: 1
+  weight_follower_vel_x: 10
   weight_follower_vel_theta: 0.1
   weight_proxemics: 1
-  enable_guide: false                                                                                                          
+  enable_guide: true                                                                                                          
   
   # Homotopy Class Planner
   enable_homotopy_class_planning: false # true
