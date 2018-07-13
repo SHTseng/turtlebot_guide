@@ -89,7 +89,7 @@ void writeModelFileTXT(const std::vector<geometry_msgs::PoseStamped> path)
        << "-" << dayte.day() << "-";
   ss << td.hours() << "-" << td.minutes() << "-" << td.seconds();
 
-  std::string file_path = ros::package::getPath("turtlebot_guide_integration")+"/models/";
+  std::string file_path = ros::package::getPath("turtlebot_guide_execution")+"/models/";
   std::string file_name = file_path + "people_" + ss.str() + ".txt";
 
   std::ofstream trajectory_file;
@@ -111,28 +111,33 @@ int main(int argc, char* argv[])
   ros::init(argc, argv, "global_path_plan_node");
   ros::NodeHandle nh;
 
+  float init_x = 0.0;
+  float init_y = 0.0;
   float goal_x = 8.0;
   float goal_y = 17.0;
-  if (argc == 3)
+  if (argc == 5)
   {
-    goal_x = std::atof(argv[1]);
-    goal_y = std::atof(argv[2]);
+    init_x = std::atof(argv[1]);
+    init_y = std::atof(argv[2]);
+    goal_x = std::atof(argv[3]);
+    goal_y = std::atof(argv[4]);
   }
-
+  else
+  {
+    ROS_INFO("Please specify start and goal");
+  }
 
   ros::ServiceClient nav_plan_srv_client = nh.serviceClient<nav_msgs::GetPlan>("/move_base_legacy_relay/make_plan");
 
   geometry_msgs::PoseStamped start_p, goal_p;
   start_p.header.frame_id = "map";
-  start_p.pose.position.x = 22.0; // 24 for follower, 22 for robot
-  start_p.pose.position.y = 17.0;
+  start_p.pose.position.x = init_x;
+  start_p.pose.position.y = init_y;
   start_p.pose.orientation.w = 1.0;
 
   goal_p.header.frame_id = "map";
   goal_p.pose.position.x = goal_x;
   goal_p.pose.position.y = goal_y;
-//  goal_p.pose.position.x = 13.0;
-//  goal_p.pose.position.y = 8.0;
   goal_p.pose.orientation.w = 1.0;
 
   nav_msgs::GetPlan nav_plan_srv;

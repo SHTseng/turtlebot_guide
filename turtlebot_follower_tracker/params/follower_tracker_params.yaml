@@ -1,5 +1,5 @@
 root_linke_name: 'base_footprint'
 odom_name: 'odom'
-foward_prediction_time: 1.0
+foward_prediction_time: 1.2
 camera_height: 0.8152 #0.805 0.887 for rosbag file
-following_range: [-0.8414, 0.2944, -2.8, 1.21, -2.8, -1.3, -0.8414, -0.3944]
+following_range: [-0.3914, 0.3244, -2.2, 1, -2.2, -1.09, -0.3214, -0.4944] #-0.8414, 0.2944, -2.8, 1.21, -2.8, -1.3, -0.8414, -0.3944

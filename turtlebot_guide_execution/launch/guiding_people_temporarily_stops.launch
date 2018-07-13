@@ -7,9 +7,7 @@
     <arg name="gui" default="false"/>
     <arg name="rviz" default="true"/>
     <arg name="visual" default="false"/>
-    <arg name="actor_mode" default="0"/>
-    <arg name="map_file" default="$(find turtlebot_guide_execution)/maps/willow_v2.yaml"/>
-    <arg name="world_name" default="$(find turtlebot_guide_execution)/worlds/actor0.world"/>
+    <arg name="world_name" default="$(find turtlebot_guide_execution)/worlds/actor1.world"/>
   </include>
   
  </launch>

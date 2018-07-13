@@ -119,6 +119,12 @@ private:
       else
       {
         // Currently get the only track out
+//        int highest_conf = 0;
+//        for (std::size_t i = 0; i < tracked_people_.tracks.size(); i++)
+//        {
+//          if(tracked_people_.tracks[i].is_matched)
+//            highest_conf = i;
+//        }
         follower_pose_ = tracked_people_.tracks.front().pose.pose;
         follower_vel_ = tracked_people_.tracks.front().twist.twist;
 

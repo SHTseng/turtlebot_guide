@@ -5,8 +5,8 @@
   <arg name="origin_y" value="5.0"/>
   <arg name="origin_yaw" value="0"/>
   
-  <arg name="map_file" value="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
-  <arg name="world_name" value="$(find turtlebot_guide_integration)/worlds/script_actor.world"/>
+  <arg name="map_file" value="$(find turtlebot_guide_execution)/maps/empty_map.yaml"/>
+  <arg name="world_name" value="$(find turtlebot_guide_execution)/worlds/script_actor.world"/>
   
   <!-- Gazebo simulation environment -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -16,7 +16,7 @@
   </include> 
 
   <!-- Spawn turtlebot guide model -->
-  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+  <include file="$(find turtlebot_guide_execution)/launch/include/spawn_tb_guide.launch.xml">
     <arg name="init_x" value="$(arg origin_x)" />
     <arg name="init_y" value="$(arg origin_y)" />
     <arg name="init_yaw" value="$(arg origin_yaw)" />
@@ -27,6 +27,6 @@
   </include>
   
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/tracking_system.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_execution)/rviz/tracking_system.rviz"/>
     
  </launch>

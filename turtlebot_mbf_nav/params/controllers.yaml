@@ -16,7 +16,7 @@ controller:
   min_samples: 3
   max_samples: 500
   global_plan_overwrite_orientation: true
-  allow_init_with_backwards_motion: false
+  allow_init_with_backwards_motion: true
   global_plan_viapoint_sep: -1 #-1
   via_points_ordered: false
   max_global_plan_lookahead_dist: 1 #1 1.5
@@ -26,7 +26,7 @@ controller:
   publish_feedback: false
   # Robot 
   max_vel_x: 0.5
-  max_vel_x_backwards: 0.2
+  max_vel_x_backwards: 0.5
   max_vel_y: 0.0
   max_vel_theta: 0.3
   acc_lim_x: 0.5
@@ -67,7 +67,7 @@ controller:
   optimization_activate: true
   optimization_verbose: false
   penalty_epsilon: 0.1
-  weight_max_vel_x: 0.5 #1
+  weight_max_vel_x: 0.1 #1
   weight_max_vel_y: 1
   weight_max_vel_theta: 1
   weight_acc_lim_x: 0

@@ -4,13 +4,28 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
-    
     <include>
       <uri>model://sun</uri>
     </include>
+    <include>
+      <uri>model://willowgarage</uri>
+    </include>
+    
+    <light type="point" name="point">
+      <pose>0 8 3 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>.1 .1 .1 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.2</linear>
+        <constant>0.8</constant>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
     
     <actor name="follower">
-      <pose>-10 -8 0.98 1.57 0 -1.57</pose>
+      <pose>-2 8 0.98 1.57 0 1.57</pose>
       <skin>
         <filename>walk.dae</filename>
         <scale>1.0</scale>
@@ -20,7 +35,7 @@
         <scale>1.000000</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
-      <plugin name="actor_plugin" filename="libgazebo_ros_path_follow_actor.so">
+      <plugin name="actor_plugin" filename="libgazebo_ros_path_following_actor.so">
         <ref_velocity>0.4</ref_velocity>
         <oscillation_enable>false</oscillation_enable>
       </plugin>

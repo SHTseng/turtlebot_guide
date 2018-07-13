@@ -1,23 +1,24 @@
 <launch>  
-  <arg name="gui" default="false"/>
-  <arg name="rviz" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="rviz" default="false"/>
   
   <arg name="origin_x" default="0"/> 
-  <arg name="origin_y" default="0"/>
+  <arg name="origin_y" default="8"/>
   <arg name="origin_yaw" default="0"/>
   
-  <arg name="map_file" default="$(find turtlebot_guide_integration)/maps/empty_map.yaml"/>
-  <arg name="world_name" default="$(find turtlebot_guide_integration)/worlds/simple_actor.world"/>
+  <arg name="map_file" default="$(find turtlebot_guide_execution)/maps/empty_map.yaml"/>
+  <arg name="world_name" default="$(find turtlebot_guide_execution)/worlds/actor_scene2.world"/>
   
   <!-- Gazebo simulation environment -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(arg world_name)"/> 
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="$(arg gui)"/>
+    <arg name="verbose" value="true" />
   </include> 
 
   <!-- Spawn turtlebot guide model -->
-  <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
+  <include file="$(find turtlebot_guide_execution)/launch/include/spawn_tb_guide.launch.xml">
     <arg name="init_x" value="$(arg origin_x)" />
     <arg name="init_y" value="$(arg origin_y)" />
     <arg name="init_yaw" value="$(arg origin_yaw)" />
@@ -35,6 +36,6 @@
   <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
   
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_integration)/rviz/guide_people.rviz" if="$(arg rviz)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_execution)/rviz/guide_people.rviz" if="$(arg rviz)"/>
     
  </launch>

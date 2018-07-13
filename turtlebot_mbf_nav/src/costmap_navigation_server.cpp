@@ -38,6 +38,7 @@
  *
  */
 
+#include <chrono>
 #include <nav_msgs/Path.h>
 #include <geometry_msgs/PoseArray.h>
 #include <costmap_2d/costmap_2d_ros.h>
@@ -100,7 +101,9 @@ CostmapNavigationServer::CostmapNavigationServer(const boost::shared_ptr<tf::Tra
 
   // subscribe to the follower
   ros::NodeHandle nh;
-  monitor_sub_ = nh.subscribe("follower_state", 1000, &CostmapNavigationServer::stateCB, this);
+  monitor_sub_ = nh.subscribe("follower_state", 1, &CostmapNavigationServer::stateCB, this);
+
+  actor_pub_ = nh.advertise<std_msgs::String>("actor_state", 1);
 
   // dynamic reconfigure server for mbf_costmap_nav configuration; also include abstract server parameters
   dsrv_costmap_ = boost::make_shared<dynamic_reconfigure::Server<mbf_costmap_nav::MoveBaseFlexConfig> >(private_nh_);
@@ -662,9 +665,9 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
   geometry_msgs::PoseStamped oscillation_pose;
   ros::Time last_oscillation_reset = ros::Time::now();
 
+  int prev_state = 0;
 //  bool first_cycle = true;
   oscillation_pose = robot_pose_;
-
   while (active_moving_ && ros::ok())
   {
     if (!getRobotPose(robot_pose_))
@@ -679,6 +682,11 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
 
     //! Parse the follower information to the local controller, TODO: need to revise
     moving_ptr_->setFollowerState(follower_state_.state, follower_state_.pose);
+
+    if (prev_state == 1 && follower_state_.state == 0)
+    {
+      // replan to goal
+    }
 
     // check preempt requested
     if (action_server_exe_path_ptr_->isPreemptRequested())
@@ -816,6 +824,9 @@ void CostmapNavigationServer::callActionExePath(const mbf_msgs::ExePathGoalConst
         action_server_exe_path_ptr_->setAborted(result, result.message);
         active_moving_ = false;
     }
+
+
+    prev_state = follower_state_.state;
 
     if (active_moving_)
     {
@@ -959,36 +970,51 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   ros::Time last_oscillation_reset = ros::Time::now();
 
   std::string type; // recovery behavior type
+
+  int prev_state = 0;
+  std_msgs::String state_msg;
+  ros::Time start_time = ros::Time::now();
+  geometry_msgs::PoseStamped task_goal = get_path_goal.target_pose;
+  ROS_INFO_STREAM("Task goal: (" << task_goal.pose.position.x << ", " <<task_goal.pose.position.y << ")");
+  bool flag = true;
+  bool flag_2 = true;
+
   while (ros::ok() && run)
   {
     bool try_recovery = false;
 
-//    ROS_INFO_STREAM("pose: " <<follower_state_.pose.x << " " << follower_state_.pose.y << " " << follower_state_.pose.theta);
-//    ROS_INFO_STREAM("vel: " << follower_state_.vel.x << " " << follower_state_.vel.y << " " << follower_state_.vel.theta);
-
     /// make reaction based on the follower state
-//    switch(follower_state_.state)
-//    {
-//      case turtlebot_guide_msgs::FollowerState::FOLLOWING:
-//        // keep adapting to the follower
-//        ROS_INFO("following");
-//        break;
-//      case turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING:
-//        // follower goes deviate from path, the robot need to start to follow3
-//        ROS_INFO("not following");
-//        break;
-//      case turtlebot_guide_msgs::FollowerState::STOPPED:
-//        // robot stops, publish zero velocity until the follower start to move again
-//        ROS_INFO("stop detected");
-//        break;
-//      case turtlebot_guide_msgs::FollowerState::UNKNOWN:
-//        // the robot needs to find out where the follower is
-//        break;
-//    }
+    if (follower_state_.state == turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING && flag)
+    {
+      // now follow the human
+      flag = false;
+      get_path_goal.target_pose.header.stamp = ros::Time::now();
+      get_path_goal.target_pose.pose.position.x = 2;
+      get_path_goal.target_pose.pose.position.y = 9;
+//      get_path_goal.target_pose.pose.orientation = target_pose.pose.orientation;
+      get_path_goal.use_start_pose = false;
+      action_client_get_path_.sendGoal(get_path_goal);
+      state = GET_PATH;
+    }
+    else if (follower_state_.state == turtlebot_guide_msgs::FollowerState::FOLLOWING &&
+             prev_state == turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING && flag_2)
+    {
+      // transition from not following to following task
+      flag_2 = false;
+      get_path_goal.target_pose.header.stamp = ros::Time::now();
+      get_path_goal.target_pose = task_goal;
+      get_path_goal.use_start_pose = false;
+      action_client_get_path_.sendGoal(get_path_goal);
+      state = GET_PATH;
+    }
+    prev_state = follower_state_.state;
 
     switch (state)
     {
       case GET_PATH:
+         // To make the actor stop moving except exe_path state
+        state_msg.data = "false";
+        actor_pub_.publish(state_msg);
 
         if (!action_client_get_path_.waitForResult(wait))
         { // no result -> action server is still running
@@ -1126,6 +1152,10 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         break;
 
       case EXE_PATH:
+
+        // Command the actor start to move
+        state_msg.data = "active";
+        actor_pub_.publish(state_msg);
 
         if (has_new_plan)
         {
@@ -1309,6 +1339,9 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         break;
 
       case RECOVERY:
+        // To make the actor stop moving except exe_path state
+        state_msg.data = "false";
+        actor_pub_.publish(state_msg);
 
         if (!action_client_recovery_.waitForResult(wait))
         {
@@ -1395,6 +1428,10 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
         break;
     }
   }
+
+  ros::Time finish_time = ros::Time::now();
+  double d = (finish_time-start_time).toSec();
+  ROS_INFO_STREAM("Guiding took " << d << " sec");
 
   planner_thread.interrupt();
   planner_thread.join();

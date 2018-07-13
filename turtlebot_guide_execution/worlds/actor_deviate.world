@@ -12,7 +12,7 @@
     </include>
     
     <light type="point" name="point">
-      <pose>22 17 3 0 0 0</pose>
+      <pose>0 8 3 0 0 0</pose>
       <diffuse>0.9 0.9 0.9 1</diffuse>
       <specular>.1 .1 .1 1</specular>
       <attenuation>
@@ -25,7 +25,7 @@
     </light>
     
     <actor name="follower">
-      <pose>24 17.0 0.98 1.57 0 -1.57</pose> <!-- 1.57 0 -1.57 -->
+      <pose>-2 8 0.98 1.57 0 1.57</pose>
       <skin>
         <filename>walk.dae</filename>
         <scale>1.0</scale>
@@ -35,13 +35,12 @@
         <scale>1.000000</scale>
         <interpolate_x>true</interpolate_x>
       </animation>
-      <plugin name="actor_path_follow_plugin" filename="libgazebo_ros_temporary_stop_actor.so">
-        <vel_topic>/cmd_vel_mux/input/navi</vel_topic>
-        <velocity>0.4</velocity>
+      <plugin name="actor_plugin" filename="libgazebo_ros_path_following_actor.so">
+        <ref_velocity>0.35</ref_velocity>
         <oscillation_enable>false</oscillation_enable>
-        <time_of_stop>12.0</time_of_stop>
-        <stop_duration>2.5</stop_duration>
+        <traj_file_name>deviate.txt</traj_file_name>
       </plugin>
+
     </actor>
      
   </world>

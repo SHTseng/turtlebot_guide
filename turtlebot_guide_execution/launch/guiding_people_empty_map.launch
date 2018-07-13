@@ -1,13 +1,12 @@
 <launch>  
   
   <include file="$(find turtlebot_guide_execution)/launch/include/guiding_in_gazebo.launch">
-    <arg name="origin_x" value="-8"/>
+    <arg name="origin_x" value="-7"/>
     <arg name="origin_y" value="-8"/>
     <arg name="origin_yaw" value="0.0"/>
-    <arg name="gui" value="false"/>
-    <arg name="rviz" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="rviz" value="false"/>
     <arg name="visual" value="false"/>
-    <arg name="actor_mode" value="0"/>
     <arg name="map_file" value="$(find turtlebot_guide_execution)/maps/empty_map.yaml"/>
     <arg name="world_name" value="$(find turtlebot_guide_execution)/worlds/actor_empty_world.world"/>
   </include>

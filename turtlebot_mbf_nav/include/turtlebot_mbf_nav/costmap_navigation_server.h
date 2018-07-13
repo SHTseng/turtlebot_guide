@@ -49,6 +49,7 @@
 
 #include <mbf_costmap_nav/MoveBaseFlexConfig.h>
 #include <std_srvs/Empty.h>
+#include <std_msgs/String.h>
 #include <mbf_msgs/CheckPose.h>
 
 #include <turtlebot_guide_msgs/FollowerState.h>
@@ -230,6 +231,7 @@ private:
   ros::Timer shutdown_costmaps_timer_;    //!< delayed shutdown timer
   ros::Duration shutdown_costmaps_delay_; //!< delayed shutdown delay
 
+  ros::Publisher actor_pub_;
   //! Subscribe to the follower state monitor
   ros::Subscriber monitor_sub_;
   turtlebot_guide_msgs::FollowerState follower_state_;

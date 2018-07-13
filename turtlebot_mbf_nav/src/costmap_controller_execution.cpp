@@ -104,7 +104,10 @@ void CostmapControllerExecution::run()
   int retries = 0;
   int seq = 0;
   follower_state_ = 0;
+  double accum_dist = 0.0;
 
+  computeRobotPose();
+  geometry_msgs::PoseStamped prev_pose = robot_pose_;
   try
   {
     while (moving_ && ros::ok())
@@ -140,6 +143,7 @@ void CostmapControllerExecution::run()
 
       // compute robot pose and store it in robot_pose_
       computeRobotPose();
+      accum_dist += hypot(robot_pose_.pose.position.x-prev_pose.pose.position.x, robot_pose_.pose.position.y-prev_pose.pose.position.y);
 
       // ask planner if the goal is reached
       if (reachedGoalCheck())
@@ -166,42 +170,50 @@ void CostmapControllerExecution::run()
         geometry_msgs::TwistStamped cmd_vel_stamped;
         geometry_msgs::TwistStamped robot_velocity;   // TODO pass current velocity to the plugin!
 
-        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
-//        switch (follower_state_)
-//        {
-//          case 0:
-//            // Follower is following, than call local planner
-//            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
-//            break;
-//          case 1:
-//          {
-//            // Follower not following, switch to robot follow follower
-//            // find the direction vector pointing to the follower
-//            // (follower_p - robot_p).Normalize()
-//            double dx = follower_pose_.x - robot_pose_.pose.position.x;
-//            double dy = follower_pose_.y - robot_pose_.pose.position.y;
-//            double norm = std::hypot(dx, dy);
-
-//            cmd_vel_stamped.twist.linear.x = 0;
-//            cmd_vel_stamped.twist.angular.z = 0;
-//            outcome_ = 0;
-//            break;
-//          }
-//          case 2:
-//            // Follower stops, publish zero velocity
-//            publishZeroVelocity();
-//            cmd_vel_stamped.twist.linear.x = 0;
-//            cmd_vel_stamped.twist.linear.y = 0;
-//            cmd_vel_stamped.twist.linear.z = 0;
-//            cmd_vel_stamped.twist.angular.x = 0;
-//            cmd_vel_stamped.twist.angular.y = 0;
-//            cmd_vel_stamped.twist.angular.z = 0;
-//            outcome_ = 0;
-//            break;
-//          case 3:
-//            // Does not know the state of the follower, no idea
-//            break;
-//        }
+//        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+        switch (follower_state_)
+        {
+          case 0:
+            // Follower is following, than call local planner
+            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+            break;
+          case 1:
+          {
+            if (robot_pose_.pose.position.x > 2.0 || robot_pose_.pose.position.y < 9)
+            {
+              cmd_vel_stamped.twist.linear.x = -0.4;
+              if(tf::getYaw(robot_pose_.pose.orientation) > -1)
+              {
+                cmd_vel_stamped.twist.angular.z = -0.35;
+              }
+            }
+            else
+            {
+              cmd_vel_stamped.twist.linear.x = 0;
+              cmd_vel_stamped.twist.linear.y = 0;
+              cmd_vel_stamped.twist.linear.z = 0;
+              cmd_vel_stamped.twist.angular.x = 0;
+              cmd_vel_stamped.twist.angular.y = 0;
+              cmd_vel_stamped.twist.angular.z = 0;
+            }
+            outcome_ = 0;
+            break;
+          }
+          case 2:
+            // Follower stops, publish zero velocity
+            publishZeroVelocity();
+            cmd_vel_stamped.twist.linear.x = 0;
+            cmd_vel_stamped.twist.linear.y = 0;
+            cmd_vel_stamped.twist.linear.z = 0;
+            cmd_vel_stamped.twist.angular.x = 0;
+            cmd_vel_stamped.twist.angular.y = 0;
+            cmd_vel_stamped.twist.angular.z = 0;
+            outcome_ = 0;
+            break;
+          default:
+            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+            break;
+        }
 
         if (outcome_ < 10)
         {
@@ -237,6 +249,7 @@ void CostmapControllerExecution::run()
           publishZeroVelocity(); // command the robot to stop
         }
       }
+      prev_pose = robot_pose_;
 
       boost::chrono::thread_clock::time_point end_time = boost::chrono::thread_clock::now();
       boost::chrono::microseconds execution_duration =
@@ -255,6 +268,7 @@ void CostmapControllerExecution::run()
         }
       }
     }
+    ROS_INFO_STREAM("Total guiding distance " << accum_dist << " m");
   }
   catch (const boost::thread_interrupted &ex)
   {
