@@ -182,10 +182,11 @@ private:
     // coordinate transformation of the following range
     geometry_msgs::Point transformed_pose = transformToLocalFrame(follower_pose_.position);
 
-    bool inside = insidePolygon(following_polygon_, transformed_pose);
+//    bool inside = insidePolygon(following_polygon_, transformed_pose);
     bool predict_inside = predictInsidePolygon(following_polygon_, transformed_pose, foward_prediction_time_);
 
-    return (inside && predict_inside) ? true : false;
+    // return (inside && predict_inside) ? true : false;
+    return predict_inside ? true : false;
   }
 
   bool predictInsidePolygon(std::vector<geometry_msgs::Point> polygon, geometry_msgs::Point p, const double prediection_time)

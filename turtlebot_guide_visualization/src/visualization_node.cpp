@@ -25,10 +25,35 @@ std::vector<geometry_msgs::Point32> getCirclePoints(const float &radius, const f
 
 const std::string base_link_ = "base_footprint";
 turtlebot_guide_msgs::FollowerState m_state;
+std::vector<geometry_msgs::Point32> following_polygon_;
+std::vector<geometry_msgs::Point32> camera_polygon_;
 
 int main(int argc, char *argv[]){
   ros::init(argc, argv, "visualization_node");
   ros::NodeHandle nh;
+
+  std::vector<double> following_range;
+  nh.param("/follower_state_monitor/following_range", following_range, std::vector<double>());
+  for(std::size_t i = 0; i < following_range.size(); i+=2)
+  {
+    geometry_msgs::Point32 p;
+    p.x = static_cast<float>(following_range[i]);
+    p.y = static_cast<float>(following_range[i+1]);
+    p.z = 0.0;
+    following_polygon_.push_back(p);
+  }
+
+  std::vector<double> camera_frustum;
+  nh.param("/follower_state_monitor/camera_frustum", camera_frustum, std::vector<double>());
+  for(std::size_t i = 0; i < camera_frustum.size(); i+=2)
+  {
+    geometry_msgs::Point32 p;
+    p.x = static_cast<float>(camera_frustum[i]);
+    p.y = static_cast<float>(camera_frustum[i+1]);
+    p.z = 0.0;
+    camera_polygon_.push_back(p);
+  }
+
 
   ros::Publisher polygon_pub = nh.advertise<jsk_recognition_msgs::PolygonArray>("turtlebot_guide/visualization", 10);
   ros::Publisher pose_marker_pub = nh.advertise<visualization_msgs::Marker>("current_pose", 10);
@@ -39,12 +64,12 @@ int main(int argc, char *argv[]){
   geometry_msgs::PolygonStamped polygon_following;
   polygon_following.header.frame_id = "base_footprint";
   polygon_following.header.stamp = ros::Time::now();
-  polygon_following.polygon.points = getFollowingPoints();
+  polygon_following.polygon.points = following_polygon_;
 
-  geometry_msgs::PolygonStamped polygon_nonfollowing;
-  polygon_nonfollowing.header.frame_id = "base_footprint";
-  polygon_nonfollowing.header.stamp = ros::Time::now();
-  polygon_nonfollowing.polygon.points = getNonFollowingPoints();
+  geometry_msgs::PolygonStamped polygon_camera_msg;
+  polygon_camera_msg.header.frame_id = "base_footprint";
+  polygon_camera_msg.header.stamp = ros::Time::now();
+  polygon_camera_msg.polygon.points = camera_polygon_;
 
   unsigned int label = 0;
   jsk_recognition_msgs::PolygonArray polygon_array;
@@ -55,7 +80,7 @@ int main(int argc, char *argv[]){
   polygon_array.labels.push_back(label);
   label += 10;
 
-  polygon_array.polygons.push_back(polygon_nonfollowing);
+  polygon_array.polygons.push_back(polygon_camera_msg); // polygon_nonfollowing
   polygon_array.likelihood.push_back(1.0);
   polygon_array.labels.push_back(label);
   label += 10;

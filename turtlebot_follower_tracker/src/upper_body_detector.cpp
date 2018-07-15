@@ -163,7 +163,7 @@ void callback(const sensor_msgs::ImageConstPtr &depth,
       for (int r = 0; r < info->height; r++){
         for (int c = 0; c < info->width; c++){
           float raw_val = img_depth_.at<ushort>(r,c);
-          matrix_depth(c, r) = (raw_val == 0) ? nanf("") : raw_val;
+          matrix_depth(c, r) = (raw_val == 0) ? nanf("") : raw_val*0.001;
         }
       }
       break;

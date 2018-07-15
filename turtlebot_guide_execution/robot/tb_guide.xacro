@@ -23,7 +23,7 @@
   <joint name="laser_joint" type="fixed">
     <axis xyz="0 1 0" />
     <origin xyz="0 0 0.015" rpy="0 0 0"/>
-    <parent link="plate_middle_link"/>
+    <parent link="plate_bottom_link"/> <!-- middle -->
     <child link="laser_link"/>
   </joint>
   
