@@ -25,7 +25,7 @@
     </light>
     
     <actor name="follower">
-      <pose>-2 8 0.98 1.57 0 1.57</pose>
+      <pose>-1.8 8 0.98 1.57 0 1.57</pose>
       <skin>
         <filename>walk.dae</filename>
         <scale>1.0</scale>

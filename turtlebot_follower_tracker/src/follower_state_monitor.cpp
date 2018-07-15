@@ -213,12 +213,12 @@ private:
       // outer product to calculate area surrounded by point and two adjent vertices
       area = (polygon[i].x-p.x)*(polygon[i+1].y-p.y)-(polygon[i+1].x-p.x)*(polygon[i].y-p.y);
       // if the value with different sign indicates the point lies in the right side
-      if(area < 0.0) return false;
+      if(area > 0.0) return false;
     }
 
     // Calculate the last point and first point
     area = (polygon.back().x-p.x)*(polygon.front().y-p.y)-(polygon.front().x-p.x)*(polygon.back().y-p.y);
-    if(area < 0.0) left_side = false;
+    if(area > 0.0) left_side = false;
 
     return left_side;
   }
