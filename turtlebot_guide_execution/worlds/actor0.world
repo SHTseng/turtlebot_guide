@@ -24,54 +24,8 @@
       <cast_shadows>false</cast_shadows>
     </light>
     
-    <!-- <model name="table">
-      <pose>25.1 18.5 0 0 0 3.14</pose>
-      <static>true</static>
-      <link name="table_body">
-        <visual name="visual">
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://turtlebot_guide_integration/models/Table/table.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name="collision">
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://turtlebot_guide_integration/models/Table/table.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
-      </link>
-    </model> 
-    
-    <model name="chair">
-      <pose>24.5 16.2 0 1.57 0 -1.57</pose>
-      <static>true</static>
-      <link name="chair_body">
-        <visual name="visual">
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://turtlebot_guide_integration/models/chair/chair.obj</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name="collision">
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://turtlebot_guide_integration/models/chair/chair.obj</uri>
-            </mesh>
-          </geometry>
-        </collision>
-      </link>
-    </model>  -->
-    
-    <actor name="follower">
-      <pose>24 17.0 0.98 1.57 0 -1.57</pose> <!-- 1.57 0 -1.57 -->
+    <!--actor name="follower">
+      <pose>24 17.0 0.98 1.57 0 -1.57</pose> 
       <skin>
         <filename>walk.dae</filename>
         <scale>1.0</scale>
@@ -88,7 +42,7 @@
         <time_of_stop>8.0</time_of_stop>
         <stop_duration>5.0</stop_duration>
       </plugin>
-    </actor>
+    </actor>-->
      
   </world>
 </sdf>

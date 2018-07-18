@@ -254,174 +254,19 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        base_footprint:
-          Value: false
-        base_link:
-          Value: false
-        camera_depth_frame:
-          Value: false
-        camera_depth_optical_frame:
-          Value: false
-        camera_link:
-          Value: true
-        camera_rgb_frame:
-          Value: false
-        camera_rgb_optical_frame:
-          Value: false
-        caster_back_link:
-          Value: false
-        caster_front_link:
-          Value: false
-        cliff_sensor_front_link:
-          Value: false
-        cliff_sensor_left_link:
-          Value: false
-        cliff_sensor_right_link:
-          Value: false
-        gyro_link:
-          Value: false
-        ir_camera_link_mid:
-          Value: false
-        l_ir_camera_link:
-          Value: false
-        laser_link:
-          Value: false
-        map:
-          Value: true
-        mount_asus_xtion_pro_link:
-          Value: false
-        odom:
-          Value: true
-        plate_bottom_link:
-          Value: false
-        plate_middle_link:
-          Value: false
-        plate_top_link:
-          Value: false
-        pole_bottom_0_link:
-          Value: false
-        pole_bottom_1_link:
-          Value: false
-        pole_bottom_2_link:
-          Value: false
-        pole_bottom_3_link:
-          Value: false
-        pole_bottom_4_link:
-          Value: false
-        pole_bottom_5_link:
-          Value: false
-        pole_kinect_0_link:
-          Value: false
-        pole_kinect_1_link:
-          Value: false
-        pole_middle_0_link:
-          Value: false
-        pole_middle_1_link:
-          Value: false
-        pole_middle_2_link:
-          Value: false
-        pole_middle_3_link:
-          Value: false
-        pole_top_0_link:
-          Value: false
-        pole_top_1_link:
-          Value: false
-        pole_top_2_link:
-          Value: false
-        pole_top_3_link:
-          Value: false
-        r_ir_camera_link:
-          Value: false
-        wheel_left_link:
-          Value: false
-        wheel_right_link:
-          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        map:
-          odom:
-            base_footprint:
-              base_link:
-                camera_rgb_frame:
-                  camera_depth_frame:
-                    camera_depth_optical_frame:
-                      {}
-                  camera_link:
-                    {}
-                  camera_rgb_optical_frame:
-                    {}
-                caster_back_link:
-                  {}
-                caster_front_link:
-                  {}
-                cliff_sensor_front_link:
-                  {}
-                cliff_sensor_left_link:
-                  {}
-                cliff_sensor_right_link:
-                  {}
-                gyro_link:
-                  {}
-                mount_asus_xtion_pro_link:
-                  {}
-                plate_bottom_link:
-                  laser_link:
-                    {}
-                plate_middle_link:
-                  {}
-                plate_top_link:
-                  ir_camera_link_mid:
-                    {}
-                  l_ir_camera_link:
-                    {}
-                  r_ir_camera_link:
-                    {}
-                pole_bottom_0_link:
-                  {}
-                pole_bottom_1_link:
-                  {}
-                pole_bottom_2_link:
-                  {}
-                pole_bottom_3_link:
-                  {}
-                pole_bottom_4_link:
-                  {}
-                pole_bottom_5_link:
-                  {}
-                pole_kinect_0_link:
-                  {}
-                pole_kinect_1_link:
-                  {}
-                pole_middle_0_link:
-                  {}
-                pole_middle_1_link:
-                  {}
-                pole_middle_2_link:
-                  {}
-                pole_middle_3_link:
-                  {}
-                pole_top_0_link:
-                  {}
-                pole_top_1_link:
-                  {}
-                pole_top_2_link:
-                  {}
-                pole_top_3_link:
-                  {}
-                wheel_left_link:
-                  {}
-                wheel_right_link:
-                  {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -921,31 +766,31 @@ Visualization Manager:
     - Alpha: 0.5
       Class: jsk_rviz_plugin/PolygonArray
       Color: 25; 255; 0
-      Enabled: true
+      Enabled: false
       Name: PolygonArray
       Topic: /turtlebot_guide/visualization
       Unreliable: false
-      Value: true
+      Value: false
       coloring: Auto
       normal length: 0.100000001
       only border: false
       show normal: false
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /move_base_flex/planner/turning_points
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: /follower_state_marker
       Name: Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -967,7 +812,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 12.8573341
+      Distance: 20.2312641
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -982,10 +827,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.39479482
+      Pitch: 1.44979477
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 4.4882102
+      Yaw: 6.16321373
     Saved: ~
 Window Geometry:
   Displays:

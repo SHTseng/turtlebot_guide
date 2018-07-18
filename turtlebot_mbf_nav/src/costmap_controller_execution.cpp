@@ -170,13 +170,13 @@ void CostmapControllerExecution::run()
         geometry_msgs::TwistStamped cmd_vel_stamped;
         geometry_msgs::TwistStamped robot_velocity;   // TODO pass current velocity to the plugin!
 
-        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
-//        switch (follower_state_)
-//        {
-//          case 0:
-//            // Follower is following, than call local planner
-//            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
-//            break;
+//        outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+        switch (follower_state_)
+        {
+          case 0:
+            // Follower is following, than call local planner
+            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+            break;
 //          case 1:
 //          {
 //            if (robot_pose_.pose.position.x > 2.0 || robot_pose_.pose.position.y < 9)
@@ -199,21 +199,21 @@ void CostmapControllerExecution::run()
 //            outcome_ = 0;
 //            break;
 //          }
-//          case 2:
-//            // Follower stops, publish zero velocity
-//            publishZeroVelocity();
-//            cmd_vel_stamped.twist.linear.x = 0;
-//            cmd_vel_stamped.twist.linear.y = 0;
-//            cmd_vel_stamped.twist.linear.z = 0;
-//            cmd_vel_stamped.twist.angular.x = 0;
-//            cmd_vel_stamped.twist.angular.y = 0;
-//            cmd_vel_stamped.twist.angular.z = 0;
-//            outcome_ = 0;
-//            break;
-//          default:
-//            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
-//            break;
-//        }
+          case 2:
+            // Follower stops, publish zero velocity
+            publishZeroVelocity();
+            cmd_vel_stamped.twist.linear.x = 0;
+            cmd_vel_stamped.twist.linear.y = 0;
+            cmd_vel_stamped.twist.linear.z = 0;
+            cmd_vel_stamped.twist.angular.x = 0;
+            cmd_vel_stamped.twist.angular.y = 0;
+            cmd_vel_stamped.twist.angular.z = 0;
+            outcome_ = 0;
+            break;
+          default:
+            outcome_ = computeVelocityCmd(robot_pose_, robot_velocity, cmd_vel_stamped, message_);
+            break;
+        }
 
         if (outcome_ < 10)
         {

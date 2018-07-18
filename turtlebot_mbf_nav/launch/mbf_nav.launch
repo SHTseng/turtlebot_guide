@@ -1,8 +1,8 @@
 <launch>  
-  <arg name="gui" default="false"/>
+  <arg name="gui" default="true"/>
   <arg name="rviz" default="true"/>
   <arg name="map_file" default="$(find turtlebot_guide_execution)/maps/willow_v2.yaml"/>
-  <arg name="world_name" default="worlds/willowgarage.world"/>
+  <arg name="world_name" default="$(find turtlebot_guide_execution)/worlds/actor0.world"/>
   
   <arg name="origin_x" default="22.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="origin_y" default="17.0"/> <!-- Use 17.0 for willow's map in simulation -->

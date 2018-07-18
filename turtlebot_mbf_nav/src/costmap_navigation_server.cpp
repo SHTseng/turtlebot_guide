@@ -984,29 +984,28 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
     bool try_recovery = false;
 
     /// make reaction based on the follower state
-    if (follower_state_.state == turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING && flag)
-    {
-      // now follow the human
-      flag = false;
-      get_path_goal.target_pose.header.stamp = ros::Time::now();
-      get_path_goal.target_pose.pose.position.x = 2;
-      get_path_goal.target_pose.pose.position.y = 9;
-//      get_path_goal.target_pose.pose.orientation = target_pose.pose.orientation;
-      get_path_goal.use_start_pose = false;
-      action_client_get_path_.sendGoal(get_path_goal);
-      state = GET_PATH;
-    }
-    else if (follower_state_.state == turtlebot_guide_msgs::FollowerState::FOLLOWING &&
-             prev_state == turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING && flag_2)
-    {
-      // transition from not following to following task
-      flag_2 = false;
-      get_path_goal.target_pose.header.stamp = ros::Time::now();
-      get_path_goal.target_pose = task_goal;
-      get_path_goal.use_start_pose = false;
-      action_client_get_path_.sendGoal(get_path_goal);
-      state = GET_PATH;
-    }
+//    if (follower_state_.state == turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING && flag)
+//    {
+//      // now follow the human
+//      flag = false;
+//      get_path_goal.target_pose.header.stamp = ros::Time::now();
+//      get_path_goal.target_pose.pose.position.x = 2;
+//      get_path_goal.target_pose.pose.position.y = 9;
+//      get_path_goal.use_start_pose = false;
+//      action_client_get_path_.sendGoal(get_path_goal);
+//      state = GET_PATH;
+//    }
+//    else if (follower_state_.state == turtlebot_guide_msgs::FollowerState::FOLLOWING &&
+//             prev_state == turtlebot_guide_msgs::FollowerState::NOT_FOLLOWING && flag_2)
+//    {
+//      // transition from not following to following task
+//      flag_2 = false;
+//      get_path_goal.target_pose.header.stamp = ros::Time::now();
+//      get_path_goal.target_pose = task_goal;
+//      get_path_goal.use_start_pose = false;
+//      action_client_get_path_.sendGoal(get_path_goal);
+//      state = GET_PATH;
+//    }
     prev_state = follower_state_.state;
 
     switch (state)

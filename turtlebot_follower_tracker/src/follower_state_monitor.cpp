@@ -165,6 +165,7 @@ private:
       // Record the follower pose for next run and unlock the mutex
       prev_follower_pose_ = follower_pose_;
       wait_for_wake_ = true;
+
     } // end while
   }
 
@@ -193,8 +194,8 @@ private:
   {
     for (auto vertices : polygon)
     {
-      vertices.x += odom_.twist.twist.linear.x*prediection_time;
-      vertices.y += odom_.twist.twist.linear.x*prediection_time;
+      vertices.x += odom_.twist.twist.linear.x*prediection_time*std::cos(odom_.twist.twist.angular.z*prediection_time);
+      vertices.y += odom_.twist.twist.linear.x*prediection_time*std::sin(odom_.twist.twist.angular.z*prediection_time);
     }
 
     p.x += follower_vel_.linear.x*prediection_time;
