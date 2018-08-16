@@ -68,6 +68,7 @@ public:
 
     dist_pub_ = nh_.advertise<std_msgs::Float64>("distance", 1);
     dist_ref_pub_ = nh_.advertise<std_msgs::Float64>("distance_ref", 1);
+    diff_pub_ = nh_.advertise<geometry_msgs::Point>("diff", 10);
   }
 
   ~FollowerStateMonitor()
@@ -119,14 +120,18 @@ private:
       else
       {
         // Currently get the only track out
-//        int highest_conf = 0;
-//        for (std::size_t i = 0; i < tracked_people_.tracks.size(); i++)
-//        {
-//          if(tracked_people_.tracks[i].is_matched)
-//            highest_conf = i;
-//        }
-        follower_pose_ = tracked_people_.tracks.front().pose.pose;
-        follower_vel_ = tracked_people_.tracks.front().twist.twist;
+        int matched_id = 0;
+        double min_dist = std::numeric_limits<double>::max();
+        for (std::size_t i = 0; i < tracked_people_.tracks.size(); i++)
+        {
+          double dist = hypot(tracked_people_.tracks[i].pose.pose.position.x-prev_follower_pose_.position.x,
+                              tracked_people_.tracks[i].pose.pose.position.y-prev_follower_pose_.position.y);
+          if(dist < min_dist)
+            matched_id = i;
+        }
+
+        follower_pose_ = tracked_people_.tracks[matched_id].pose.pose;
+        follower_vel_ = tracked_people_.tracks[matched_id].twist.twist;
 
         // Check the follower is following or not
         follower_state = checkFollowerState();
@@ -161,6 +166,11 @@ private:
       dist_ref.data = 1.8;
       dist_pub_.publish(dist);
       dist_ref_pub_.publish(dist_ref);
+
+      geometry_msgs::Point diff;
+      diff.x = odom_.pose.pose.position.x-follower_pose_.position.x;
+      diff.y = odom_.pose.pose.position.y-follower_pose_.position.y;
+      diff_pub_.publish(diff);
 
       // Record the follower pose for next run and unlock the mutex
       prev_follower_pose_ = follower_pose_;
@@ -268,6 +278,7 @@ private:
   // only for visualization
   ros::Publisher dist_pub_;
   ros::Publisher dist_ref_pub_;
+  ros::Publisher diff_pub_;
 
   nav_msgs::Odometry odom_;
   spencer_tracking_msgs::TrackedPersons tracked_people_;

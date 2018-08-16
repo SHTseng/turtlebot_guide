@@ -11,7 +11,7 @@
   <arg name="odom_topic" default="odom" />
   <arg name="laser_topic" default="scan" />
 
-  <node pkg="turtlebot_mbf_nav" type="turtlebot_mbf_nav" respawn="false" name="move_base_flex" output="screen">
+  <node pkg="turtlebot_mbf_nav" type="turtlebot_mbf_nav" respawn="false" name="move_base_flex" output="screen"> <!-- turtlebot_mbf_nav -->
     <param name="tf_timeout" value="1.5"/>
     <rosparam file="$(find turtlebot_mbf_nav)/params/planners.yaml" command="load" />
     <rosparam file="$(find turtlebot_mbf_nav)/params/controllers.yaml" command="load" />

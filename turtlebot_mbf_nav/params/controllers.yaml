@@ -3,8 +3,9 @@ controllers:
     type: 'teb_local_planner/TebLocalPlannerROS'
 controller:
   holonomic_robot: false
-  controller_frequency: 5
+  controller_frequency: 10
   controller_patience: 15
+  controller_max_retries: 20
   
   # TEB planner params
   odom_topic: 'odom'
@@ -92,7 +93,7 @@ controller:
   #!! Optimization params for follower
   # weight_follower_pose_x: 0
   # weight_follower_pose_y: 0
-  weight_follower_vel_x: 10
+  weight_follower_vel_x: 2
   weight_follower_vel_theta: 0.1
   weight_proxemics: 1
   enable_guide: false                                                                                                          

@@ -1,18 +1,9 @@
 <launch>
+  <arg name="bag_file" default="/home/shtseng/.ros/bag/keyboard.bag"/>
 
-  <!-- Tracking system --> 
-  <include file="$(find turtlebot_follower_tracker)/launch/rgbd_laser_tracking.launch">
-    <arg name="depth_image_topic" value="/depth/image_raw"/>
-    <arg name="rgb_image_topic" value="/rgb/image_raw"/>
-    <arg name="camera_info_topic" value="/depth/camera_info"/>
-    <arg name="scan_topic" value="/scan"/>
-    <arg name="update_rate" value="20.0"/>
-    <arg name="static_map_filter" value="false" />
-  </include>
-  
-  <node pkg="rosbag" type="play" name="player" output="screen" args="--clock --pause /home/shtseng/Videos/2018-07-13-19-58-35.bag"/>
+  <node pkg="rosbag" type="play" name="player" output="screen" args="--pause $(arg bag_file)"/>
   
   <!-- RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_execution)/rviz/tb3_exec.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d /home/shtseng/.rviz/remote.rviz"/>
     
  </launch>

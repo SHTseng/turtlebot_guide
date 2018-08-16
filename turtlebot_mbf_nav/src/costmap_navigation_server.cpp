@@ -976,8 +976,7 @@ void CostmapNavigationServer::callActionMoveBase(const mbf_msgs::MoveBaseGoalCon
   ros::Time start_time = ros::Time::now();
   geometry_msgs::PoseStamped task_goal = get_path_goal.target_pose;
   ROS_INFO_STREAM("Task goal: (" << task_goal.pose.position.x << ", " <<task_goal.pose.position.y << ")");
-  bool flag = true;
-  bool flag_2 = true;
+  bool flag = true, flag_2 = true;
 
   while (ros::ok() && run)
   {

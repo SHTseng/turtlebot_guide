@@ -29,10 +29,10 @@
   </include>
   
   <!-- Laser scan leg detector -->
-  <include file="$(find turtlebot_follower_tracker)/launch/laser_leg_detector.launch.xml">
+  <!--<include file="$(find turtlebot_follower_tracker)/launch/laser_leg_detector.launch.xml">
     <arg name="topic_scan" value="$(arg scan_topic)" />
     <arg name="detected_persons" value="/spencer/perception_internal/detected_persons/laser" />
-  </include>
+  </include> -->
   
   <!-- Data fusioon and tracking pipeline -->
   <include file="$(find turtlebot_follower_tracker)/launch/tracking_pipeline.launch.xml">

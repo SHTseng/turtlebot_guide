@@ -84,7 +84,7 @@ void Detector::ProcessFrame(const Camera &camera_origin, const Matrix<double> &d
 
     detected_bounding_boxes = EvaluateTemplate(upper_body_template, depth_map, close_range_BBoxes, distances);
 
-    auto evaluate_time = std::chrono::high_resolution_clock::now();
+//    auto evaluate_time = std::chrono::high_resolution_clock::now();
 
 //    auto compute_free_space_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(compute_free_space_time - start).count();
 //    auto preprocess_roi_preprocess_roi_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(preprocess_roi_time - compute_free_space_time).count();
@@ -141,7 +141,8 @@ void Detector::ComputeFreespace(const Camera& camera,
             double distance_to_plane = plane_par_0*xj + plane_par_1*yj + plane_par_2*zj + plane_par_3;
 
             // Only accept points in upper_body height range (0.1m to 2.5m)
-            if(distance_to_plane < 2.5 && distance_to_plane > 0.1)
+//            if(distance_to_plane < 2.5 && distance_to_plane > 0.1)
+            if(distance_to_plane < 1.8 && distance_to_plane > 0.8)
             {
                 double x = xj - min_x_;
                 double z = zj - min_z_;

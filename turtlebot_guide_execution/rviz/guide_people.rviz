@@ -4,13 +4,12 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /TF1
+        - /Global Options1
         - /TF1/Tree1
         - /Map1/Position1
         - /Map1/Orientation1
         - /Local Planning1/Costmap1
         - /DetectedPersons1/Style1
-        - /PolygonArray1
       Splitter Ratio: 0.503144681
     Tree Height: 841
   - Class: rviz/Selection
@@ -118,16 +117,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        ir_camera_link_mid:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l_ir_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         laser_link:
           Alpha: 1
           Show Axes: false
@@ -232,11 +221,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        r_ir_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         wheel_left_link:
           Alpha: 1
           Show Axes: false
@@ -290,7 +274,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.00999999978
+      Size (m): 0.0299999993
       Style: Squares
       Topic: /scan
       Unreliable: false
@@ -682,7 +666,7 @@ Visualization Manager:
         Scaling factor: 1
         Value: Bounding boxes
       Text spacing: 1
-      Topic: /spencer/perception_internal/detected_persons/rgbd/hog
+      Topic: /spencer/perception/detected_persons
       Unreliable: false
       Value: false
       Z offset:
@@ -812,25 +796,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 20.2312641
+      Distance: 13.6385174
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.183569059
-        Y: -1.2444725
-        Z: 2.00950646
+        X: -2.02123046
+        Y: 0.44422707
+        Z: 0.182303146
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.44979477
+      Pitch: 1.15479457
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 6.16321373
+      Yaw: 4.46321249
     Saved: ~
 Window Geometry:
   Displays:

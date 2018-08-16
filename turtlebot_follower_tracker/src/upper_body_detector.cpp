@@ -62,28 +62,28 @@ void ReadConfigFile(string path_config_file)
   //======================================
   Globals::inc_width_ratio = config.read<double>("inc_width_ratio");
   Globals::inc_height_ratio = config.read<double>("inc_height_ratio");
-  Globals::region_size_threshold = config.read<double>("region_size_threshold", 10);
+  Globals::region_size_threshold = config.read<double>("region_size_threshold", double(10));
 
   //======================================
   // Freespace Parameters
   //======================================
-  Globals::freespace_scaleZ = config.read<double>("freespace_scaleZ", 20);
-  Globals::freespace_scaleX = config.read<double>("freespace_scaleX", 20);
-  Globals::freespace_minX = config.read<double>("freespace_minX", -20);
-  Globals::freespace_minZ = config.read<double>("freespace_minZ", 0);
-  Globals::freespace_maxX = config.read<double>("freespace_maxX", 20);
-  Globals::freespace_maxZ = config.read<double>("freespace_maxZ", 30);
-  Globals::freespace_threshold = config.read<double>("freespace_threshold", 120);
-  Globals::freespace_max_depth_to_cons = config.read<int>("freespace_max_depth_to_cons", 20);
+  Globals::freespace_scaleZ = config.read<double>("freespace_scaleZ", double(20));
+  Globals::freespace_scaleX = config.read<double>("freespace_scaleX", double(20));
+  Globals::freespace_minX = config.read<double>("freespace_minX", double(-20));
+  Globals::freespace_minZ = config.read<double>("freespace_minZ", double(0));
+  Globals::freespace_maxX = config.read<double>("freespace_maxX", double(20));
+  Globals::freespace_maxZ = config.read<double>("freespace_maxZ", double(30));
+  Globals::freespace_threshold = config.read<double>("freespace_threshold", double(120));
+  Globals::freespace_max_depth_to_cons = config.read<int>("freespace_max_depth_to_cons", int(20));
 
   //======================================
   // Evaluation Parameters
   //======================================
-  Globals::evaluation_NMS_threshold = config.read<double>("evaluation_NMS_threshold",0.4);
-  Globals::evaluation_NMS_threshold_LM = config.read<double>("evaluation_NMS_threshold_LM",0.4);
-  Globals::evaluation_NMS_threshold_Border = config.read<double>("evaluation_NMS_threshold_Border",0.4);
-  Globals::evaluation_inc_height_ratio = config.read<double>("evaluation_inc_height_ratio",0.2);
-  Globals::evaluation_stride = config.read<int>("evaluation_stride",3);
+  Globals::evaluation_NMS_threshold = config.read<double>("evaluation_NMS_threshold", double(0.4));
+  Globals::evaluation_NMS_threshold_LM = config.read<double>("evaluation_NMS_threshold_LM", double(0.4));
+  Globals::evaluation_NMS_threshold_Border = config.read<double>("evaluation_NMS_threshold_Border", double(0.4));
+  Globals::evaluation_inc_height_ratio = config.read<double>("evaluation_inc_height_ratio", double(0.2));
+  Globals::evaluation_stride = config.read<int>("evaluation_stride", 3);
   Globals::evaluation_scale_stride = config.read<double>("evaluation_scale_stride",1.03);
   Globals::evaluation_nr_scales = config.read<int>("evaluation_nr_scales",1);
   Globals::evaluation_inc_cropped_height = config.read<int>("evaluation_inc_cropped_height",20);
@@ -111,8 +111,8 @@ void ReadConfigFile(string path_config_file)
   //====================================
   Globals::template_size = config.read<int>("template_size");
 
-  Globals::max_height = config.read<double>("max_height", 2.0);
-  Globals::min_height = config.read<double>("min_height", 1.4);
+  Globals::max_height = config.read<double>("max_height", double(2.0));
+  Globals::min_height = config.read<double>("min_height", double(1.4));
 
 }
 
