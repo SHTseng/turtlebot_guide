@@ -9,9 +9,6 @@
   <arg name="origin_y" default="17.0"/> 
   <arg name="origin_yaw" default="3.14"/>
   
-  <arg name="depth_nodelet_name" value="depthimage_nodelet_manager"/>
-  <param name ="/use_sim_time" value="true"/>
-  
   <!-- Gazebo simulation environment -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(arg world_name)"/> 
@@ -38,20 +35,15 @@
   
   <!-- Visualization for the experiment data -->
   <include file="$(find turtlebot_guide_visualization)/launch/visualization.launch" if="$(arg visual)" />
-  
-  <!-- Map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
-    <param name="frame_id" value="/map"/>
-  </node>
-  
-  <!-- Localization for navigation -->
-  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
     
   <!-- Move base flex server -->
-  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml" />
+  <include file="$(find turtlebot_mbf_nav)/launch/mbf.launch.xml">
+    <arg name="map_file" value="$(arg map_file)"/>
+  </incude>
   
   <!-- RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_guide_execution)/rviz/guide_people.rviz" 
         if="$(arg rviz)"/>
+
  </launch>
  

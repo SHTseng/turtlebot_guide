@@ -1,15 +1,23 @@
-<!-- 
-    ROS navigation stack with velocity smoother and safety (reactive) controller
--->
 <launch>
-  <include file="$(find turtlebot_description)/launch/velocity_smoother.launch.xml"/>
-  <include file="$(find turtlebot_description)/launch/safety_controller.launch.xml"/>
   
   <arg name="odom_frame_id"   default="odom"/>
   <arg name="base_frame_id"   default="base_footprint"/>
   <arg name="global_frame_id" default="/map"/>
   <arg name="odom_topic" default="odom" />
   <arg name="laser_topic" default="scan" />
+  <arg name="map_file" default="$(find turtlebot_guide_execution)/maps/empty_map.yaml" />
+  
+  <!-- Kobuki module -->
+  <include file="$(find turtlebot_description)/launch/velocity_smoother.launch.xml"/>
+  <include file="$(find turtlebot_description)/launch/safety_controller.launch.xml"/>
+  
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+    <param name="frame_id" value="/map"/>
+  </node>
+  
+  <!-- Localization for navigation -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen"/> 
 
   <node pkg="turtlebot_mbf_nav" type="turtlebot_mbf_nav" respawn="false" name="move_base_flex" output="screen"> <!-- turtlebot_mbf_nav -->
     <param name="tf_timeout" value="1.5"/>
