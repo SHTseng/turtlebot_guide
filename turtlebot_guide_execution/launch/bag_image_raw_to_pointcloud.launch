@@ -1,0 +1,22 @@
+<launch>
+    <arg name="dir" default="/home/shtseng/rosbag/" />
+    <arg name="file" default="depth_image_raws_2019-02-07-23-22-48" />
+    <node pkg="rosbag" type="play" name="player" output="screen" 
+          args="--clock -l $(arg dir)$(arg file).bag"
+    />
+
+    <node name="republish" type="republish" pkg="image_transport" output="screen"
+          args="compressed in:=/axis_camera raw out:=/axis_camera/image_raw"
+    />
+
+    <node pkg="nodelet" type="nodelet" args="manager"
+          name="pointc_manager" output="screen"
+    />
+
+    <node name="republish_rgb"   pkg="image_transport" type="republish" args="compressed in:=rgb_recorded/image_color raw out:=rgb/image_raw"/>
+    <node name="republish_depth" pkg="image_transport" type="republish" args="compressedDepth in:=depth_recorded/image_raw raw out:=depth/image_raw"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" 
+          args="-d $(find turtlebot_guide_execution)/rviz/realsense_d435i.rviz"
+    />
+</launch>

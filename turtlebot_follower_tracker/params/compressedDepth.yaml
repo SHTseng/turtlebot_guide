@@ -1,0 +1,21 @@
+!!python/object/new:dynamic_reconfigure.encoding.Config
+dictitems:
+  depth_max: 10.0
+  depth_quantization: 100.0
+  groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+    dictitems:
+      depth_max: 10.0
+      depth_quantization: 100.0
+      groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      id: 0
+      name: Default
+      parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      parent: 0
+      png_level: 5
+      state: true
+      type: ''
+    state: []
+  png_level: 4
+state: []

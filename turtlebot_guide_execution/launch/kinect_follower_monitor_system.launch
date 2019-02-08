@@ -14,7 +14,7 @@
     <arg name="gui" value="false"/>
   </include> 
   
-  <!-- Spawn turtlebot guide model -->
+  <!-- Spawn turtlebot guide model --> 
   <include file="$(find turtlebot_guide_integration)/launch/spawn_tb_guide.launch.xml">
     <arg name="init_x" value="$(arg origin_x)" />
     <arg name="init_y" value="$(arg origin_y)" />
