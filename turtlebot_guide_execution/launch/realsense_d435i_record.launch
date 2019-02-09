@@ -1,7 +1,9 @@
 <launch>
     <arg name="record_image" default="true" />
     <arg name="record_imu" default="false" />
-
+    
+    <param name="/camera/depth/image_rect_raw/compressed/format" type="string" value="png" />
+    <param name="/camera/depth/image_rect_raw/compressed/png_level" type="int" value="4" />
     <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
         <arg name="enable_imu"    value="$(arg record_imu)"/>
         <arg name="color_width"   value="1280"/>
@@ -13,10 +15,6 @@
         <arg name="infra2_width"  value="1280"/>
         <arg name="infra2_height" value="720"/>
     </include>
-
-    <!-- <node name="dynamic_reconfigure_load" pkg="dynamic_reconfigure" type="dynparam"
-          args="load /realsense2_camera $(find turtlebot_follower_tracker)/params/compressedDepth.yaml"
-    /> -->
 
     <node pkg="rosbag" type="record" name="d435i_image_record"
           args="record -o /home/shtseng/rosbag/depth_image_raws
