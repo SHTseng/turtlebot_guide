@@ -1,22 +1,40 @@
 <launch>
-    <arg name="dir" default="/home/shtseng/rosbag/" />
-    <arg name="file" default="depth_image_raws_2019-02-07-23-22-48" />
-    <node pkg="rosbag" type="play" name="player" output="screen" 
-          args="--clock -l $(arg dir)$(arg file).bag"
-    />
+  <arg name="dir" default="/home/shtseng/rosbag/" />
+  <arg name="file" default="test1" />
 
-    <node name="republish" type="republish" pkg="image_transport" output="screen"
-          args="compressed in:=/axis_camera raw out:=/axis_camera/image_raw"
-    />
+  <param name="use_sim_time" value="true"/>
 
-    <node pkg="nodelet" type="nodelet" args="manager"
-          name="pointc_manager" output="screen"
-    />
+  <node pkg="rosbag" type="play" name="player" output="screen" 
+        args="--clock --queue=5 --delay=0 -l $(arg dir)$(arg file).bag"
+  />
 
-    <node name="republish_rgb"   pkg="image_transport" type="republish" args="compressed in:=rgb_recorded/image_color raw out:=rgb/image_raw"/>
-    <node name="republish_depth" pkg="image_transport" type="republish" args="compressedDepth in:=depth_recorded/image_raw raw out:=depth/image_raw"/>
+  <node pkg="nodelet" type="nodelet" args="manager"
+        name="camera_stream_manager" output="screen"
+  />
 
-    <node name="rviz" pkg="rviz" type="rviz" 
-          args="-d $(find turtlebot_guide_execution)/rviz/realsense_d435i.rviz"
-    />
+  <node name="rgb_decompress" pkg="image_transport" type="republish"
+        args="compressed raw">
+    <remap from="in" to="camera/color/image_raw" />
+    <remap from="out" to="camera/color/image_raw_decompressed" />
+  </node>
+
+  <node name="depth_decompress" pkg="image_transport" type="republish"
+        args="compressedDepth raw">
+    <remap from="in" to="camera/aligned_depth_to_color/image_raw"/>
+    <!-- <remap from="in" to="camera/depth/image_rect_raw"/> -->
+    <remap from="out" to="camera/aligned_depth_to_color/image_raw_decompressed" />
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="cloudify"
+        args="load depth_image_proc/point_cloud_xyzrgb camera_stream_manager --no-bond">
+    <remap from="rgb/camera_info" to="camera/color/camera_info"/>
+    <remap from="rgb/image_rect_color" to="camera/color/image_raw_decompressed"/>
+    <remap from="depth_registered/image_rect" to="camera/aligned_depth_to_color/image_raw_decompressed"/>
+    <remap from="depth_registered/points" to="camera/depth_registered/points"/>
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" 
+        args="-d $(find turtlebot_guide_execution)/rviz/realsense_d435i.rviz"
+  />
+
 </launch>
